@@ -1,7 +1,6 @@
 :root {
   --primary-font: 'Raleway', serif;
   --secondary-font: 'Moon Dance', serif;
-
   --primary-color: #d4cdc5;
   --secondary-color: #f1f1f1;
   --third-color: #5d6d5c;
@@ -25,4 +24,8 @@ a {
 
 a:hover {
   color: var(--third-color);
+}
+.wrapper {
+  width: 100%;
+  height: auto;
 }

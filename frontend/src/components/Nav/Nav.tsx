@@ -2,6 +2,7 @@ import styles from './Nav.module.css';
 import { Link } from 'react-scroll';
 import Button from '../Button/Button';
 import { useState } from 'react';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,6 +72,11 @@ const Nav = () => {
                 }}>
                 {' '}
                 {section.name}
+                {id === dropdownId ? (
+                  <FaChevronUp className={styles.arrow} />
+                ) : (
+                  <FaChevronDown className={styles.arrow} />
+                )}
               </span>
 
               {section.subSections && (

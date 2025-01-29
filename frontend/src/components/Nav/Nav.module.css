@@ -35,8 +35,16 @@
 }
 
 .link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   color: var(--third-color);
   font-weight: 600;
+}
+.arrow {
+  display: none;
+  fill: var(--third-color);
 }
 .sublink {
   color: var(--secondary-color);
@@ -150,6 +158,9 @@
     flex-direction: column;
     justify-content: space-between;
     display: flex;
+  }
+  .arrow {
+    display: block;
   }
 
   .menu {

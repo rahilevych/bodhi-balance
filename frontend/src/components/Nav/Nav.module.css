@@ -10,6 +10,7 @@
 .logo {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .logo span {
@@ -23,14 +24,9 @@
   text-transform: capitalize;
   text-align: center;
 }
-.nav_menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 70px;
-}
 
 .menu {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,29 +35,38 @@
 }
 
 .link {
-  text-decoration: none;
   color: var(--third-color);
+  font-weight: 600;
+}
+.sublink {
+  color: var(--secondary-color);
+  font-weight: 400;
+}
+.sublink:hover {
+  text-decoration: underline;
+  font-weight: 500;
+}
+.link,
+.sublink {
+  text-decoration: none;
   cursor: pointer;
   transition: color 0.3s ease, transform 0.3s ease;
   font-size: 18px;
-  font-weight: 500;
+  text-align: center;
 }
 
-.link:hover {
+.link:hover,
+.sublink:hover {
   color: var(--secondary-color);
   transform: translateY(-2px);
 }
-.activ {
-  text-decoration: underline;
-  color: var(--secondary-color);
-}
-
-.activ {
-  text-decoration: underline;
-}
 
 .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  margin-left: 50px;
 }
 
 .dropdown {
@@ -80,7 +85,7 @@
   background-color: var(--third-color);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   margin: 0;
-  padding: 0;
+  padding: 0px;
 }
 
 .dropdown:hover .dropdownMenu {
@@ -101,18 +106,15 @@
 .dropdownMenu li .link:hover {
   color: var(--secondary-color);
 }
-.burger {
-  display: none;
-  cursor: pointer;
-}
 
 .burger_icon {
-  position: relative;
+  display: none;
+  position: absolute;
+  top: 25%;
+  right: 2rem;
   width: 2rem;
   height: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
   transition: all 0.3s ease-in-out;
 }
 
@@ -142,59 +144,64 @@
   transform-origin: center;
 }
 
-.burger_menu {
-  visibility: hidden;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--primary-color);
-  list-style: none;
-  padding: 10px 0;
-  margin: 0;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transform: scaleY(0);
-  transform-origin: top;
-  opacity: 0;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.burger_open .burger_menu {
-  visibility: visible;
-  transform: scaleY(1);
-  opacity: 1;
-}
-.burger_menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.burger_menu li {
-  margin: 10px 0;
-}
-
-.burger_menu li a {
-  color: var(--third-color);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.burger_menu li a:hover {
-  color: var(--primary-color);
-}
-
 @media (max-width: 768px) {
-  .burger {
+  .burger_icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     display: flex;
   }
 
-  .nav_menu {
-    display: none;
+  .menu {
+    visibility: hidden;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    background-color: var(--primary-color);
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  .menu_opened {
+    visibility: visible;
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  .link:hover {
+    color: var(--third-color);
+  }
+
+  .dropdownMenu {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: none;
+    list-style-type: none;
+    background-color: var(--primary-color);
+    box-shadow: none;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+
+  .menu li {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+  .dropdownMenu.open {
+    height: auto;
   }
 }

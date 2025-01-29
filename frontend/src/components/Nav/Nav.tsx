@@ -11,14 +11,7 @@ const Nav = () => {
   };
   const sectionsList = [
     {
-      name: 'Home',
-      link: 'home',
-      dropdown: false,
-    },
-    {
       name: 'About',
-      link: 'about',
-      dropdown: true,
       subSections: [
         { name: 'About Us', link: 'about' },
         { name: 'Teachers', link: 'teachers' },
@@ -27,8 +20,6 @@ const Nav = () => {
     },
     {
       name: 'Classes',
-      link: 'yogastyles',
-      dropdown: true,
       subSections: [
         { name: 'Yoga Styles', link: 'yogastyles' },
         { name: 'Schedule', link: 'schedule' },
@@ -36,8 +27,6 @@ const Nav = () => {
     },
     {
       name: 'Info',
-      link: 'pricing',
-      dropdown: true,
       subSections: [
         { name: 'Pricing', link: 'pricing' },
         { name: 'FAQ', link: 'faq' },
@@ -45,17 +34,13 @@ const Nav = () => {
       ],
     },
   ];
-  const burgerMenu = [
-    'home',
-    'about',
-    'yoga styles',
-    'schedule',
-    'pricing',
-    'teachers',
-    'atmosphere',
-    'faq',
-    'contact',
-  ];
+
+  const [dropdownId, setDropdownId] = useState<string | null | number>(null);
+
+  const clickDropdown = (id: string | null | number) => {
+    if (id === dropdownId) setDropdownId(null);
+    else setDropdownId(id);
+  };
 
   return (
     <section className={styles.nav}>
@@ -66,56 +51,46 @@ const Nav = () => {
       </div>
       <div className={styles.nav_menu}>
         {' '}
-        <ul className={styles.menu}>
-          {sectionsList.map((section) => (
-            <li
-              key={section.name}
-              className={section.dropdown ? styles.dropdown : ''}>
-              <Link
-                to={section.link}
-                smooth={true}
+        <div
+          className={`${styles.burger_icon} ${
+            isMenuOpen ? styles.burger_open : ''
+          }`}
+          onClick={handleBurgerClick}>
+          <span className={styles.line}></span>
+          <span className={styles.line}></span>
+          <span className={styles.line}></span>
+        </div>
+        <ul
+          className={`${styles.menu} ${isMenuOpen ? styles.menu_opened : ''}`}>
+          {sectionsList.map((section, id) => (
+            <li className={styles.dropdown} key={id}>
+              <span
                 className={styles.link}
-                activeClass={styles.active}>
+                onClick={() => {
+                  clickDropdown(id);
+                }}>
+                {' '}
                 {section.name}
-              </Link>
-              {section.dropdown && section.subSections && (
-                <ul className={styles.dropdownMenu}>
+              </span>
+
+              {section.subSections && (
+                <ul
+                  className={`${styles.dropdownMenu} ${
+                    id === dropdownId ? styles.open : ''
+                  }`}>
                   {section.subSections.map((subSection) => (
                     <li key={subSection.link}>
                       <Link
                         to={subSection.link}
                         smooth={true}
-                        className={styles.link}>
+                        className={styles.sublink}
+                        onClick={() => setIsMenuOpen(false)}>
                         {subSection.name}
                       </Link>
                     </li>
                   ))}
                 </ul>
               )}
-            </li>
-          ))}
-        </ul>
-        <Link to='/login' className={styles.btn}>
-          <Button text='Sign in' />
-        </Link>
-      </div>
-      <div
-        className={`${styles.burger} ${isMenuOpen ? styles.burger_open : ''}`}
-        onClick={handleBurgerClick}>
-        <div className={styles.burger_icon}>
-          <span className={styles.line}></span>
-          <span className={styles.line}></span>
-          <span className={styles.line}></span>
-        </div>
-        <ul className={styles.burger_menu}>
-          {burgerMenu.map((section) => (
-            <li key={section}>
-              <Link
-                to={section}
-                smooth={true}
-                onClick={() => setIsMenuOpen(false)}>
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </Link>
             </li>
           ))}
           <li>

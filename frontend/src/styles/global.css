@@ -26,8 +26,13 @@ a {
 a:hover {
   color: var(--third-color);
 }
+
+.wrapper {
+  width: 100%;
+  height: auto;
+
+}
 @media (min-width: 1920px) {
   html {
     font-size: 20px;
   }
-}

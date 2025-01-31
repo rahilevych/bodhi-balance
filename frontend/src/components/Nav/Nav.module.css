@@ -3,8 +3,10 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: 20px 40px;
+  height: 100%;
+  padding: 0 40px;
   background-color: var(--primary-background-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -19,7 +21,7 @@
   justify-content: center;
   font-family: var(--secondary-font);
   color: var(--third-color);
-  font-size: 30px;
+  font-size: 1rem;
   font-weight: 500;
   text-transform: capitalize;
   text-align: center;

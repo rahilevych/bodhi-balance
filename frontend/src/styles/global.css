@@ -7,6 +7,9 @@
   --third-color: #5d6d5c;
   --text-color: #404040;
 }
+html {
+  font-size: 16px;
+}
 
 body {
   font-family: var(--primary-font);
@@ -17,6 +20,10 @@ h2,
 h3 {
   font-family: var(--secondary-font);
   color: var(--third-color);
+}
+h2 {
+  font-size: 4rem;
+  font-weight: 400;
 }
 a {
   color: var(--text-color);
@@ -30,9 +37,14 @@ a:hover {
 .wrapper {
   width: 100%;
   height: auto;
-
 }
 @media (min-width: 1920px) {
   html {
     font-size: 20px;
   }
+}
+@media (max-width: 425px) {
+  h2 {
+    font-size: 3rem;
+  }
+}

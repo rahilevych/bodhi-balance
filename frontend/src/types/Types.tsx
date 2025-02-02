@@ -1,8 +1,8 @@
 export type YogaCardType = {
-  id: Number;
-  title: String;
-  image: String;
-  duration: Number;
-  days: String[];
+  id: number;
+  title: string;
+  image: string;
+  duration: number;
+  days: string[];
   description: String;
 };

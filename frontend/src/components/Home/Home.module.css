@@ -109,7 +109,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: fit-content;
+    height: auto;
   }
   .content {
     position: static;
@@ -126,8 +126,7 @@
   .content > div:nth-child(2) {
     width: 15rem;
     height: 20rem;
-
-    margin: 0;
+    margin: 2rem auto;
   }
   .h1 {
     position: static;
@@ -136,8 +135,10 @@
     flex-direction: row;
     transform: none;
     gap: 2rem;
+    margin-top: 2rem;
   }
   .content > div:nth-child(3) {
+    gap: 2rem;
     transform: none;
     width: 80%;
     height: auto;

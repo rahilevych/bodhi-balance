@@ -2,7 +2,8 @@
   display: flex;
   align-items: start;
   justify-content: center;
-  gap: 5rem;
+  gap: 8rem;
+  height: 100%;
 }
 .image {
   width: 20rem;
@@ -18,9 +19,10 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: start;
+  justify-content: space-between;
   gap: 1.5rem;
   width: 50%;
+  height: 100%;
 }
 .info > p {
   display: flex;
@@ -30,6 +32,10 @@
 }
 .icon {
   fill: var(--secondary-font);
+}
+.nav {
+  width: 100%;
+  margin-bottom: 0;
 }
 @media (max-width: 768px) {
   .card {
@@ -42,7 +48,6 @@
     align-items: center;
     text-align: center;
     gap: 1rem;
-    width: 100%;
   }
   .image {
     width: 15rem;

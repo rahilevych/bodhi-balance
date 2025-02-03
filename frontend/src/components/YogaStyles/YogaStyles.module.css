@@ -1,0 +1,20 @@
+.yogastyles {
+  background-color: var(--secondary-color);
+  width: 100%;
+  height: auto;
+  padding: 5rem 2rem;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: start;
+}
+.types {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+
+  width: 100%;
+}

@@ -30,7 +30,7 @@ export const About = () => {
   return (
     <Element name='about'>
       <section className={styles.about}>
-        <div className={styles.container}>
+        <div className='container'>
           <h2 className={styles.h2}>About us</h2>
           <div className={styles.content}>
             <div className={styles.image}>
@@ -54,7 +54,6 @@ export const About = () => {
           </div>
         </div>
       </section>
-      ;
     </Element>
   );
 };

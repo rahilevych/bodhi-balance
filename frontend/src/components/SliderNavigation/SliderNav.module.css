@@ -1,0 +1,34 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.progressBar {
+  width: 100%;
+  height: 2px;
+  background-color: grey;
+  border-radius: 2px;
+}
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--third-color);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+.icon {
+  stroke: var(--third-color);
+  font-size: 1.25rem;
+}

@@ -3,6 +3,8 @@ import YogaCard from '../YogaCard/YogaCard';
 import styles from './YogaStyles.module.css';
 
 import Slider from '../Slider/Slider';
+import { useState } from 'react';
+import { YogaCardType } from '../../types/Types';
 export const yogaStyles = [
   {
     id: 1,
@@ -102,6 +104,12 @@ export const yogaStyles = [
   },
 ];
 const YogaStyles = () => {
+  const [card, setCard] = useState<YogaCardType>(yogaStyles[0]);
+
+  const handleChangeCard = (currentCard: YogaCardType) => {
+    setCard(currentCard);
+  };
+
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles}>
@@ -110,7 +118,12 @@ const YogaStyles = () => {
           <div className={styles.content}>
             <ul className={styles.types}>
               {yogaStyles.map((type, index) => (
-                <li key={index}>{type.title}</li>
+                <li
+                  className={card.id === type.id ? styles.active : ''}
+                  key={index}
+                  onClick={() => handleChangeCard(type)}>
+                  {type.title}
+                </li>
               ))}
             </ul>
             <div>
@@ -118,6 +131,8 @@ const YogaStyles = () => {
               <Slider
                 items={yogaStyles}
                 renderCard={(item) => <YogaCard card={item} />}
+                currentCard={card}
+                onChange={handleChangeCard}
               />
             </div>
           </div>

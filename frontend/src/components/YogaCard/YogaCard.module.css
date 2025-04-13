@@ -38,6 +38,9 @@
   margin-bottom: 0;
 }
 @media (max-width: 768px) {
+  h3 {
+    font-size: 2rem;
+  }
   .card {
     flex-direction: column-reverse;
     justify-content: center;
@@ -45,6 +48,7 @@
     gap: 2rem;
   }
   .info {
+    width: 80%;
     align-items: center;
     text-align: center;
     gap: 1rem;

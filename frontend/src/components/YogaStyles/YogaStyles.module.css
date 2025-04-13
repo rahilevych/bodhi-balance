@@ -15,6 +15,46 @@
   align-items: center;
   justify-content: space-between;
   list-style-type: none;
-
+  gap: 1.5rem;
   width: 100%;
+}
+.types li {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+}
+.types li:hover {
+  color: var(--third-color);
+  font-size: 1.1rem;
+}
+
+.types li::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  top: 105%;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--third-color);
+  transition: width 0.3s ease-in-out;
+}
+
+.types li:hover::before {
+  width: 100%;
+}
+
+.types li.active {
+  font-weight: 700;
+  color: var(--third-color);
+}
+@media (max-width: 768px) {
+  .yogastyles {
+    padding: 2rem 1rem;
+  }
+  .types {
+    display: none;
+  }
 }

@@ -41,7 +41,7 @@ const Slider = ({ items, renderCard, currentCard, onChange }: Props) => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [index]);
+  }, []);
   useEffect(() => {
     const calculatedProgress = ((index + 1) / items.length) * 100;
     setProgress(calculatedProgress);

@@ -10,6 +10,13 @@
   gap: 4rem;
   align-items: start;
 }
+.slider {
+  flex: 2;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .types {
   display: flex;
   align-items: center;
@@ -27,7 +34,6 @@
 }
 .types li:hover {
   color: var(--third-color);
-  font-size: 1.1rem;
 }
 
 .types li::before {
@@ -56,5 +62,13 @@
   }
   .types {
     display: none;
+  }
+  .slider {
+    max-width: 400px;
+  }
+}
+@media (max-width: 375px) {
+  .slider {
+    max-width: 300px;
   }
 }

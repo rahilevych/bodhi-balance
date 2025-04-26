@@ -1,10 +1,14 @@
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import { Element } from 'react-scroll';
 import YogaCard from '../YogaCard/YogaCard';
 import styles from './YogaStyles.module.css';
-
-import Slider from '../Slider/Slider';
-import { useState } from 'react';
-import { YogaCardType } from '../../types/Types';
+import { useRef } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
+import { Pagination } from 'swiper/modules';
+import SliderNav from '../SliderNavigation/SliderNav';
 export const yogaStyles = [
   {
     id: 1,
@@ -104,12 +108,14 @@ export const yogaStyles = [
   },
 ];
 const YogaStyles = () => {
-  const [card, setCard] = useState<YogaCardType>(yogaStyles[0]);
+  const swiperRef = useRef<SwiperType | null>(null);
 
-  const handleChangeCard = (currentCard: YogaCardType) => {
-    setCard(currentCard);
+  const handleSlideChange = (index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
+      swiperRef.current.pagination.update();
+    }
   };
-
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles}>
@@ -118,22 +124,36 @@ const YogaStyles = () => {
           <div className={styles.content}>
             <ul className={styles.types}>
               {yogaStyles.map((type, index) => (
-                <li
-                  className={card.id === type.id ? styles.active : ''}
-                  key={index}
-                  onClick={() => handleChangeCard(type)}>
+                <li key={index} onClick={() => handleSlideChange(index)}>
                   {type.title}
                 </li>
               ))}
-            </ul>
-            <div>
-              {' '}
-              <Slider
-                items={yogaStyles}
-                renderCard={(item) => <YogaCard card={item} />}
-                currentCard={card}
-                onChange={handleChangeCard}
-              />
+            </ul>{' '}
+            <div className={styles.slider}>
+              <Swiper
+                modules={[Pagination]}
+                pagination={{
+                  el: '#custom-swiper-progressbar',
+                  progressbarFillClass: 'swiper-pagination-progressbar-fill',
+                  type: 'progressbar',
+                }}
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
+                loop={true}
+                spaceBetween={30}
+                slidesPerView={1}
+                breakpoints={{
+                  640: { slidesPerView: 1 },
+                  768: { slidesPerView: 1 },
+                  1024: { slidesPerView: 1 },
+                }}>
+                {' '}
+                {yogaStyles.map((style) => (
+                  <SwiperSlide key={style.id}>
+                    <YogaCard card={style} />
+                  </SwiperSlide>
+                ))}{' '}
+                <SliderNav />
+              </Swiper>
             </div>
           </div>
         </div>

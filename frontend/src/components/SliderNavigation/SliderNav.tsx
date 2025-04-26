@@ -1,25 +1,22 @@
-import React from 'react';
 import styles from './SliderNav.module.css';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import ProgressBar from '../progress-bar/ProgressBar';
-interface Props {
-  nextBtn: () => void;
-  prevBtn: () => void;
-  progress: number;
-}
-const SliderNav: React.FC<Props> = ({ nextBtn, prevBtn, progress }) => {
+import { useSwiper } from 'swiper/react';
+
+const SliderNav = () => {
+  const swiper = useSwiper();
+
   return (
     <div className={styles.navigation}>
       <div className={styles.buttons}>
-        <button className={styles.arrow} onClick={prevBtn}>
+        <button className={styles.arrow} onClick={() => swiper.slidePrev()}>
           <FiChevronLeft className={styles.icon} />
         </button>
-        <button className={styles.arrow} onClick={nextBtn}>
+        <button className={styles.arrow} onClick={() => swiper.slideNext()}>
           {' '}
           <FiChevronRight className={styles.icon} />
         </button>
       </div>
-      <ProgressBar progress={progress} />
+      <div className={styles.pagination} id='custom-swiper-progressbar' />
     </div>
   );
 };

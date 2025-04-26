@@ -5,6 +5,7 @@
   gap: 2rem;
   width: 100%;
   position: relative;
+  margin-top: 5rem;
 }
 .buttons {
   display: flex;
@@ -27,4 +28,20 @@
 .icon {
   stroke: var(--third-color);
   font-size: 1.25rem;
+}
+
+.pagination {
+  height: 4px;
+  background-color: #e0e0e0;
+  width: 100%;
+
+  position: relative;
+  border-radius: 2px;
+}
+
+:global(.swiper-pagination-progressbar-fill) {
+  background-color: var(--third-color) !important;
+  height: 100%;
+  width: 100%;
+  transition: width 0.3s ease;
 }

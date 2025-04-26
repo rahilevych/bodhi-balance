@@ -6,3 +6,11 @@ export type YogaCardType = {
   days: string[];
   description: String;
 };
+export type Teacher = {
+  id: string;
+  fullName: string;
+  experience: string;
+  specialization: string;
+  about: string;
+  photo: string;
+};

@@ -1,0 +1,38 @@
+.card {
+  display: flex;
+  align-items: end;
+  gap: 2rem;
+}
+.photo {
+  height: 25rem;
+  width: auto;
+}
+.photo > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 50%;
+}
+@media (max-width: 1024px) {
+  .photo {
+    height: 20rem;
+  }
+}
+@media (max-width: 500px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .info {
+    width: 100%;
+    align-items: center;
+  }
+}

@@ -7,7 +7,7 @@ interface Props {
 }
 const Button: React.FC<Props> = ({ text }) => {
   return (
-    <div className={`${styles.button} `}>
+    <div className={styles.button}>
       <span>{text}</span>
       <FiChevronRight className={styles.icon} />
     </div>

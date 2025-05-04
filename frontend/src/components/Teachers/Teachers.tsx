@@ -1,6 +1,4 @@
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import 'swiper/swiper-bundle.css';
 import { useEffect, useState } from 'react';
 import { SmallCard } from './SmallCard';
 import styles from './Teachers.module.css';

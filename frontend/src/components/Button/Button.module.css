@@ -9,6 +9,7 @@
   border: none;
   padding: 15px;
   transition: all 1s ease;
+  font-family: var(--primary-font);
 }
 .button span {
   color: var(--secondary-color);

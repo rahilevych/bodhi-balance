@@ -1,3 +1,7 @@
+.atmosphere {
+  background-color: var(--primary-color);
+  padding: 5rem 2rem;
+}
 .photos {
   width: 100%;
   display: flex;

@@ -56,7 +56,7 @@
   font-weight: 700;
   color: var(--third-color);
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .yogastyles {
     padding: 2rem 1rem;
   }

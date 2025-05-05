@@ -5,8 +5,8 @@ import * as z from 'zod';
 import Button from '../Button/Button';
 
 const schema = z.object({
-  firstName: z.string().min(1, 'First name ist required !'),
-  lastName: z.string().min(1, 'Last name ist required !'),
+  fullName: z.string().min(1, 'Name ist required !'),
+
   email: z.string().email('Invalid email format').min(1, 'Email is required !'),
   phone: z
     .string()
@@ -33,11 +33,8 @@ export const ContactForm = () => {
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('firstName')} placeholder='First Name' />
-      {errors.firstName && <p>{errors.firstName.message}</p>}
-
-      <input {...register('lastName')} placeholder='Last Name' />
-      {errors.lastName && <p>{errors.lastName.message}</p>}
+      <input {...register('fullName')} placeholder='Full Name' />
+      {errors.fullName && <p>{errors.fullName.message}</p>}
 
       <input {...register('email')} placeholder='Email' />
       {errors.email && <p>{errors.email.message}</p>}

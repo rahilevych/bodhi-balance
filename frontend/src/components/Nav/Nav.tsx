@@ -3,9 +3,11 @@ import { Link } from 'react-scroll';
 import Button from '../Button/Button';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { useAppContext } from '../../context/AppContext';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { openModal } = useAppContext();
 
   const handleBurgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -100,9 +102,9 @@ const Nav = () => {
             </li>
           ))}
           <li>
-            <Link to='/login' className={styles.btn}>
+            <div onClick={openModal} className={styles.btn}>
               <Button text='Sign in' />
-            </Link>
+            </div>
           </li>
         </ul>
       </div>

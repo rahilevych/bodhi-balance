@@ -17,7 +17,10 @@
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  width: 400px;
+  min-width: 30%;
+  width: auto;
+  min-height: 45%;
+  height: auto;
 }
 
 .close-btn {

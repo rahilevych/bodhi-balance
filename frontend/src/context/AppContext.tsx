@@ -43,8 +43,15 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     localStorage.removeItem('token');
   };
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const openModal = () => {
+    document.body.style.overflow = 'hidden';
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    document.body.style.overflow = 'auto';
+    setIsModalOpen(false);
+  };
 
   return (
     <AppContext.Provider

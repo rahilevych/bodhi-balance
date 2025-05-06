@@ -1,8 +1,9 @@
 .button {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 10rem;
+  justify-content: center;
+  min-width: 10rem;
+  width: auto;
   height: 2.8rem;
   border-radius: 50px;
   background-color: var(--third-color);

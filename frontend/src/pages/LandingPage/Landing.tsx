@@ -9,7 +9,7 @@ import Schedule from '../../components/Schedule/Schedule';
 import Teachers from '../../components/Teachers/Teachers';
 import YogaStyles from '../../components/YogaStyles/YogaStyles';
 import { useAppContext } from '../../context/AppContext';
-import Login from '../LoginPage/Login';
+import { Registration } from '../Registration/Registration';
 import styles from './Landing.module.css';
 
 const Landing = () => {
@@ -27,7 +27,7 @@ const Landing = () => {
       <Contact />
       {isModalOpen && (
         <Modal onClose={closeModal}>
-          <Login />
+          <Registration />
         </Modal>
       )}
     </main>

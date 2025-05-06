@@ -1,16 +1,17 @@
 import { z } from 'zod';
-import styles from './LoginForm.module.css';
+import styles from './Form.module.css';
 import Button from '../../components/Button/Button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const schema = z.object({
-  email: z.string().email('Invalid email format').min(1, 'Email is required !'),
+  fullName: z.string().min(3, 'Name is required!'),
+  email: z.string().email('Invalid email format').min(1, 'Email is required!'),
   password: z.string().min(6, 'Password must be at least 6 characters long'),
 });
 
 type FormData = z.infer<typeof schema>;
-export const LoginForm = () => {
+export const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
@@ -23,6 +24,8 @@ export const LoginForm = () => {
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('fullName')} placeholder='Full Name' />
+      {errors.fullName && <p>{errors.fullName.message}</p>}
       <input {...register('email')} placeholder='Email' />
       {errors.email && <p>{errors.email.message}</p>}
       <input type='password' {...register('password')} placeholder='Password' />

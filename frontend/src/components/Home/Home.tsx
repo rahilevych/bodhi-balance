@@ -1,6 +1,7 @@
-import { Element } from 'react-scroll';
+import { Element, Link } from 'react-scroll';
 import Button from '../Button/Button';
 import styles from './Home.module.css';
+
 const Home = () => {
   return (
     <Element name='home'>
@@ -25,7 +26,10 @@ const Home = () => {
           </div>
           <div>
             <p>Find your inner balance and strength through mindful movement</p>
-            <Button text='Check classes' />
+
+            <Link to='schedule' smooth={true}>
+              <Button text='Check classes' />
+            </Link>
           </div>
         </div>
       </section>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Schedule.module.css';
 import ScheduleTable from './ScheduleTable';
+import { Element } from 'react-scroll';
 export const daysOfWeek = [
   'Monday',
   'Tuesday',
@@ -24,24 +25,26 @@ const Schedule = () => {
   };
 
   return (
-    <section id='schedule' className={styles.schedule}>
-      <div className='container'>
-        <h2>Schedule</h2>
-        <div className={styles.days}>
-          <ul>
-            {daysOfWeek.map((weekDay, index) => (
-              <li
-                className={day === weekDay ? styles.active : ''}
-                key={index}
-                onClick={() => handleDayChange(weekDay)}>
-                {weekDay}
-              </li>
-            ))}
-          </ul>
+    <Element name='schedule'>
+      <section id='schedule' className={styles.schedule}>
+        <div className='container'>
+          <h2>Schedule</h2>
+          <div className={styles.days}>
+            <ul>
+              {daysOfWeek.map((weekDay, index) => (
+                <li
+                  className={day === weekDay ? styles.active : ''}
+                  key={index}
+                  onClick={() => handleDayChange(weekDay)}>
+                  {weekDay}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <ScheduleTable day={day} />
         </div>
-        <ScheduleTable day={day} />
-      </div>
-    </section>
+      </section>
+    </Element>
   );
 };
 

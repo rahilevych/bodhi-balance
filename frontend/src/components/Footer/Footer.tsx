@@ -1,5 +1,7 @@
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import styles from './Footer.module.css';
+import { sectionsList } from '../../constants/sections';
+import { Link } from 'react-scroll';
 
 const Footer = () => {
   return (
@@ -11,13 +13,15 @@ const Footer = () => {
           </div>
           <div className={styles.nav}>
             <ul>
-              <li>About</li>
-              <li>Styles</li>
-              <li>Schedule</li>
-              <li>Pricing plans</li>
-              <li>Trainers</li>
-              <li>Atmosphere</li>
-              <li>Content</li>
+              {sectionsList.flatMap((section) =>
+                section.subSections.map((subSection) => (
+                  <li key={subSection.link}>
+                    <Link to={subSection.link} smooth={true}>
+                      <p className={styles.link}> {subSection.name}</p>
+                    </Link>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
           <div className={styles.social}>

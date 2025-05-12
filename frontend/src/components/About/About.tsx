@@ -1,6 +1,5 @@
-import { Element } from 'react-scroll';
+import { Element, Link } from 'react-scroll';
 import styles from './About.module.css';
-import { Link } from 'react-router';
 
 export const About = () => {
   const description =
@@ -12,7 +11,7 @@ export const About = () => {
     },
     {
       name: 'Certified instructors with years of practice and teaching experience',
-      link: 'instructors',
+      link: 'trainers',
     },
     {
       name: ' A warm and welcoming space designed for comfort and mindfulness',
@@ -44,7 +43,7 @@ export const About = () => {
               <ul>
                 {links.map((link, index) => (
                   <li key={index}>
-                    <Link to={link.link} className={styles.link}>
+                    <Link to={link.link} className={styles.link} smooth={true}>
                       {link.name}
                     </Link>
                   </li>

@@ -14,3 +14,8 @@
   font-size: 1.5rem;
   font-weight: 500;
 }
+.content > p > span {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--third-color);
+}

@@ -50,14 +50,13 @@
 }
 .text > ul > li {
   padding-bottom: 5px;
-  border-bottom: 2px solid var(--secondary-color);
   transition: all 0.5s ease;
   cursor: pointer;
 }
 .text > ul > li:hover {
   padding-bottom: 2px;
-  border-bottom: 2px solid var(--secondary-color);
-  transform: scale(1.05);
+  text-decoration: underline;
+  font-weight: 500;
   opacity: 0.9;
   color: var(--third-color);
 }

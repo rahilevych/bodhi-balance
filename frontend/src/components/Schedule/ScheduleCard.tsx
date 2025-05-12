@@ -1,3 +1,4 @@
+import Button from '../Button/Button';
 import styles from './ScheduleCard.module.css';
 interface Props {
   item: any;
@@ -23,7 +24,7 @@ export const ScheduleCard = ({ item }: Props) => {
       <p>
         <strong>Trainer:</strong> {item.trainer}
       </p>
-      <button className={styles.bookBtn}>Book a class</button>
+      <Button text='Book a class' className={styles.bookBtn}></Button>
     </div>
   );
 };

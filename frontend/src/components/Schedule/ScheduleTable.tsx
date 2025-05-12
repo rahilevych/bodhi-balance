@@ -1,7 +1,7 @@
-import { FaEdit } from 'react-icons/fa';
 import { scheduleData } from '../../data/schedule';
 import styles from './ScheduleTable.module.css';
 import { ScheduleCard } from './ScheduleCard';
+import Button from '../Button/Button';
 
 interface Props {
   day: string;
@@ -34,9 +34,7 @@ const ScheduleTable = ({ day }: Props) => {
               <td>{item.duration}</td>
               <td>{item.trainer}</td>
               <td>
-                <button className={styles.bookBtn}>
-                  Book <FaEdit className={styles.icon} />
-                </button>
+                <Button text='Book ' className={styles.bookBtn}></Button>
               </td>
             </tr>
           ))}

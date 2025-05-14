@@ -70,13 +70,22 @@
   color: var(--secondary-color);
   transform: translateY(-2px);
 }
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-right: 1.5rem;
+}
 
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin-left: 50px;
+
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 .dropdown {
@@ -169,7 +178,7 @@
     visibility: hidden;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    gap: 1rem;
     background-color: var(--primary-color);
     list-style: none;
     padding: 10px 0;
@@ -211,6 +220,7 @@
 
   .menu li {
     display: flex;
+
     flex-direction: column;
     padding: 5px;
   }

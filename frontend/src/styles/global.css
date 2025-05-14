@@ -6,6 +6,10 @@
   --secondary-color: #f1f1f1;
   --third-color: #5d6d5c;
   --text-color: #404040;
+  --confirm-btn-color: #6a8f6b;
+  --confirm-btn-color-hover: #5c7e5d;
+  --cancel-btn-color: #b35c5c;
+  --cancel-btn-color-hover: #a14f4f;
 }
 html {
   font-size: 16px;

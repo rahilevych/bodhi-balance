@@ -5,13 +5,15 @@
   min-width: 10rem;
   width: auto;
   height: 2.8rem;
-  border-radius: 50px;
   background-color: var(--third-color);
+  font-size: 1rem;
+  padding: 10px 20px;
   border: none;
-  padding: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--secondary-color);
   transition: all 1s ease;
   font-family: var(--primary-font);
-  cursor: pointer;
 }
 .button span {
   color: var(--secondary-color);
@@ -28,7 +30,4 @@
 }
 .button:hover span {
   color: var(--third-color);
-}
-.button:hover .icon {
-  stroke: var(--third-color);
 }

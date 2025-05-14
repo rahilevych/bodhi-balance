@@ -1,13 +1,24 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
+import { User } from '../types/Types';
+import { getMe } from '../services/authService';
+import { NotificationWindow } from '../components/ModalWindow/NotificationWindow';
 
 interface AppContextType {
-  isAuthenticated: boolean;
-  token: string | null;
   openModal: () => void;
   closeModal: () => void;
   isModalOpen: boolean;
-  login: (token: string) => void;
-  logout: () => void;
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+  isAuthenticated: boolean;
+  notification: string | null;
+  setNotification: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -23,25 +34,10 @@ export const useAppContext = () => {
 export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
-    Boolean(localStorage.getItem('token'))
-  );
-  const [token, setToken] = useState<string | null>(
-    localStorage.getItem('token')
-  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const login = (token: string) => {
-    setToken(token);
-    setIsAuthenticated(true);
-    localStorage.setItem('token', token);
-  };
-
-  const logout = () => {
-    setToken(null);
-    setIsAuthenticated(false);
-    localStorage.removeItem('token');
-  };
+  const [notification, setNotification] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
 
   const openModal = () => {
     document.body.style.overflow = 'hidden';
@@ -53,18 +49,43 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     setIsModalOpen(false);
   };
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await getMe();
+        console.log(res);
+        setUser(res);
+        setIsAuthenticated(true);
+        console.log(user);
+      } catch (err) {
+        setUser(null);
+        setIsAuthenticated(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
-        isAuthenticated,
-        token,
+        user,
+        setUser,
+        setIsAuthenticated,
         openModal,
         closeModal,
         isModalOpen,
-        login,
-        logout,
+        isAuthenticated,
+        notification,
+        setNotification,
       }}>
       {children}
+      {notification && (
+        <NotificationWindow
+          message={notification}
+          onClose={() => setNotification(null)}
+        />
+      )}
     </AppContext.Provider>
   );
 };

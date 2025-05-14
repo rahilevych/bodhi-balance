@@ -1,42 +1,22 @@
 import styles from './Nav.module.css';
 import { Link } from 'react-scroll';
 import Button from '../Button/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
+import { useNavigate } from 'react-router';
+import { sectionsList } from '../../constants/sections';
+
+import LogoutButton from '../Button/LogoutButton';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { openModal } = useAppContext();
+  const { openModal, isAuthenticated } = useAppContext();
+  const navigate = useNavigate();
 
   const handleBurgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  const sectionsList = [
-    {
-      name: 'About',
-      subSections: [
-        { name: 'About Us', link: 'about' },
-        { name: 'Teachers', link: 'teachers' },
-        { name: 'Atmosphere', link: 'atmosphere' },
-      ],
-    },
-    {
-      name: 'Classes',
-      subSections: [
-        { name: 'Yoga Styles', link: 'yogastyles' },
-        { name: 'Schedule', link: 'schedule' },
-      ],
-    },
-    {
-      name: 'Info',
-      subSections: [
-        { name: 'Pricing', link: 'pricing' },
-        { name: 'FAQ', link: 'faq' },
-        { name: 'Contact', link: 'contact' },
-      ],
-    },
-  ];
 
   const [dropdownId, setDropdownId] = useState<string | null | number>(null);
 
@@ -47,10 +27,12 @@ const Nav = () => {
 
   return (
     <section className={styles.nav}>
-      <div className={styles.logo}>
-        <Link to='home' smooth={true}>
-          <span>Bodhi balance</span>
-        </Link>
+      <div
+        className={styles.logo}
+        onClick={() => {
+          navigate('/');
+        }}>
+        <span>Bodhi balance</span>
       </div>
       <div className={styles.nav_menu}>
         {' '}
@@ -102,9 +84,23 @@ const Nav = () => {
             </li>
           ))}
           <li>
-            <div onClick={openModal} className={styles.btn}>
-              <Button text='Sign in' />
-            </div>
+            {isAuthenticated ? (
+              <div className={styles.buttons}>
+                {' '}
+                <div
+                  onClick={() => {
+                    navigate('/profile');
+                  }}
+                  className={styles.btn}>
+                  <Button text='Profile' />
+                </div>
+                <LogoutButton />
+              </div>
+            ) : (
+              <div onClick={openModal} className={styles.btn}>
+                <Button text='Sign in' />
+              </div>
+            )}
           </li>
         </ul>
       </div>

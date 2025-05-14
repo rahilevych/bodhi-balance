@@ -3,7 +3,7 @@ import Atmosphere from '../../components/Atmosphere/Atmosphere';
 import Contact from '../../components/Contact/Contact';
 import FAQ from '../../components/FAQ/FAQ';
 import Home from '../../components/Home/Home';
-import { Modal } from '../../components/ModalWindow/Modal';
+import { AuthorizationWindow } from '../../components/ModalWindow/AuthorizationWindow';
 import Pricing from '../../components/Pricing/Pricing';
 import Schedule from '../../components/Schedule/Schedule';
 import Teachers from '../../components/Teachers/Teachers';
@@ -26,9 +26,9 @@ const Landing = () => {
       <FAQ />
       <Contact />
       {isModalOpen && (
-        <Modal onClose={closeModal}>
+        <AuthorizationWindow onClose={closeModal}>
           <Registration />
-        </Modal>
+        </AuthorizationWindow>
       )}
     </main>
   );

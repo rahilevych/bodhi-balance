@@ -3,6 +3,10 @@ import styles from './Form.module.css';
 import Button from '../../components/Button/Button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { registerUser } from '../../services/authService';
+import { useState } from 'react';
+import axios from 'axios';
+import { useAppContext } from '../../context/AppContext';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),
@@ -12,6 +16,8 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 export const RegistrationForm = () => {
+  const [serverError, setServerError] = useState<string | null>(null);
+  const { setNotification } = useAppContext();
   const {
     register,
     handleSubmit,
@@ -19,8 +25,19 @@ export const RegistrationForm = () => {
   } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = (data: FormData) => {
-    console.log('Form submitted:', data);
+  const onSubmit = async (data: FormData) => {
+    setServerError(null);
+    try {
+      await registerUser(data);
+      setNotification('Successfully registered!');
+    } catch (error: any) {
+      setNotification('Registration failed!');
+      if (axios.isAxiosError(error)) {
+        setServerError(error.response?.data?.error || 'Server error');
+      } else {
+        setServerError('Unknown error');
+      }
+    }
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -30,7 +47,8 @@ export const RegistrationForm = () => {
       {errors.email && <p>{errors.email.message}</p>}
       <input type='password' {...register('password')} placeholder='Password' />
       {errors.password && <p>{errors.password.message}</p>}{' '}
-      <Button text='Login' type='submit' className={styles.btn} />
+      <Button text='Sign up' type='submit' className={styles.btn} />
+      {serverError && <p className={styles.error}>{serverError}</p>}
     </form>
   );
 };

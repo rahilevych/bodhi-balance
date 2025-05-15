@@ -9,7 +9,7 @@ import Schedule from '../../components/Schedule/Schedule';
 import Teachers from '../../components/Teachers/Teachers';
 import YogaStyles from '../../components/YogaStyles/YogaStyles';
 import { useAppContext } from '../../context/AppContext';
-import { Registration } from '../Registration/Registration';
+import { Registration } from '../../components/Registration/Registration';
 import styles from './Landing.module.css';
 
 const Landing = () => {

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import styles from './Form.module.css';
-import Button from '../../components/Button/Button';
+import Button from '../Button/Button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';

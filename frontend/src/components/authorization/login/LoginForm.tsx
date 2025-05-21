@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import styles from './Form.module.css';
+import styles from '../Form.module.css';
 import Button from '../../button/Button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

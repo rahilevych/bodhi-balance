@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import styles from './Form.module.css';
-import Button from '../button/Button';
+import styles from '../Form.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerUser } from '../../services/authService';
 import { useState } from 'react';
 import axios from 'axios';
-import { useAppContext } from '../../context/AppContext';
+import { useAppContext } from '../../../context/AppContext';
+import { registerUser } from '../../../services/authService';
+import Button from '../../button/Button';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),

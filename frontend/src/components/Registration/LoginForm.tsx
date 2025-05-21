@@ -13,7 +13,7 @@ const schema = z.object({
   password: z.string().min(6, 'Password must be at least 6 characters long'),
 });
 
-export type FormData = z.infer<typeof schema>;
+export type LoginFormData = z.infer<typeof schema>;
 
 export const LoginForm = () => {
   const { setUser, setIsAuthenticated, setNotification } = useAppContext();
@@ -26,7 +26,7 @@ export const LoginForm = () => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     setServerError(null);
     try {
       const result = await loginUser(data);

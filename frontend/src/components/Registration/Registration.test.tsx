@@ -1,7 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { useAppContext } from '../../context/AppContext';
 import userEvent from '@testing-library/user-event';
-import { renderWithContext } from '../../test-utils/renderWithContex';
 import { RegistrationForm } from './RegistrationForm';
 import '@testing-library/jest-dom';
 import { registerUser } from '../../services/authService';

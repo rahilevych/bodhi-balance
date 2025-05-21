@@ -1,5 +1,6 @@
 import { Element, Link } from 'react-scroll';
 import styles from './About.module.css';
+import { aboutInfo } from '../../constants/about';
 
 export const About = () => {
   const description =
@@ -33,15 +34,12 @@ export const About = () => {
           <h2 className={styles.h2}>About us</h2>
           <div className={styles.content}>
             <div className={styles.image}>
-              <img
-                src='https://i.pinimg.com/236x/41/fd/27/41fd27979325f866d134b077de5d9bca.jpg'
-                alt=''
-              />
+              <img src={aboutInfo.img} alt='about-img' />
             </div>
             <div className={styles.text}>
-              <p>{description}</p>
+              <p>{aboutInfo.info}</p>
               <ul>
-                {links.map((link, index) => (
+                {aboutInfo.links.map((link, index) => (
                   <li key={index}>
                     <Link to={link.link} className={styles.link} smooth={true}>
                       {link.name}

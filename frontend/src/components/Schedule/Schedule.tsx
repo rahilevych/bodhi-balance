@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import styles from './Schedule.module.css';
-import ScheduleTable from './ScheduleTable';
+
 import { Element } from 'react-scroll';
+import ScheduleTable from './ScheduleTable';
 export const daysOfWeek = [
   'Monday',
   'Tuesday',

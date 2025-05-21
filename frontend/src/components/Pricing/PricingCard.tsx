@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from '../Button/Button';
+import Button from '../button/Button';
 import styles from './PricingCard.module.css';
 interface Props {
   plan: any;

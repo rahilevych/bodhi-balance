@@ -1,4 +1,4 @@
-import Button from '../Button/Button';
+import Button from '../button/Button';
 import styles from './ScheduleCard.module.css';
 interface Props {
   item: any;

@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Button.module.css';
-import { FiChevronRight } from 'react-icons/fi';
 
 interface Props {
   text: string;
@@ -19,7 +18,6 @@ const Button: React.FC<Props> = ({
       className={`${styles.button} ${className || ''}`}
       {...rest}>
       <span>{text}</span>
-      {/* <FiChevronRight className={styles.icon} /> */}
     </button>
   );
 };

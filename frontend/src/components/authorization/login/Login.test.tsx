@@ -1,9 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { useAppContext } from '../../context/AppContext';
+
 import userEvent from '@testing-library/user-event';
-import { LoginForm } from './LoginForm';
+
 import '@testing-library/jest-dom';
-import { loginUser } from '../../services/authService';
+import { useAppContext } from '../../../context/AppContext';
+import { loginUser } from '../../../services/authService';
+import { LoginForm } from './LoginForm';
 
 const setNotificationMock = jest.fn();
 const setUserMock = jest.fn();

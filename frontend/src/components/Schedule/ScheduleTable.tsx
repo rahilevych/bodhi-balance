@@ -1,7 +1,8 @@
-import { scheduleData } from '../../data/schedule';
 import styles from './ScheduleTable.module.css';
+
+import Button from '../button/Button';
 import { ScheduleCard } from './ScheduleCard';
-import Button from '../Button/Button';
+import { scheduleData } from '../../data/schedule';
 
 interface Props {
   day: string;

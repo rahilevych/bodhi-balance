@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { RegisterFormData } from '../components/Registration/RegistrationForm';
-import { LoginFormData } from '../components/Registration/LoginForm';
+import { RegisterFormData } from '../components/authorization/registration/RegistrationForm';
+import { LoginFormData } from '../components/authorization/login/LoginForm';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 

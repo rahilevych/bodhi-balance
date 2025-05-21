@@ -1,13 +1,13 @@
 import styles from './Nav.module.css';
 import { Link } from 'react-scroll';
-import Button from '../Button/Button';
+import Button from '../button/Button';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
 import { useNavigate } from 'react-router';
 import { sectionsList } from '../../constants/sections';
 
-import LogoutButton from '../Registration/LogoutButton';
+import LogoutButton from '../authorization/LogoutButton';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

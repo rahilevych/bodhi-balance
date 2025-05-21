@@ -6,7 +6,7 @@ import { trainerData } from '../../data/teachers';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { FullCard } from './FullCard';
-import SliderNav from '../SliderNavigation/SliderNav';
+import SliderNav from '../sliderNav/SliderNav';
 import { Element } from 'react-scroll';
 
 const Teachers = () => {

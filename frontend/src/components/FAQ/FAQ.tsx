@@ -2,6 +2,7 @@ import { Element } from 'react-scroll';
 import { faqData } from '../../data/questions';
 import styles from './FAQ.module.css';
 import { Question } from './Question';
+
 const FAQ = () => {
   return (
     <Element name='faq'>

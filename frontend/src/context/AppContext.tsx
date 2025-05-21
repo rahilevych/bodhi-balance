@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { User } from '../types/Types';
 import { getMe } from '../services/authService';
-import { NotificationWindow } from '../components/ModalWindow/NotificationWindow';
+import { NotificationWindow } from '../components/modal/NotificationWindow';
 
 interface AppContextType {
   openModal: () => void;

@@ -2,13 +2,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Element } from 'react-scroll';
-import YogaCard from '../YogaCard/YogaCard';
+import YogaCard from '../yogaCard/YogaCard';
 import styles from './YogaStyles.module.css';
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
 import { Pagination } from 'swiper/modules';
-import SliderNav from '../SliderNavigation/SliderNav';
+import SliderNav from '../sliderNav/SliderNav';
 export const yogaStyles = [
   {
     id: 1,

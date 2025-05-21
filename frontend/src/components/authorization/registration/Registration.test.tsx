@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { useAppContext } from '../../context/AppContext';
 import userEvent from '@testing-library/user-event';
-import { RegistrationForm } from './RegistrationForm';
 import '@testing-library/jest-dom';
-import { registerUser } from '../../services/authService';
+import { useAppContext } from '../../../context/AppContext';
+import { registerUser } from '../../../services/authService';
+import { RegistrationForm } from './RegistrationForm';
 
 jest.mock('../../context/AppContext.tsx', () => ({
   useAppContext: jest.fn(),

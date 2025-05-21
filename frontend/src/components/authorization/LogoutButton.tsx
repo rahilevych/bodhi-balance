@@ -1,5 +1,5 @@
 import styles from './LogoutButton.module.css';
-import { ConfirmationWindow } from '../ModalWindow/ConfirmationWindow';
+import { ConfirmationWindow } from '../modal/ConfirmationWindow';
 import { logout } from '../../services/authService';
 import { useAppContext } from '../../context/AppContext';
 import { useState } from 'react';

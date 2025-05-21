@@ -10,11 +10,12 @@ import { useAppContext } from '../../context/AppContext';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),
-  email: z.string().email('Invalid email format').min(1, 'Email is required!'),
+  email: z.string().min(1, 'Email is required!').email('Invalid email format'),
   password: z.string().min(6, 'Password must be at least 6 characters long'),
 });
 
-type FormData = z.infer<typeof schema>;
+export type RegisterFormData = z.infer<typeof schema>;
+
 export const RegistrationForm = () => {
   const [serverError, setServerError] = useState<string | null>(null);
   const { setNotification } = useAppContext();
@@ -25,7 +26,7 @@ export const RegistrationForm = () => {
   } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: RegisterFormData) => {
     setServerError(null);
     try {
       await registerUser(data);
@@ -39,6 +40,7 @@ export const RegistrationForm = () => {
       }
     }
   };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <input {...register('fullName')} placeholder='Full Name' />

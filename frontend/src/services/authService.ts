@@ -1,12 +1,10 @@
 import axios from 'axios';
+import { RegisterFormData } from '../components/Registration/RegistrationForm';
+import { LoginFormData } from '../components/Registration/LoginForm';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export const registerUser = async (data: {
-  fullName: string;
-  email: string;
-  password: string;
-}) => {
+export const registerUser = async (data: RegisterFormData) => {
   console.log(data);
   const res = await axios.post(`${BASE_URL}/auth/register`, {
     name: data.fullName,
@@ -15,7 +13,7 @@ export const registerUser = async (data: {
   });
   return res.data;
 };
-export const loginUser = async (data: { email: string; password: string }) => {
+export const loginUser = async (data: LoginFormData) => {
   const res = await axios.post(
     `${BASE_URL}/auth/login`,
     {

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import styles from './Registration.module.css';
+import styles from './Authorization.module.css';
 import { RegistrationForm } from './RegistrationForm';
 import { LoginForm } from './LoginForm';
-export const Registration = () => {
+export const Authorization = () => {
   const [type, setType] = useState<'signin' | 'signup'>('signin');
 
   return (

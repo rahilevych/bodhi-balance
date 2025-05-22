@@ -8,10 +8,14 @@ const SliderNav = () => {
   return (
     <div className={styles.navigation}>
       <div className={styles.buttons}>
-        <button className={styles.arrow} onClick={() => swiper.slidePrev()}>
+        <button
+          className={styles.arrow}
+          onClick={() => swiper && swiper.slidePrev()}>
           <FiChevronLeft className={styles.icon} />
         </button>
-        <button className={styles.arrow} onClick={() => swiper.slideNext()}>
+        <button
+          className={styles.arrow}
+          onClick={() => swiper && swiper.slideNext()}>
           {' '}
           <FiChevronRight className={styles.icon} />
         </button>

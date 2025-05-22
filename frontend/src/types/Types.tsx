@@ -1,11 +1,3 @@
-export type YogaCardType = {
-  id: number;
-  title: string;
-  image: string;
-  duration: number;
-  days: string[];
-  description: String;
-};
 export type User = {
   _id: string;
   name: string;
@@ -21,4 +13,12 @@ export type Teacher = {
   specialization: string;
   about: string;
   photo: string;
+};
+export type YogaStyle = {
+  id: string;
+  title: string;
+  image: string;
+  duration: number;
+  trainer: string;
+  description: string;
 };

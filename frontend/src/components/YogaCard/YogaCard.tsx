@@ -1,9 +1,9 @@
 import React from 'react';
-import { YogaCardType } from '../../types/Types';
+import { YogaStyle } from '../../types/Types';
 import styles from './YogaCard.module.css';
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 interface Props {
-  card: YogaCardType;
+  card: YogaStyle;
 }
 
 const YogaCard: React.FC<Props> = ({ card }) => {
@@ -14,15 +14,8 @@ const YogaCard: React.FC<Props> = ({ card }) => {
       </div>
       <div className={styles.info}>
         <h3>{card.title}</h3>
-        <p>
-          {' '}
-          <FaCalendarAlt className={styles.icon} />
-          Days: {card.days.join(', ')}
-        </p>
-        <p>
-          <FaClock className={styles.icon} />
-          Duration: {card.duration}
-        </p>
+        <p>Duration: {card.duration}</p>
+        <p>Trainer: {card.trainer}</p>
         <p>{card.description}</p>
       </div>
     </div>

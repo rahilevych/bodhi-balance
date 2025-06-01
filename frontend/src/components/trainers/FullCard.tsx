@@ -1,7 +1,7 @@
-import { Teacher } from '../../types/Types';
+import { Trainer } from '../../types/Types';
 import styles from './FullCard.module.css';
 interface Props {
-  currentTeacher: Teacher;
+  currentTeacher: Trainer;
 }
 
 export const FullCard = ({ currentTeacher }: Props) => {

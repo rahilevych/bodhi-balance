@@ -1,7 +1,7 @@
-import { Teacher } from '../../types/Types';
+import { Trainer } from '../../types/Types';
 import styles from './SmallCard.module.css';
 interface Props {
-  trainer: Teacher;
+  trainer: Trainer;
 }
 
 export const SmallCard = ({ trainer }: Props) => {

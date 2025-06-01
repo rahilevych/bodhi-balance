@@ -6,7 +6,7 @@ export type User = {
   role: string;
   createdAt: Date;
 };
-export type Teacher = {
+export type Trainer = {
   id: string;
   fullName: string;
   experience: string;
@@ -21,4 +21,14 @@ export type YogaStyle = {
   duration: number;
   trainer: string;
   description: string;
+};
+export type Training = {
+  id: string;
+  datetime: Date;
+  duration: number;
+  spots_taken: number;
+  spots_total: number;
+  trainer_id: Trainer;
+  yogaStyle_id: YogaStyle;
+  type: string;
 };

@@ -1,29 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Schedule.module.css';
-
 import { Element } from 'react-scroll';
 import ScheduleTable from './ScheduleTable';
-export const daysOfWeek = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-];
+import { Training } from '../../types/Types';
+import { getAllTrainingForDay } from '../../services/scheduleService';
+import { getNext7Days } from '../../utils/dateHelpers';
+
 const Schedule = () => {
   const today = new Date();
-  const jsDay = today.getDay();
-  const adjustedIndex = jsDay === 0 ? 6 : jsDay - 1;
-  const currentDay = daysOfWeek[adjustedIndex];
+  const [trainings, setTrainings] = useState<Training[] | null>(null);
+  const [day, setDay] = useState<Date>(today);
 
-  const [day, setDay] = useState<string>(currentDay);
-
-  const handleDayChange = (selectedDay: string) => {
-    console.log(selectedDay);
-    setDay(selectedDay);
-  };
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const data = await getAllTrainingForDay(day);
+        console.log(data);
+        setTrainings(data);
+      } catch (error) {
+        console.error('Error loading schedule', error);
+      }
+    };
+    init();
+  }, [day]);
 
   return (
     <Element name='schedule'>
@@ -32,17 +31,29 @@ const Schedule = () => {
           <h2>Schedule</h2>
           <div className={styles.days}>
             <ul>
-              {daysOfWeek.map((weekDay, index) => (
+              {getNext7Days().map((date, index) => (
                 <li
-                  className={day === weekDay ? styles.active : ''}
+                  className={
+                    date.toDateString() === day.toDateString()
+                      ? styles.active
+                      : ''
+                  }
                   key={index}
-                  onClick={() => handleDayChange(weekDay)}>
-                  {weekDay}
+                  onClick={() => setDay(date)}>
+                  <p className={styles.weekday}>
+                    {date.toLocaleDateString('en-US', { weekday: 'long' })}
+                  </p>
+                  <p className={styles.dayMonth}>
+                    {date.toLocaleDateString('en-GB', {
+                      day: 'numeric',
+                      month: 'numeric',
+                    })}
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
-          <ScheduleTable day={day} />
+          {<ScheduleTable trainings={trainings} />}
         </div>
       </section>
     </Element>

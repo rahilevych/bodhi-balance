@@ -1,16 +1,14 @@
 import styles from './ScheduleTable.module.css';
-
 import Button from '../button/Button';
 import { ScheduleCard } from './ScheduleCard';
-import { scheduleData } from '../../data/schedule';
+import { Training } from '../../types/Types';
+import { getTimeFromDate } from '../../utils/dateHelpers';
 
 interface Props {
-  day: string;
+  trainings: Training[] | null;
 }
 
-const ScheduleTable = ({ day }: Props) => {
-  const data = scheduleData[day];
-
+const ScheduleTable = ({ trainings }: Props) => {
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.table}>
@@ -18,7 +16,6 @@ const ScheduleTable = ({ day }: Props) => {
           <tr>
             <th>Time</th>
             <th>Type</th>
-            <th>Format</th>
             <th>Spots</th>
             <th>Duration</th>
             <th>Trainer</th>
@@ -26,14 +23,16 @@ const ScheduleTable = ({ day }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
+          {trainings?.map((training, index) => (
             <tr key={index}>
-              <td>{item.time}</td>
-              <td>{item.type}</td>
-              <td>{item.format}</td>
-              <td>{item.spots}</td>
-              <td>{item.duration}</td>
-              <td>{item.trainer}</td>
+              <td>{getTimeFromDate(training.datetime)}</td>
+              <td>{training.yogaStyle_id.title}</td>
+
+              <td>
+                {training.spots_taken}/{training.spots_total}
+              </td>
+              <td>{training.yogaStyle_id.duration}</td>
+              <td>{training.trainer_id.fullName}</td>
               <td>
                 <Button text='Book ' className={styles.bookBtn}></Button>
               </td>
@@ -41,7 +40,7 @@ const ScheduleTable = ({ day }: Props) => {
           ))}
         </tbody>
       </table>
-      {data.map((item, index) => (
+      {trainings?.map((item, index) => (
         <ScheduleCard key={index} item={item} />
       ))}
     </div>

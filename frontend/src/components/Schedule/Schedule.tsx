@@ -17,7 +17,9 @@ const Schedule = () => {
         const data = await getAllTrainingForDay(day);
         console.log(data);
         setTrainings(data);
-      } catch (error) {}
+      } catch (error) {
+        console.error('Error loading schedule', error);
+      }
     };
     init();
   }, [day]);

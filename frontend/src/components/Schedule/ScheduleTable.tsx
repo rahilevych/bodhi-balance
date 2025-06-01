@@ -1,11 +1,7 @@
 import styles from './ScheduleTable.module.css';
-
 import Button from '../button/Button';
 import { ScheduleCard } from './ScheduleCard';
-import { scheduleData } from '../../data/schedule';
-import { useEffect, useState } from 'react';
 import { Training } from '../../types/Types';
-import { getAllTrainingForDay } from '../../services/scheduleService';
 import { getTimeFromDate } from '../../utils/dateHelpers';
 
 interface Props {

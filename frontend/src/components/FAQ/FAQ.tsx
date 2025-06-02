@@ -1,9 +1,23 @@
 import { Element } from 'react-scroll';
-import { faqData } from '../../data/questions';
 import styles from './FAQ.module.css';
 import { Question } from './Question';
+import { useEffect, useState } from 'react';
+import { QuestionType } from '../../types/Types';
+import { getAllFAQ } from '../../services/questionService';
 
 const FAQ = () => {
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const data = await getAllFAQ();
+        setQuestions(data);
+      } catch (error) {
+        console.error('Error fetching questions', error);
+      }
+    };
+    init();
+  }, []);
   return (
     <Element name='faq'>
       <section id='faq' className={styles.faq}>
@@ -11,7 +25,7 @@ const FAQ = () => {
           <h2>FAQ</h2>
           <div className={styles.content}>
             <div className={styles.questions}>
-              {faqData.map((question, index) => (
+              {questions.map((question, index) => (
                 <Question
                   question={question.question}
                   answer={question.answer}

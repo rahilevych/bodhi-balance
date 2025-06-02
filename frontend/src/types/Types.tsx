@@ -32,3 +32,8 @@ export type Training = {
   yogaStyle_id: YogaStyle;
   type: string;
 };
+export type QuestionType = {
+  id: string;
+  question: string;
+  answer: string;
+};

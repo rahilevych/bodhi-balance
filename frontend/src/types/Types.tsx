@@ -9,7 +9,7 @@ export type User = {
 export type Trainer = {
   id: string;
   fullName: string;
-  experience: string;
+  experience: number;
   specialization: string;
   about: string;
   photo: string;

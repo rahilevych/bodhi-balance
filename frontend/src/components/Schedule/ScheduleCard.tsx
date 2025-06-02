@@ -1,28 +1,30 @@
+import { Training } from '../../types/Types';
+import { getTimeFromDate } from '../../utils/dateHelpers';
 import Button from '../button/Button';
 import styles from './ScheduleCard.module.css';
 interface Props {
-  item: any;
+  item: Training;
 }
 export const ScheduleCard = ({ item }: Props) => {
   return (
     <div className={styles.card}>
       <p>
-        <strong>Time:</strong> {item.time}
+        <strong>Time:</strong>
+        {getTimeFromDate(item.datetime)}
       </p>
       <p>
-        <strong>Type:</strong> {item.type}
+        <strong>Type:</strong> {item.yogaStyle_id.title}
+      </p>
+
+      <p>
+        <strong>Spots:</strong> {item.spots_taken}/{item.spots_total}
       </p>
       <p>
-        <strong>Format:</strong> {item.format}
+        <strong>Duration:</strong>
+        {item.yogaStyle_id.duration}
       </p>
       <p>
-        <strong>Spots:</strong> {item.spots}
-      </p>
-      <p>
-        <strong>Duration:</strong> {item.duration}
-      </p>
-      <p>
-        <strong>Trainer:</strong> {item.trainer}
+        <strong>Trainer:</strong> {item.trainer_id.fullName}
       </p>
       <Button text='Book a class' className={styles.bookBtn}></Button>
     </div>

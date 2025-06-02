@@ -6,11 +6,11 @@ import Home from '../../components/home/Home';
 import { AuthorizationWindow } from '../../components/modal/AuthorizationWindow';
 import Pricing from '../../components/pricing/Pricing';
 import Schedule from '../../components/schedule/Schedule';
-import Teachers from '../../components/trainers/Teachers';
 import YogaStyles from '../../components/yogaStyles/YogaStyles';
 import { useAppContext } from '../../context/AppContext';
 import { Authorization } from '../../components/authorization/Authorization';
 import styles from './Landing.module.css';
+import Trainers from '../../components/trainers/Trainers';
 
 const Landing = () => {
   const { isModalOpen, closeModal } = useAppContext();
@@ -21,7 +21,7 @@ const Landing = () => {
       <YogaStyles />
       <Schedule />
       <Pricing />
-      <Teachers />
+      <Trainers />
       <Atmosphere />
       <FAQ />
       <Contact />

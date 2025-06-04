@@ -1,28 +1,29 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
 import styles from './PricingCard.module.css';
+import { Plan } from '../../types/Types';
 interface Props {
-  plan: any;
+  type: string;
+  plans: Plan[];
 }
-export const PricingCard = ({ plan }: Props) => {
-  const [selectedOption, setSelectedOption] = useState(plan.options[0]);
+export const PricingCard = ({ plans, type }: Props) => {
+  const [selectedOption, setSelectedOption] = useState<Plan>(plans[0]);
 
-  const handleOptionChange = (selectedOption: string) => {
+  const handleOptionChange = (selectedOption: Plan) => {
     setSelectedOption(selectedOption);
   };
   return (
     <div className={styles.card}>
-      <h3>{plan.category}</h3>
+      <h3>{type}</h3>
       <div className={styles.categories}>
-        {plan.options &&
-          plan.options.map((option: any, index: any) => (
-            <p
-              key={index}
-              className={selectedOption === option ? styles.active : ''}
-              onClick={() => handleOptionChange(option)}>
-              {option.title}
-            </p>
-          ))}
+        {plans.map((plan: Plan, index: any) => (
+          <p
+            key={index}
+            className={selectedOption.title === plan.title ? styles.active : ''}
+            onClick={() => handleOptionChange(plan)}>
+            {plan.title}
+          </p>
+        ))}
       </div>
       <div>{selectedOption.description}</div>
       <div>Price: {selectedOption.price}</div>

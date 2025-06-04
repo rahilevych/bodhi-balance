@@ -37,3 +37,9 @@ export type QuestionType = {
   question: string;
   answer: string;
 };
+export type Plan = {
+  type: string;
+  title: string;
+  price: number;
+  description: string;
+};

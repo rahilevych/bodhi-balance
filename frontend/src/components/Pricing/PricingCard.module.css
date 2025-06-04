@@ -18,6 +18,7 @@
 .card > h3 {
   margin: 0;
   font-size: 1.5rem;
+  text-transform: capitalize;
 }
 .categories {
   position: relative;

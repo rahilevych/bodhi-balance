@@ -1,9 +1,30 @@
 import { Element } from 'react-scroll';
-import { plans } from '../../data/plans';
+
 import styles from './Pricing.module.css';
 import { PricingCard } from './PricingCard';
+import { useEffect, useState } from 'react';
+import { Plan } from '../../types/Types';
+import { getAllPlans } from '../../services/planService';
 
 const Pricing = () => {
+  const [plans, setPlans] = useState<Plan[]>([]);
+  const types = plans.reduce((acc, plan) => {
+    if (!acc[plan.type]) acc[plan.type] = [];
+    acc[plan.type].push(plan);
+    return acc;
+  }, {} as Record<string, typeof plans>);
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const data = await getAllPlans();
+        setPlans(data);
+      } catch (error) {
+        console.error('Error fetching questions', error);
+      }
+    };
+    init();
+  }, []);
   return (
     <Element name='pricing'>
       <section id='pricing' className={styles.pricing}>
@@ -11,8 +32,8 @@ const Pricing = () => {
           <h2>Pricing plans</h2>
           <div className={styles.plans}>
             {' '}
-            {plans.map((plan, index) => (
-              <PricingCard plan={plan} />
+            {Object.entries(types).map(([type, plans]) => (
+              <PricingCard type={type} plans={plans} />
             ))}
           </div>
         </div>

@@ -15,8 +15,9 @@ export const PricingCard = ({ plan }: Props) => {
       <h3>{plan.category}</h3>
       <div className={styles.categories}>
         {plan.options &&
-          plan.options.map((option, index) => (
+          plan.options.map((option: any, index: any) => (
             <p
+              key={index}
               className={selectedOption === option ? styles.active : ''}
               onClick={() => handleOptionChange(option)}>
               {option.title}

@@ -1,6 +1,6 @@
 import styles from './Nav.module.css';
 import { Link } from 'react-scroll';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';

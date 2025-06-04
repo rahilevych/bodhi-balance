@@ -1,6 +1,6 @@
 import { Training } from '../../types/Types';
 import { getTimeFromDate } from '../../utils/dateHelpers';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import styles from './ScheduleCard.module.css';
 interface Props {
   item: Training;

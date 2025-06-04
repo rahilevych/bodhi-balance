@@ -2,7 +2,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Element } from 'react-scroll';
-import YogaCard from '../yogaCard/YogaCard';
+import YogaCard from '../YogaCard/YogaCard';
 import styles from './YogaStyles.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';

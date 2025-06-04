@@ -1,5 +1,5 @@
 import { Element, Link } from 'react-scroll';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import styles from './Home.module.css';
 
 const Home = () => {

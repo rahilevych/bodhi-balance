@@ -1,5 +1,5 @@
 import styles from './ScheduleTable.module.css';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import { ScheduleCard } from './ScheduleCard';
 import { Training } from '../../types/Types';
 import { getTimeFromDate } from '../../utils/dateHelpers';

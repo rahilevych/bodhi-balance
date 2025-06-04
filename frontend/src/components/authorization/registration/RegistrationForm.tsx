@@ -6,7 +6,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from '../../../context/AppContext';
 import { registerUser } from '../../../services/authService';
-import Button from '../../button/Button';
+import Button from '../../Button/Button';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),

@@ -2,7 +2,7 @@ import styles from './ContactForm.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import { sendMessage } from '../../services/contactService';
 import { useAppContext } from '../../context/AppContext';
 

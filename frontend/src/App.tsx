@@ -4,9 +4,9 @@ import './styles/global.css';
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Landing from './pages/landing/Landing';
 import Booking from './pages/booking/Booking';
-import Header from './components/header/Header';
+import Header from './components/Header/Header';
 import Profile from './pages/profile/Profile';
-import Footer from './components/footer/Footer';
+import Footer from './components/Footer/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import { useAppContext } from './context/AppContext';
 

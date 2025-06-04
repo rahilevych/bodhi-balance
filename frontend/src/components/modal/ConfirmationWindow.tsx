@@ -1,4 +1,4 @@
-import Button from '../button/Button';
+import Button from '../Button/Button';
 import styles from './ConfirmationWindow.module.css';
 
 interface ConfirmationWindowProps {

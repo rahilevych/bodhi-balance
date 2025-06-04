@@ -3,24 +3,19 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import Button from '../button/Button';
+import { sendMessage } from '../../services/contactService';
+import { useAppContext } from '../../context/AppContext';
 
 const schema = z.object({
   fullName: z.string().min(1, 'Name ist required !'),
-
   email: z.string().email('Invalid email format').min(1, 'Email is required !'),
-  phone: z
-    .string()
-    .regex(
-      /^\+?\d{1,4}?[\s-]?\(?\d{1,4}?\)?[\s-]?\d{1,4}[\s-]?\d{1,4}$/,
-      'Invalid phone number'
-    )
-    .min(1, 'Phone is required'),
   message: z.string().min(1, 'Message is required'),
 });
 
-type FormData = z.infer<typeof schema>;
+export type ContactData = z.infer<typeof schema>;
 
 export const ContactForm = () => {
+  const { setNotification } = useAppContext();
   const {
     register,
     handleSubmit,
@@ -28,8 +23,15 @@ export const ContactForm = () => {
   } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = (data: FormData) => {
-    console.log('Form submitted:', data);
+  const onSubmit = async (data: ContactData) => {
+    try {
+      const res = await sendMessage(data);
+      if (res.status === 200) {
+        setNotification(res.data.message);
+      }
+    } catch (error) {
+      setNotification('Try later, smth went wrong!');
+    }
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -38,9 +40,6 @@ export const ContactForm = () => {
 
       <input {...register('email')} placeholder='Email' />
       {errors.email && <p>{errors.email.message}</p>}
-
-      <input {...register('phone')} placeholder='Phone' />
-      {errors.phone && <p>{errors.phone.message}</p>}
 
       <textarea {...register('message')} placeholder='Message'></textarea>
       {errors.message && <p>{errors.message.message}</p>}

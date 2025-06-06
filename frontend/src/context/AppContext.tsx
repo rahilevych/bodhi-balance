@@ -19,6 +19,8 @@ interface AppContextType {
   isAuthenticated: boolean;
   notification: string | null;
   setNotification: React.Dispatch<React.SetStateAction<string | null>>;
+  loading: boolean;
+  color: string;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -37,6 +39,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
+  const [color, setColor] = useState('#5d6d5c');
   const [user, setUser] = useState<User | null>(null);
 
   const openModal = () => {
@@ -78,6 +82,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         isAuthenticated,
         notification,
         setNotification,
+        color,
+        loading,
       }}>
       {children}
       {notification && (

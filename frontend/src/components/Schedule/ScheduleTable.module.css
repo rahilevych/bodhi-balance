@@ -37,6 +37,9 @@ tbody tr:hover {
   font-size: 1rem;
 }
 
+.bookBtn {
+  width: 100%;
+}
 .bookBtn:hover {
   color: var(--third-color);
 }

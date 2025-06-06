@@ -27,6 +27,7 @@
   color: var(--third-color);
   padding: 0.75rem 0.25rem;
 }
+
 @media (max-width: 1024px) {
   .form > input,
   .form > textarea {

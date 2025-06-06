@@ -44,7 +44,7 @@ export const ContactForm = () => {
       <textarea {...register('message')} placeholder='Message'></textarea>
       {errors.message && <p>{errors.message.message}</p>}
 
-      <Button text='Send' type='submit' />
+      <Button text='Send' type='submit' className={styles.btn} />
     </form>
   );
 };

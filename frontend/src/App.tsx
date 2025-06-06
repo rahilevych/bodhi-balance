@@ -1,7 +1,7 @@
-import './App.css';
 import './styles/null.css';
 import './styles/global.css';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './pages/landing/Landing';
 import Booking from './pages/booking/Booking';
 import Header from './components/Header/Header';
@@ -16,27 +16,30 @@ function App() {
     <BrowserRouter>
       <div className='wrapper'>
         <Header />
-        <Routes>
-          <Route path='/' element={<Landing />} />
-          <Route
-            path='/profile'
-            element={
-              <ProtectedRoute
-                element={<Profile />}
-                isAuthenticated={isAuthenticated}
-              />
-            }
-          />
-          <Route
-            path='/booking'
-            element={
-              <ProtectedRoute
-                element={<Booking />}
-                isAuthenticated={isAuthenticated}
-              />
-            }
-          />
-        </Routes>
+        <main>
+          {' '}
+          <Routes>
+            <Route path='/' element={<Landing />} />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute
+                  element={<Profile />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+            <Route
+              path='/booking'
+              element={
+                <ProtectedRoute
+                  element={<Booking />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </BrowserRouter>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import styles from './Schedule.module.css';
 import { Element } from 'react-scroll';
 import ScheduleTable from './ScheduleTable';
@@ -13,6 +13,10 @@ const Schedule = () => {
   const [trainings, setTrainings] = useState<Training[] | null>(null);
   const [day, setDay] = useState<Date>(today);
   const { loading, color } = useAppContext();
+
+  const override: CSSProperties = {
+    margin: '3rem',
+  };
 
   useEffect(() => {
     const init = async () => {
@@ -32,37 +36,46 @@ const Schedule = () => {
       <section id='schedule' className={styles.schedule}>
         <div className='container'>
           <h2>Schedule</h2>
-          {trainings && trainings?.length > 0 ? (
-            <div className={styles.timetable}>
-              <div className={styles.days}>
-                <ul>
-                  {getNext7Days().map((date, index) => (
-                    <li
-                      className={
-                        date.toDateString() === day.toDateString()
-                          ? styles.active
-                          : ''
-                      }
-                      key={index}
-                      onClick={() => setDay(date)}>
-                      <p className={styles.weekday}>
-                        {date.toLocaleDateString('en-US', { weekday: 'long' })}
-                      </p>
-                      <p className={styles.dayMonth}>
-                        {date.toLocaleDateString('en-GB', {
-                          day: 'numeric',
-                          month: 'numeric',
-                        })}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              {<ScheduleTable trainings={trainings} />}
+
+          <div className={styles.timetable}>
+            <div className={styles.days}>
+              <ul>
+                {getNext7Days().map((date, index) => (
+                  <li
+                    className={
+                      date.toDateString() === day.toDateString()
+                        ? styles.active
+                        : ''
+                    }
+                    key={index}
+                    onClick={() => setDay(date)}>
+                    <p className={styles.weekday}>
+                      {date.toLocaleDateString('en-US', { weekday: 'long' })}
+                    </p>
+                    <p className={styles.dayMonth}>
+                      {date.toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'numeric',
+                      })}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ) : (
-            <BounceLoader />
-          )}
+            {trainings === null ? (
+              <BounceLoader
+                color={color}
+                loading={loading}
+                cssOverride={override}
+              />
+            ) : trainings.length > 0 ? (
+              <ScheduleTable trainings={trainings} />
+            ) : (
+              <p className={styles.err}>
+                Schedule for this day is not available, try later!
+              </p>
+            )}
+          </div>
         </div>
       </section>
     </Element>

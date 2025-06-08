@@ -1,19 +1,22 @@
 .nav {
   display: flex;
-  align-items: start;
-  justify-content: start;
-  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 25rem;
+  width: 15rem;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
 }
 .nav > ul {
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: start;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  margin-top: 3rem;
   list-style-type: none;
-  margin: 2rem 1rem;
-  padding-top: 8rem;
-  border-right: 1px solid lightgray;
 }
 
 .nav > ul > li {
@@ -21,9 +24,9 @@
   align-items: center;
   justify-content: start;
   height: 2rem;
-  width: 200px;
+  width: 100%;
   color: var(--third-color);
-  padding: 1.5rem;
+  padding: 1rem 1.5rem;
   font-family: var(--primary-font);
   font-weight: 500;
   border-radius: var(--border-radius);
@@ -31,8 +34,19 @@
   transition: background-color 0.3s ease-in;
 }
 .nav > ul > li:hover {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
 }
 .active {
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+.img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+}
+.img > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
 }

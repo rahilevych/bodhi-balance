@@ -4,44 +4,59 @@ import styles from './PersonalData.module.css';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppContext } from '../../context/AppContext';
+import { updateUser } from '../../services/userService';
 
 const schema = z.object({
-  fullName: z.string().min(3, 'Name is required'),
+  name: z.string().min(3, 'Name is required'),
   email: z.string().email('Invalid email format'),
-  phone: z.string().optional(),
+  phone: z
+    .string()
+    .optional()
+    .refine((val) => !val || /^[0-9()+\- ]+$/.test(val), {
+      message: 'Invalid phone number',
+    }),
   address: z.string().optional(),
 });
 
 export type UserFormData = z.infer<typeof schema>;
 export const PersonalData = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const { user, setUser } = useAppContext();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = (data: UserFormData) => {
-    console.log('Updated user data:', data);
+  const onSubmit = async (data: UserFormData) => {
+    try {
+      const updatedUser = user && (await updateUser(data, user?._id));
+      setUser(updatedUser);
+    } catch (error) {
+      console.error(error);
+    }
     setIsEditing(false);
+    reset();
   };
   return (
     <div className={styles.data}>
       {!isEditing ? (
         <div className={styles.info}>
           <p>
-            <strong>Full Name:</strong> Name Surname
+            <strong>Full Name:</strong> {user?.name}
           </p>
           <p>
-            <strong>Email:</strong> user@gmail.com
+            <strong>Email:</strong> {user?.email}
           </p>
           <p>
-            <strong>Phone:</strong> +49123456789
+            <strong>Phone:</strong> {user?.phone || 'not provided'}
           </p>
           <p>
-            <strong>Address:</strong> Berlin Germany
+            <strong>Address:</strong> {user?.address || 'not provided'}
           </p>
           <Button
             text='Edit'
@@ -57,12 +72,14 @@ export const PersonalData = () => {
                 <strong>Full Name:</strong>
               </p>
               <input
-                {...register('fullName')}
+                {...register('name')}
                 placeholder='Full Name'
-                defaultValue='Name Surname'
+                defaultValue={user?.name}
               />
             </label>
-            {errors.fullName && <p>{errors.fullName.message}</p>}
+            {errors.name && (
+              <p className={styles.error}>{errors.name.message}</p>
+            )}
             <label>
               <p>
                 <strong>Email:</strong>
@@ -71,11 +88,13 @@ export const PersonalData = () => {
                 {...register('email')}
                 placeholder='Email'
                 disabled
-                defaultValue='user@gmail.com'
+                defaultValue={user?.email}
               />
             </label>
 
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && (
+              <p className={styles.error}>{errors.email.message}</p>
+            )}
             <label>
               <p>
                 <strong>Phone:</strong>
@@ -83,10 +102,12 @@ export const PersonalData = () => {
               <input
                 {...register('phone')}
                 placeholder='Phone (optional)'
-                defaultValue='+49123456789'
+                defaultValue={user?.phone || ''}
               />
             </label>
-            {errors.phone && <p>{errors.phone.message}</p>}
+            {errors.phone && (
+              <p className={styles.error}>{errors.phone.message}</p>
+            )}
             <label>
               <p>
                 <strong>Address:</strong>
@@ -94,11 +115,13 @@ export const PersonalData = () => {
               <input
                 {...register('address')}
                 placeholder='Address (optional)'
-                defaultValue='Berlin Germany'
+                defaultValue={user?.address || ''}
               />
             </label>
 
-            {errors.address && <p>{errors.address.message}</p>}
+            {errors.address && (
+              <p className={styles.error}>{errors.address.message}</p>
+            )}
           </div>
 
           <div className={styles.buttons}>

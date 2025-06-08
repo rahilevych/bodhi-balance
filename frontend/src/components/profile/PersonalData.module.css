@@ -1,5 +1,4 @@
 .info {
-  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -11,7 +10,6 @@
   color: var(--third-color);
 }
 .form {
-  margin-top: 3rem;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -42,6 +40,9 @@
 }
 .fields > label > p {
   width: 6rem;
+}
+.error {
+  color: var(--cancel-btn-color);
 }
 .confirm {
   background-color: var(--confirm-btn-color);

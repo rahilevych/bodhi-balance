@@ -5,6 +5,8 @@ export type User = {
   password: string;
   role: string;
   createdAt: Date;
+  address: string;
+  phone: string;
 };
 export type Trainer = {
   id: string;

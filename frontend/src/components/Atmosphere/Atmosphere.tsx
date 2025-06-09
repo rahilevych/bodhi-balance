@@ -62,7 +62,7 @@ const Atmosphere = () => {
               spaceBetween={30}
               style={{ height: '28rem' }}>
               {images.map((image, index) => (
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                   <div className={styles.image}>
                     <img src={image} alt='' />
                   </div>

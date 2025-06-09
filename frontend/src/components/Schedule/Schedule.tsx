@@ -22,7 +22,6 @@ const Schedule = () => {
     const init = async () => {
       try {
         const data = await getAllTrainingForDay(day);
-        console.log(data);
         setTrainings(data);
       } catch (error) {
         console.error('Error loading schedule', error);

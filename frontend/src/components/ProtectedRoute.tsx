@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 }
 const ProtectedRoute = ({ element, isAuthenticated }: ProtectedRouteProps) => {
   const { isLoading } = useAppContext();
-  if (isLoading) return null;
+  // if (isLoading) return null;
   return isAuthenticated ? element : <Navigate to='/' replace />;
 };
 

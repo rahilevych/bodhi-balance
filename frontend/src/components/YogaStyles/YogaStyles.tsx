@@ -29,7 +29,6 @@ const YogaStyles = () => {
     const init = async () => {
       try {
         const styles = await getAllStyles();
-        console.log(styles);
         setYogaStyles(styles);
       } catch (error) {
         console.error(error);
@@ -78,12 +77,11 @@ const YogaStyles = () => {
                   onSlideChange={(swiper) => {
                     setActiveIndex(swiper.realIndex);
                   }}>
-                  {' '}
-                  {yogaStyles.map((style) => (
-                    <SwiperSlide key={style.id}>
+                  {yogaStyles.map((style, index) => (
+                    <SwiperSlide key={index}>
                       <YogaCard card={style} />
                     </SwiperSlide>
-                  ))}{' '}
+                  ))}
                   <SliderNav />
                 </Swiper>
               </div>

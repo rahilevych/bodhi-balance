@@ -41,7 +41,7 @@ const Trainers = () => {
     };
     init();
   }, [trainers.length]);
-  console.log(trainers);
+
   return (
     <Element name={'trainers'}>
       <section className={styles.trainers}>
@@ -78,8 +78,8 @@ const Trainers = () => {
                       setCurrentTrainer(trainers[realIndex]);
                     }}>
                     {' '}
-                    {trainers.map((trainer) => (
-                      <SwiperSlide key={trainer.id}>
+                    {trainers.map((trainer, index) => (
+                      <SwiperSlide key={index}>
                         <div
                           onClick={() => setCurrentTrainer(trainer)}
                           className={`${styles.sliderCard} ${

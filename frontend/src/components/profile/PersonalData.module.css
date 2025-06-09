@@ -15,7 +15,7 @@
   align-items: start;
   justify-content: space-between;
   height: 100%;
-  gap: 5rem;
+  gap: 4rem;
 }
 .fields {
   display: flex;
@@ -35,7 +35,7 @@
 .fields > label {
   display: flex;
   align-items: center;
-  gap: 1.5em;
+  gap: 1.5rem;
   color: var(--third-color);
 }
 .fields > label > p {
@@ -72,4 +72,68 @@
 .buttons {
   display: flex;
   gap: 2rem;
+}
+.img {
+  display: none;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.img > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  .data {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .info {
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+  }
+  .img {
+    display: block;
+  }
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+@media (max-width: 425px) {
+  .fields > label > input {
+    width: 10rem;
+  }
+  .buttons {
+    gap: 1rem;
+  }
+  .fields > label > p {
+    width: 6rem;
+  }
+  .form {
+    width: 100%;
+  }
+  .fields {
+    margin: 0 auto;
+  }
+}
+@media (max-width: 375px) {
+  .buttons {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .fields > label > input {
+    width: 9rem;
+  }
+
+  .fields > label > p {
+    width: 5rem;
+  }
 }

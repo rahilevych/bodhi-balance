@@ -35,6 +35,7 @@ export const PersonalData = () => {
   const onSubmit = async (data: UserFormData) => {
     try {
       const updatedUser = user && (await updateUser(data, user?._id));
+      console.log(updateUser);
       setUser(updatedUser);
     } catch (error) {
       console.error(error);
@@ -42,10 +43,18 @@ export const PersonalData = () => {
     setIsEditing(false);
     reset();
   };
+  console.log(user);
   return (
     <div className={styles.data}>
-      {!isEditing ? (
+      {!isEditing && user ? (
         <div className={styles.info}>
+          {' '}
+          <div className={styles.img}>
+            <img
+              src='https://i.pinimg.com/736x/07/fb/34/07fb3452c4640d881a16d08c2e314f3e.jpg'
+              alt=''
+            />
+          </div>
           <p>
             <strong>Full Name:</strong> {user?.name}
           </p>
@@ -65,76 +74,85 @@ export const PersonalData = () => {
           />
         </div>
       ) : (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={styles.fields}>
-            <label>
-              <p>
-                <strong>Full Name:</strong>
-              </p>
-              <input
-                {...register('name')}
-                placeholder='Full Name'
-                defaultValue={user?.name}
-              />
-            </label>
-            {errors.name && (
-              <p className={styles.error}>{errors.name.message}</p>
-            )}
-            <label>
-              <p>
-                <strong>Email:</strong>
-              </p>
-              <input
-                {...register('email')}
-                placeholder='Email'
-                disabled
-                defaultValue={user?.email}
-              />
-            </label>
-
-            {errors.email && (
-              <p className={styles.error}>{errors.email.message}</p>
-            )}
-            <label>
-              <p>
-                <strong>Phone:</strong>
-              </p>
-              <input
-                {...register('phone')}
-                placeholder='Phone (optional)'
-                defaultValue={user?.phone || ''}
-              />
-            </label>
-            {errors.phone && (
-              <p className={styles.error}>{errors.phone.message}</p>
-            )}
-            <label>
-              <p>
-                <strong>Address:</strong>
-              </p>
-              <input
-                {...register('address')}
-                placeholder='Address (optional)'
-                defaultValue={user?.address || ''}
-              />
-            </label>
-
-            {errors.address && (
-              <p className={styles.error}>{errors.address.message}</p>
-            )}
-          </div>
-
-          <div className={styles.buttons}>
-            {' '}
-            <Button
-              text='Cancel'
-              type='button'
-              className={styles.cancel}
-              onClick={() => setIsEditing(false)}
+        <div className={styles['user-info']}>
+          {' '}
+          <div className={styles.img}>
+            <img
+              src='https://i.pinimg.com/736x/07/fb/34/07fb3452c4640d881a16d08c2e314f3e.jpg'
+              alt=''
             />
-            <Button text='Save' type='submit' className={styles.confirm} />
           </div>
-        </form>
+          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.fields}>
+              <label>
+                <p>
+                  <strong>Full Name:</strong>
+                </p>
+                <input
+                  {...register('name')}
+                  placeholder='Full Name'
+                  defaultValue={user?.name}
+                />
+              </label>
+              {errors.name && (
+                <p className={styles.error}>{errors.name.message}</p>
+              )}
+              <label>
+                <p>
+                  <strong>Email:</strong>
+                </p>
+                <input
+                  {...register('email')}
+                  placeholder='Email'
+                  disabled
+                  defaultValue={user?.email}
+                />
+              </label>
+
+              {errors.email && (
+                <p className={styles.error}>{errors.email.message}</p>
+              )}
+              <label>
+                <p>
+                  <strong>Phone:</strong>
+                </p>
+                <input
+                  {...register('phone')}
+                  placeholder='Phone (optional)'
+                  defaultValue={user?.phone || ''}
+                />
+              </label>
+              {errors.phone && (
+                <p className={styles.error}>{errors.phone.message}</p>
+              )}
+              <label>
+                <p>
+                  <strong>Address:</strong>
+                </p>
+                <input
+                  {...register('address')}
+                  placeholder='Address (optional)'
+                  defaultValue={user?.address || ''}
+                />
+              </label>
+
+              {errors.address && (
+                <p className={styles.error}>{errors.address.message}</p>
+              )}
+            </div>
+
+            <div className={styles.buttons}>
+              {' '}
+              <Button
+                text='Cancel'
+                type='button'
+                className={styles.cancel}
+                onClick={() => setIsEditing(false)}
+              />
+              <Button text='Save' type='submit' className={styles.confirm} />
+            </div>
+          </form>
+        </div>
       )}
     </div>
   );

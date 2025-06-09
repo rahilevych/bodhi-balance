@@ -50,3 +50,42 @@
   border-radius: 50%;
   object-fit: contain;
 }
+
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+    background-color: var(--third-color);
+  }
+  .nav > ul {
+    flex-direction: row;
+    margin-top: 0;
+    width: 100%;
+    gap: 0.5rem;
+  }
+  .nav > ul > li {
+    color: var(--secondary-color);
+    text-align: center;
+    padding: 0.5rem;
+    justify-content: center;
+  }
+  .nav > ul > li:hover {
+    background-color: var(--secondary-color);
+    color: var(--third-color) !important;
+  }
+  .active {
+    background-color: var(--secondary-color);
+    color: var(--third-color) !important;
+  }
+  .img {
+    display: none;
+  }
+}
+@media (max-width: 425px) {
+  .nav > ul > li {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+  }
+}

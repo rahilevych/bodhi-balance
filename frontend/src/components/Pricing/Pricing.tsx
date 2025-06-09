@@ -38,7 +38,7 @@ const Pricing = () => {
             <div className={styles.plans}>
               {' '}
               {Object.entries(types).map(([type, plans]) => (
-                <PricingCard type={type} plans={plans} />
+                <PricingCard key={type} type={type} plans={plans} />
               ))}
             </div>
           ) : (

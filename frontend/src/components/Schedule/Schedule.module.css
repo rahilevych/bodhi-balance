@@ -50,6 +50,9 @@
   font-weight: 700;
   color: var(--third-color);
 }
+.err {
+  margin-top: 3rem;
+}
 @media (max-width: 1024px) {
   .days {
     width: 100%;

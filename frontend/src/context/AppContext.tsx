@@ -17,6 +17,7 @@ interface AppContextType {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   isAuthenticated: boolean;
+  isLoading: boolean;
   notification: string | null;
   setNotification: React.Dispatch<React.SetStateAction<string | null>>;
   loading: boolean;
@@ -39,6 +40,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(true);
   const [color, setColor] = useState('#5d6d5c');
   const [user, setUser] = useState<User | null>(null);
@@ -57,10 +59,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     const fetchUser = async () => {
       try {
         const res = await getMe();
-        console.log(res);
         setUser(res);
         setIsAuthenticated(true);
-        console.log(user);
+        //setIsLoading(false);
       } catch (err) {
         setUser(null);
         setIsAuthenticated(false);
@@ -76,6 +77,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         user,
         setUser,
         setIsAuthenticated,
+        isLoading,
         openModal,
         closeModal,
         isModalOpen,

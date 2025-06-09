@@ -10,7 +10,10 @@
   --confirm-btn-color-hover: #5c7e5d;
   --cancel-btn-color: #b35c5c;
   --cancel-btn-color-hover: #a14f4f;
+  --border-radius: 6px;
+  --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
+
 html {
   font-size: 16px;
 }
@@ -45,10 +48,6 @@ a:hover {
   color: var(--third-color);
 }
 
-.wrapper {
-  width: 100%;
-  height: auto;
-}
 .container {
   display: flex;
   align-items: center;
@@ -56,6 +55,32 @@ a:hover {
   width: 80%;
   margin: 0 auto;
 }
+.confirm-btn {
+  background-color: var(--confirm-btn-color);
+}
+
+.cancel-btn {
+  background-color: var(--cancel-btn-color);
+}
+
+.confirm-btn:hover {
+  background-color: var(--confirm-btn-color-hover);
+  color: var(--secondary-color);
+}
+
+.cancel-btn:hover {
+  background-color: var(--cancel-btn-color-hover);
+  color: var(--secondary-color);
+}
+.confirm-btn:hover,
+.cancel-btn:hover {
+  border: 1px solid var(--secondary-color);
+}
+.confirm-btn:hover span,
+.cancel-btn:hover span {
+  color: var(--secondary-color);
+}
+
 @media (min-width: 1920px) {
   html {
     font-size: 20px;

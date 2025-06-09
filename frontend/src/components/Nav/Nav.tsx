@@ -4,7 +4,7 @@ import Button from '../Button/Button';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { sectionsList } from '../../constants/sections';
 
 import LogoutButton from '../authorization/LogoutButton';

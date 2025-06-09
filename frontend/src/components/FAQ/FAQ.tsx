@@ -1,11 +1,12 @@
 import { Element } from 'react-scroll';
 import styles from './FAQ.module.css';
-import { Question } from './Question';
+
 import { useEffect, useState } from 'react';
 import { QuestionType } from '../../types/Types';
 import { getAllFAQ } from '../../services/questionService';
 import { useAppContext } from '../../context/AppContext';
 import { BounceLoader } from 'react-spinners';
+import { Question } from './Question';
 
 const FAQ = () => {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
@@ -31,6 +32,7 @@ const FAQ = () => {
               <div className={styles.questions}>
                 {questions.map((question, index) => (
                   <Question
+                    key={index}
                     question={question.question}
                     answer={question.answer}
                   />

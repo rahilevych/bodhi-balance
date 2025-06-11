@@ -3,14 +3,16 @@
   --secondary-font: 'Lora', serif;
   --header-height: 85px;
   --primary-color: #d4cdc5;
-  --secondary-color: #f1f1f1;
+  --secondary-color: rgb(245, 245, 245);
   --third-color: #5d6d5c;
   --text-color: #404040;
   --confirm-btn-color: #6a8f6b;
   --confirm-btn-color-hover: #5c7e5d;
   --cancel-btn-color: #b35c5c;
   --cancel-btn-color-hover: #a14f4f;
+  --blocks-bg-color: rgb(250, 248, 245);
   --border-radius: 6px;
+  --border-color: var(--secondary-color);
   --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 

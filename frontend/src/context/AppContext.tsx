@@ -61,7 +61,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         const res = await getMe();
         setUser(res);
         setIsAuthenticated(true);
-        //setIsLoading(false);
+        setIsLoading(false);
       } catch (err) {
         setUser(null);
         setIsAuthenticated(false);

@@ -1,0 +1,86 @@
+.booking {
+  margin-top: var(--header-height);
+  display: flex;
+  align-items: start;
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color);
+}
+.content {
+  position: relative;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin: 5rem 0;
+  gap: 5rem;
+}
+.class-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: auto;
+  width: 60%;
+  gap: 3rem;
+}
+.info,
+.trainer,
+.cancellation {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  box-shadow: var(--box-shadow);
+  border: 0.5px solid var(--border-color);
+  background-color: var(--blocks-bg-color);
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  gap: 2rem;
+}
+.trainer-data {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 2rem;
+}
+.info > div:first-child {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+h4 {
+  font-size: 2rem;
+  color: var(--third-color);
+}
+.style-img {
+  width: 7rem;
+
+  height: 7rem;
+}
+.style-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.booking-block {
+  position: fixed;
+  left: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  height: auto;
+  padding: 3rem;
+  gap: 2rem;
+  background-color: var(--blocks-bg-color);
+  border: 0.5px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--border-radius);
+}
+.btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

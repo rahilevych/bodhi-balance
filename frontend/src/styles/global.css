@@ -11,7 +11,7 @@
   --cancel-btn-color: #b35c5c;
   --cancel-btn-color-hover: #a14f4f;
   --border-radius: 6px;
-  --box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 html {

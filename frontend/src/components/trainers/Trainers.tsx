@@ -83,7 +83,7 @@ const Trainers = () => {
                         <div
                           onClick={() => setCurrentTrainer(trainer)}
                           className={`${styles.sliderCard} ${
-                            currentTrainer?.id === trainer.id
+                            currentTrainer?._id === trainer._id
                               ? styles.selected
                               : styles.notSelected
                           }`}>

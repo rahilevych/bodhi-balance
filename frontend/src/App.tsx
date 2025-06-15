@@ -30,7 +30,7 @@ function App() {
               }
             />
             <Route
-              path='/booking'
+              path='/booking/:id'
               element={
                 <ProtectedRoute
                   element={<Booking />}

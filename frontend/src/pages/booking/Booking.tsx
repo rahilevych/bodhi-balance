@@ -1,13 +1,14 @@
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import styles from './Booking.module.css';
 import { useEffect, useState } from 'react';
 import { Training } from '../../types/Types';
 import { getTrainingById } from '../../services/scheduleService';
 import Button from '../../components/Button/Button';
+import { useCheckout } from '../../hooks/useCheckout';
 
 const Booking = () => {
   const { id } = useParams();
-
+  const { startCheckout } = useCheckout();
   const [training, setTraining] = useState<Training | null>(null);
   useEffect(() => {
     const init = async () => {
@@ -70,7 +71,10 @@ const Booking = () => {
               </div>
               <div className={styles.btn}>
                 {' '}
-                <Button text='Booking' />
+                <Button
+                  text='Booking'
+                  onClick={() => startCheckout(training._id)}
+                />
               </div>
             </div>
           </div>

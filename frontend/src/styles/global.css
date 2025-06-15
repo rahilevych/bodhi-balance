@@ -10,6 +10,7 @@
   --confirm-btn-color-hover: #5c7e5d;
   --cancel-btn-color: #b35c5c;
   --cancel-btn-color-hover: #a14f4f;
+  --blocks-bg-color: rgb(245, 245, 245);
   --border-radius: 6px;
   --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

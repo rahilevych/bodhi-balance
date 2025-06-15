@@ -24,10 +24,9 @@
   height: 100%;
   flex: 1;
   border-radius: var(--border-radius);
-  background-color: var(--blocks-bg-color);
+
+  background-color: var(--blocks-color);
   box-shadow: var(--box-shadow);
-  border: 0.5px solid var(--border-color);
-  /* background-color: rgb(245, 245, 245); */
 
   padding: 2rem;
 }

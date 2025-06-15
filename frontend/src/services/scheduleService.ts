@@ -9,3 +9,7 @@ export const getAllTrainingForDay = async (date: Date) => {
 
   return res.data;
 };
+export const getTrainingById = async (id: string) => {
+  const res = await axios.get(`${BASE_URL}/schedule/trainings/training/${id}`);
+  return res.data;
+};

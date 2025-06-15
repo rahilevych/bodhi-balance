@@ -1,14 +1,20 @@
 import styles from './ScheduleTable.module.css';
 import Button from '../Button/Button';
 import { ScheduleCard } from './ScheduleCard';
-import { Training } from '../../types/Types';
+import { Training, YogaStyle } from '../../types/Types';
 import { getTimeFromDate } from '../../utils/dateHelpers';
+import { useNavigate } from 'react-router';
 
 interface Props {
   trainings: Training[] | null;
 }
 
 const ScheduleTable = ({ trainings }: Props) => {
+  const navigate = useNavigate();
+
+  const handleBookingBtn = (id: string) => {
+    navigate(`/booking/${id}`);
+  };
   return (
     <div className={styles.tableWrapper}>
       <table className={styles.table}>
@@ -34,7 +40,13 @@ const ScheduleTable = ({ trainings }: Props) => {
               <td>{training.yogaStyle_id.duration}</td>
               <td>{training.trainer_id.fullName}</td>
               <td>
-                <Button text='Book ' className={styles.bookBtn}></Button>
+                <Button
+                  text='Book '
+                  className={styles.bookBtn}
+                  onClick={() => {
+                    console.log(training._id);
+                    handleBookingBtn(training._id);
+                  }}></Button>
               </td>
             </tr>
           ))}

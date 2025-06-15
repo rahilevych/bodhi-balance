@@ -9,7 +9,7 @@ export type User = {
   phone: string;
 };
 export type Trainer = {
-  id: string;
+  _id: string;
   fullName: string;
   experience: number;
   specialization: string;
@@ -17,7 +17,7 @@ export type Trainer = {
   photo: string;
 };
 export type YogaStyle = {
-  id: string;
+  _id: string;
   title: string;
   image: string;
   duration: number;
@@ -25,7 +25,7 @@ export type YogaStyle = {
   description: string;
 };
 export type Training = {
-  id: string;
+  _id: string;
   datetime: Date;
   duration: number;
   spots_taken: number;
@@ -33,15 +33,19 @@ export type Training = {
   trainer_id: Trainer;
   yogaStyle_id: YogaStyle;
   type: string;
+  price: number;
+  priceId: string;
 };
 export type QuestionType = {
-  id: string;
+  _id: string;
   question: string;
   answer: string;
 };
 export type Plan = {
+  _id: string;
   type: string;
   title: string;
   price: number;
   description: string;
+  priceId: string;
 };

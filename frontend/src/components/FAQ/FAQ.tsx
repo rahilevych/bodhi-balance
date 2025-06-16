@@ -1,27 +1,23 @@
 import { Element } from 'react-scroll';
 import styles from './FAQ.module.css';
-
-import { useEffect, useState } from 'react';
 import { QuestionType } from '../../types/Types';
 import { getAllFAQ } from '../../services/questionService';
 import { useAppContext } from '../../context/AppContext';
 import { BounceLoader } from 'react-spinners';
 import { Question } from './Question';
+import { useFetchData } from '../../hooks/useFetchData';
 
 const FAQ = () => {
-  const [questions, setQuestions] = useState<QuestionType[]>([]);
-  const { color, loading } = useAppContext();
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const data = await getAllFAQ();
-        setQuestions(data);
-      } catch (error) {
-        console.error('Error fetching questions', error);
-      }
-    };
-    init();
-  }, []);
+  const {
+    data: questions,
+    loading,
+    error,
+  } = useFetchData<QuestionType>({ fetchFunction: getAllFAQ });
+  const { color } = useAppContext();
+
+  if (error) {
+    return <div>Somethig went wrong!</div>;
+  }
   return (
     <Element name='faq'>
       <section id='faq' className={styles.faq}>

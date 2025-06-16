@@ -7,28 +7,24 @@ import { getAllTrainingForDay } from '../../services/scheduleService';
 import { getNext7Days } from '../../utils/dateHelpers';
 import { useAppContext } from '../../context/AppContext';
 import { BounceLoader } from 'react-spinners';
+import { useFetchDataWithParam } from '../../hooks/useFetchDataWithParam';
 
 const Schedule = () => {
   const today = new Date();
-  const [trainings, setTrainings] = useState<Training[] | null>(null);
   const [day, setDay] = useState<Date>(today);
-  const { loading, color } = useAppContext();
+  const {
+    data: trainings,
+    loading,
+    error,
+  } = useFetchDataWithParam<Training, Date>({
+    fetchFunction: getAllTrainingForDay,
+    param: day,
+  });
+  const { color } = useAppContext();
 
   const override: CSSProperties = {
     margin: '3rem',
   };
-
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const data = await getAllTrainingForDay(day);
-        setTrainings(data);
-      } catch (error) {
-        console.error('Error loading schedule', error);
-      }
-    };
-    init();
-  }, [day]);
 
   return (
     <Element name='schedule'>
@@ -60,14 +56,12 @@ const Schedule = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-            {trainings === null ? (
-              <BounceLoader
-                color={color}
-                loading={loading}
-                cssOverride={override}
-              />
-            ) : trainings.length > 0 ? (
+            </div>{' '}
+            {loading ? (
+              <BounceLoader color={color} cssOverride={override} />
+            ) : error ? (
+              <p className={styles.err}>Error loading schedule</p>
+            ) : Array.isArray(trainings) && trainings.length > 0 ? (
               <ScheduleTable trainings={trainings} />
             ) : (
               <p className={styles.err}>

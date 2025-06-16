@@ -1,0 +1,44 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin: 3rem 0;
+  gap: 3rem;
+}
+
+.plan {
+  display: flex;
+  box-shadow: var(--box-shadow);
+  border: 0.5px solid var(--border-color);
+  background-color: var(--blocks-bg-color);
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  gap: 2rem;
+  width: 100%;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+}
+.btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.price {
+  display: flex;
+  gap: 0.25rem;
+  font-size: 1.25rem;
+}
+.price > p:first-child {
+  font-weight: 600;
+  color: var(--third-color);
+}

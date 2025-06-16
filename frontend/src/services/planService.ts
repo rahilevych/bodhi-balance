@@ -6,3 +6,7 @@ export const getAllPlans = async () => {
   const res = await axios.get(`${BASE_URL}/plans/all`);
   return res.data;
 };
+export const getPlanById = async (id: string) => {
+  const res = await axios.get(`${BASE_URL}/plans/all/${id}`);
+  return res.data;
+};

@@ -13,30 +13,28 @@ import { YogaStyle } from '../../types/Types';
 import { getAllStyles } from '../../services/stylesService';
 import { BounceLoader } from 'react-spinners';
 import { useAppContext } from '../../context/AppContext';
+import { useFetchData } from '../../hooks/useFetchData';
 
 const YogaStyles = () => {
   const swiperRef = useRef<SwiperType | null>(null);
-  const [yogaStyles, setYogaStyles] = useState<YogaStyle[]>([]);
+  const {
+    data: yogaStyles,
+    loading,
+    error,
+  } = useFetchData<YogaStyle>({
+    fetchFunction: getAllStyles,
+  });
   const [activeIndex, setActiveIndex] = useState(0);
-  const { loading, color } = useAppContext();
+  const { color } = useAppContext();
 
   const handleSlideChange = (index: number) => {
     swiperRef.current?.slideToLoop(index);
     swiperRef.current?.pagination?.update();
   };
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const styles = await getAllStyles();
-        setYogaStyles(styles);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    init();
-  }, [yogaStyles.length]);
-
+  if (error) {
+    return <div>Somethig went wrong!</div>;
+  }
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles}>

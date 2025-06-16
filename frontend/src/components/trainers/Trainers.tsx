@@ -11,12 +11,17 @@ import { Trainer } from '../../types/Types';
 import { getAllTrainers } from '../../services/trainerService';
 import { BounceLoader } from 'react-spinners';
 import { useAppContext } from '../../context/AppContext';
+import { useFetchData } from '../../hooks/useFetchData';
 
 const Trainers = () => {
-  const [trainers, setTrainers] = useState<Trainer[]>([]);
+  const {
+    data: trainers,
+    loading,
+    error,
+  } = useFetchData<Trainer>({ fetchFunction: getAllTrainers });
   const [currentTrainer, setCurrentTrainer] = useState<Trainer | null>();
   const [isMobile, setIsMobile] = useState(false);
-  const { loading, color } = useAppContext();
+  const { color } = useAppContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,19 +33,14 @@ const Trainers = () => {
   }, []);
 
   useEffect(() => {
-    const init = async () => {
-      try {
-        const trainers = await getAllTrainers();
-        setTrainers(trainers);
-        if (trainers.length > 0) {
-          setCurrentTrainer(trainers[0]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    init();
-  }, [trainers.length]);
+    if (trainers && trainers.length > 0 && !currentTrainer) {
+      setCurrentTrainer(trainers[0]);
+    }
+  }, [trainers]);
+
+  if (error) {
+    return <div>Somethig went wrong!</div>;
+  }
 
   return (
     <Element name={'trainers'}>

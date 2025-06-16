@@ -24,8 +24,10 @@
   height: 100%;
   flex: 1;
   border-radius: var(--border-radius);
+
   background-color: var(--blocks-color);
   box-shadow: var(--box-shadow);
+
   padding: 2rem;
 }
 

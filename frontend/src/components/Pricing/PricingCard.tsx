@@ -3,6 +3,7 @@ import Button from '../Button/Button';
 import styles from './PricingCard.module.css';
 import { Plan } from '../../types/Types';
 import { useNavigate } from 'react-router';
+import { scroller } from 'react-scroll';
 interface Props {
   type: string;
   plans: Plan[];
@@ -11,8 +12,16 @@ export const PricingCard = ({ plans, type }: Props) => {
   const [selectedOption, setSelectedOption] = useState<Plan>(plans[0]);
   const navigate = useNavigate();
 
-  const handleBookingBtn = (id: string) => {
-    navigate(`/detailed/plan/${id}`);
+  const handleBookingBtn = (plan: Plan) => {
+    if (plan.title.toLowerCase().includes('1 session')) {
+      scroller.scrollTo('schedule', {
+        duration: 800,
+        delay: 0,
+        smooth: 'easeInOutQuart',
+      });
+    } else {
+      navigate(`/detailed/plan/${plan._id}`);
+    }
   };
   const handleOptionChange = (selectedOption: Plan) => {
     setSelectedOption(selectedOption);
@@ -36,7 +45,7 @@ export const PricingCard = ({ plans, type }: Props) => {
         {' '}
         <Button
           text='Book now'
-          onClick={() => handleBookingBtn(selectedOption._id)}
+          onClick={() => handleBookingBtn(selectedOption)}
         />
       </div>
     </div>

@@ -1,29 +1,25 @@
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import styles from './Booking.module.css';
-import { useEffect, useState } from 'react';
 import { Training } from '../../types/Types';
 import { getTrainingById } from '../../services/scheduleService';
-import Button from '../../components/Button/Button';
-import { useCheckout } from '../../hooks/useCheckout';
+import { BookingBlock } from '../../components/booking/BookingBlock';
+import { useFetchDataWithParam } from '../../hooks/useFetchDataWithParam';
 
 const Booking = () => {
   const { id } = useParams();
-  const { startCheckout } = useCheckout();
-  const [training, setTraining] = useState<Training | null>(null);
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const res = id && (await getTrainingById(id.toString()));
-        setTraining(res);
-      } catch (error) {}
-    };
-    init();
-  }, []);
+  const {
+    data: training,
+    loading,
+    error,
+  } = useFetchDataWithParam<Training, string>({
+    fetchFunction: getTrainingById,
+    param: id?.toString(),
+  });
 
   return (
     <div className={styles.booking}>
       <div className='container'>
-        {training && (
+        {training && !Array.isArray(training) && (
           <div className={styles.content}>
             <div className={styles['class-info']}>
               <div className={styles.info}>
@@ -60,23 +56,7 @@ const Booking = () => {
                 </div>
               </div>
             </div>
-            <div className={styles['booking-block']}>
-              <div className={styles['booking-date']}>
-                <div>Date</div>
-                <div>{training.datetime.toString()}</div>
-              </div>
-              <div className={styles['booking-time']}>
-                <div>Time</div>
-                <div>{training.duration}</div>
-              </div>
-              <div className={styles.btn}>
-                {' '}
-                <Button
-                  text='Booking'
-                  onClick={() => startCheckout(training._id)}
-                />
-              </div>
-            </div>
+            <BookingBlock training={training} />
           </div>
         )}
       </div>

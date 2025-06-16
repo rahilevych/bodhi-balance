@@ -1,16 +1,19 @@
 import { Element } from 'react-scroll';
-
 import styles from './Pricing.module.css';
 import { PricingCard } from './PricingCard';
-import { useEffect, useState } from 'react';
 import { Plan } from '../../types/Types';
 import { getAllPlans } from '../../services/planService';
 import { useAppContext } from '../../context/AppContext';
 import { BounceLoader } from 'react-spinners';
+import { useFetchData } from '../../hooks/useFetchData';
 
 const Pricing = () => {
-  const [plans, setPlans] = useState<Plan[]>([]);
-  const { loading, color } = useAppContext();
+  const {
+    data: plans,
+    loading,
+    error,
+  } = useFetchData<Plan>({ fetchFunction: getAllPlans });
+  const { color } = useAppContext();
 
   const types = plans.reduce((acc, plan) => {
     if (!acc[plan.type]) acc[plan.type] = [];
@@ -18,17 +21,9 @@ const Pricing = () => {
     return acc;
   }, {} as Record<string, typeof plans>);
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        const data = await getAllPlans();
-        setPlans(data);
-      } catch (error) {
-        console.error('Error fetching questions', error);
-      }
-    };
-    init();
-  }, []);
+  if (error) {
+    return <div>Somethig went wrong!</div>;
+  }
   return (
     <Element name='pricing'>
       <section id='pricing' className={styles.pricing}>

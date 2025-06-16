@@ -42,3 +42,17 @@
   font-weight: 600;
   color: var(--third-color);
 }
+@media (max-width: 425px) {
+  .btn {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  h4 {
+    font-size: 1.55rem;
+  }
+
+  .plan {
+    padding: 2rem;
+  }
+}

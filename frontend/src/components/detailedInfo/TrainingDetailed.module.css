@@ -5,8 +5,8 @@
   justify-content: space-between;
   width: 100%;
   height: auto;
-  margin: 5rem 0;
-  gap: 5rem;
+  margin: 3rem 0;
+  gap: 3rem;
 }
 
 .training,
@@ -108,9 +108,6 @@ h4 {
   .info > div:last-child,
   .trainer > div:last-child {
     width: 100%;
-  }
-  .content {
-    gap: 3rem;
   }
 }
 @media (max-width: 425px) {

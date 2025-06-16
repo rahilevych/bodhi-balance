@@ -3,7 +3,7 @@ import './styles/global.css';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Landing from './pages/landing/Landing';
-import Booking from './pages/booking/Booking';
+import DetailedPage from './pages/detailed-info/DetailedPage';
 import Header from './components/Header/Header';
 import Profile from './pages/profile/Profile';
 import Footer from './components/Footer/Footer';
@@ -30,10 +30,19 @@ function App() {
               }
             />
             <Route
-              path='/booking/:id'
+              path='/detailed/training/:id'
               element={
                 <ProtectedRoute
-                  element={<Booking />}
+                  element={<DetailedPage />}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+            <Route
+              path='/detailed/plan/:id'
+              element={
+                <ProtectedRoute
+                  element={<DetailedPage />}
                   isAuthenticated={isAuthenticated}
                 />
               }

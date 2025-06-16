@@ -13,7 +13,7 @@ const ScheduleTable = ({ trainings }: Props) => {
   const navigate = useNavigate();
 
   const handleBookingBtn = (id: string) => {
-    navigate(`/booking/${id}`);
+    navigate(`/detailed/training/${id}`);
   };
   return (
     <div className={styles.tableWrapper}>
@@ -44,7 +44,6 @@ const ScheduleTable = ({ trainings }: Props) => {
                   text='Book '
                   className={styles.bookBtn}
                   onClick={() => {
-                    console.log(training._id);
                     handleBookingBtn(training._id);
                   }}></Button>
               </td>
@@ -53,7 +52,11 @@ const ScheduleTable = ({ trainings }: Props) => {
         </tbody>
       </table>
       {trainings?.map((item, index) => (
-        <ScheduleCard key={index} item={item} />
+        <ScheduleCard
+          key={index}
+          item={item}
+          onClick={() => handleBookingBtn(item._id)}
+        />
       ))}
     </div>
   );

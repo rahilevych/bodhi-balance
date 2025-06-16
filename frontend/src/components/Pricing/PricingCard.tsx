@@ -2,13 +2,18 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import styles from './PricingCard.module.css';
 import { Plan } from '../../types/Types';
+import { useNavigate } from 'react-router';
 interface Props {
   type: string;
   plans: Plan[];
 }
 export const PricingCard = ({ plans, type }: Props) => {
   const [selectedOption, setSelectedOption] = useState<Plan>(plans[0]);
+  const navigate = useNavigate();
 
+  const handleBookingBtn = (id: string) => {
+    navigate(`/detailed/plan/${id}`);
+  };
   const handleOptionChange = (selectedOption: Plan) => {
     setSelectedOption(selectedOption);
   };
@@ -29,7 +34,10 @@ export const PricingCard = ({ plans, type }: Props) => {
       <div>Price: {selectedOption.price}</div>
       <div>
         {' '}
-        <Button text='Book now' />
+        <Button
+          text='Book now'
+          onClick={() => handleBookingBtn(selectedOption._id)}
+        />
       </div>
     </div>
   );

@@ -4,8 +4,9 @@ import Button from '../Button/Button';
 import styles from './ScheduleCard.module.css';
 interface Props {
   item: Training;
+  onClick: () => void;
 }
-export const ScheduleCard = ({ item }: Props) => {
+export const ScheduleCard = ({ item, onClick }: Props) => {
   return (
     <div className={styles.card}>
       <p>
@@ -26,7 +27,10 @@ export const ScheduleCard = ({ item }: Props) => {
       <p>
         <strong>Trainer:</strong> {item.trainer_id.fullName}
       </p>
-      <Button text='Book a class' className={styles.bookBtn}></Button>
+      <Button
+        text='Book a class'
+        className={styles.bookBtn}
+        onClick={onClick}></Button>
     </div>
   );
 };

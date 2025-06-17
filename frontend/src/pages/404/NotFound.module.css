@@ -1,0 +1,28 @@
+.notfound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--secondary-color);
+  padding: 16px;
+  text-align: center;
+}
+
+.notfound h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--cancel-btn-color);
+}
+
+.notfound p {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

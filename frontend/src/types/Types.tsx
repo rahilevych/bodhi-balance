@@ -7,6 +7,7 @@ export type User = {
   createdAt: Date;
   address: string;
   phone: string;
+  bookings: Booking[];
 };
 export type Trainer = {
   _id: string;
@@ -48,4 +49,11 @@ export type Plan = {
   price: number;
   description: string;
   priceId: string;
+};
+export type Booking = {
+  _id: string;
+  user: string;
+  training: Training;
+  date: Date;
+  status: string;
 };

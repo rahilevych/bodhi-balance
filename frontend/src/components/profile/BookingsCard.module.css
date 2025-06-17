@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: start;
+  justify-content: center;
+  padding: 1rem;
+  border: 1px solid lightgray;
+  border-radius: var(--border-radius);
+  font-size: 0.75rem;
+}
+.card > p > label {
+  font-weight: 600;
+  color: var(--third-color);
+}
+@media (max-width: 425px) {
+  .card {
+    width: 100%;
+  }
+}

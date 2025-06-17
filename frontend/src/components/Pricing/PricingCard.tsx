@@ -44,7 +44,7 @@ export const PricingCard = ({ plans, type }: Props) => {
       <div>
         {' '}
         <Button
-          text='Book now'
+          text='Buy now'
           onClick={() => handleBookingBtn(selectedOption)}
         />
       </div>

@@ -46,15 +46,15 @@ export const PersonalData = () => {
   console.log(user);
   return (
     <div className={styles.data}>
+      <div className={styles.img}>
+        <img
+          src='https://i.pinimg.com/736x/07/fb/34/07fb3452c4640d881a16d08c2e314f3e.jpg'
+          alt=''
+        />
+      </div>
       {!isEditing && user ? (
         <div className={styles.info}>
           {' '}
-          <div className={styles.img}>
-            <img
-              src='https://i.pinimg.com/736x/07/fb/34/07fb3452c4640d881a16d08c2e314f3e.jpg'
-              alt=''
-            />
-          </div>
           <p>
             <strong>Full Name:</strong> {user?.name}
           </p>
@@ -74,14 +74,7 @@ export const PersonalData = () => {
           />
         </div>
       ) : (
-        <div className={styles['user-info']}>
-          {' '}
-          <div className={styles.img}>
-            <img
-              src='https://i.pinimg.com/736x/07/fb/34/07fb3452c4640d881a16d08c2e314f3e.jpg'
-              alt=''
-            />
-          </div>
+        <div className={styles.info}>
           <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.fields}>
               <label>

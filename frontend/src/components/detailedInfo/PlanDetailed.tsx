@@ -34,7 +34,7 @@ export const PlanDetailed = ({ id }: PlanDetailedProps) => {
                 <p>Price:</p>
                 {plan?.price} $
               </div>
-              <Button text='Book' />
+              <Button text='Buy' />
             </div>
           </div>
         </div>

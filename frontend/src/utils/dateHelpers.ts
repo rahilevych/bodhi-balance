@@ -31,8 +31,5 @@ export const getEndTime = (datetime: Date, duration: number) => {
   return time;
 };
 export const convertDateToString = (datetime: any) => {
-  const date = new Date(datetime);
-  const options = { month: 'long', day: 'numeric' } as const;
-  const formattedDate = date.toLocaleDateString('en-US', options);
-  return formattedDate;
+  return new Date(datetime).toLocaleDateString('de-DE');
 };

@@ -1,0 +1,71 @@
+.bookings {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+  gap: 2rem;
+}
+.table {
+  width: 100%;
+  overflow-x: auto;
+}
+.table th,
+.table td {
+  text-align: left;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  width: 100%;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  border: 0.5px solid lightgray;
+}
+.tab {
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--third-color);
+  padding: 0.5rem;
+  text-decoration: none;
+}
+.tab:hover {
+  text-decoration: underline;
+}
+
+.active {
+  text-decoration: underline;
+  font-weight: 700;
+}
+.nodata {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.cardList {
+  display: none;
+}
+@media (max-width: 768px) {
+  .table {
+    display: none;
+  }
+  .cardList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+  }
+  .tabs {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+}

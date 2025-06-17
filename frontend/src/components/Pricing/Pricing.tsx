@@ -21,9 +21,6 @@ const Pricing = () => {
     return acc;
   }, {} as Record<string, typeof plans>);
 
-  if (error) {
-    return <div>Somethig went wrong!</div>;
-  }
   return (
     <Element name='pricing'>
       <section id='pricing' className={styles.pricing}>

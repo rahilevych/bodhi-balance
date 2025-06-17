@@ -32,9 +32,6 @@ const YogaStyles = () => {
     swiperRef.current?.pagination?.update();
   };
 
-  if (error) {
-    return <div>Somethig went wrong!</div>;
-  }
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles}>

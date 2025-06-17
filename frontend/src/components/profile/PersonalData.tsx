@@ -43,7 +43,7 @@ export const PersonalData = () => {
     setIsEditing(false);
     reset();
   };
-  console.log(user);
+
   return (
     <div className={styles.data}>
       <div className={styles.img}>

@@ -38,10 +38,6 @@ const Trainers = () => {
     }
   }, [trainers]);
 
-  if (error) {
-    return <div>Somethig went wrong!</div>;
-  }
-
   return (
     <Element name={'trainers'}>
       <section className={styles.trainers}>

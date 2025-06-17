@@ -25,7 +25,7 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
     fetchFunction: getTrainingById,
     param: id?.toString(),
   });
-  if (error) return <p>Something went wrong</p>;
+
   if (!training || Array.isArray(training)) return null;
   return (
     <div className={styles.content}>

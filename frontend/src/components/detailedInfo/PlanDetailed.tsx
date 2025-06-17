@@ -18,7 +18,7 @@ export const PlanDetailed = ({ id }: PlanDetailedProps) => {
     fetchFunction: getPlanById,
     param: id?.toString(),
   });
-  if (error) return <p>Something went wrong</p>;
+
   if (!plan || Array.isArray(plan)) return null;
   return (
     <div className={styles.content}>

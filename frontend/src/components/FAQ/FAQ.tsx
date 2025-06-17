@@ -15,9 +15,6 @@ const FAQ = () => {
   } = useFetchData<QuestionType>({ fetchFunction: getAllFAQ });
   const { color } = useAppContext();
 
-  if (error) {
-    return <div>Somethig went wrong!</div>;
-  }
   return (
     <Element name='faq'>
       <section id='faq' className={styles.faq}>

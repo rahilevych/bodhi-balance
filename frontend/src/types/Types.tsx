@@ -7,7 +7,7 @@ export type User = {
   createdAt: Date;
   address: string;
   phone: string;
-  bookings: Booking[];
+  bookings: [Booking];
 };
 export type Trainer = {
   _id: string;

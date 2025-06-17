@@ -40,6 +40,9 @@ tbody tr:hover {
 .bookBtn {
   width: 100%;
 }
+.bookBtnDeact {
+  cursor: not-allowed;
+}
 .bookBtn:hover {
   color: var(--third-color);
 }

@@ -10,6 +10,7 @@ interface PlanDetailedProps {
 }
 export const PlanDetailed = ({ id }: PlanDetailedProps) => {
   const { startCheckout } = useCheckout();
+  const type = 'subscription';
   const {
     data: plan,
     loading,
@@ -34,7 +35,10 @@ export const PlanDetailed = ({ id }: PlanDetailedProps) => {
                 <p>Price:</p>
                 {plan?.price} $
               </div>
-              <Button text='Buy' />
+              <Button
+                text='Buy'
+                onClick={() => startCheckout(plan._id, type)}
+              />
             </div>
           </div>
         </div>

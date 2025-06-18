@@ -17,6 +17,7 @@ interface TrainingDetailedProps {
 }
 export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const { startCheckout } = useCheckout();
+  const type = 'training';
   const {
     data: training,
     loading,
@@ -64,7 +65,10 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
                 <p>Price:</p>
                 {training?.price} $
               </div>
-              <Button text='Book' onClick={() => startCheckout(training._id)} />
+              <Button
+                text='Book'
+                onClick={() => startCheckout(training._id, type)}
+              />
             </div>
           </div>
         </div>

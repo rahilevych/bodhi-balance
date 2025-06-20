@@ -1,30 +1,52 @@
+import { useAppContext } from '../../context/AppContext';
+import { useFetchDataWithParam } from '../../hooks/useFetchDataWithParam';
+import { getSubscriptionByUserId } from '../../services/subscriptionService';
+import { Subscription } from '../../types/Types';
+import { convertDateToString } from '../../utils/dateHelpers';
 import styles from './Subscription.module.css';
-export const Subscription = () => {
+export const SubscriptionSection = () => {
+  const { user } = useAppContext();
+  const {
+    data: subscription,
+    loading,
+    error,
+  } = useFetchDataWithParam<Subscription, string>({
+    fetchFunction: getSubscriptionByUserId,
+    param: user?._id,
+  });
+
+  if (Array.isArray(subscription)) return null;
   return (
-    <div className={styles.plan}>
-      <ul className={styles.info}>
-        <li>
-          <strong>Plan name:</strong>{' '}
-        </li>
-        <li>
-          <strong>Status: </strong>
-        </li>
-        <li>
-          <strong>Start day: </strong>
-        </li>
-        <li>
-          <strong>Plan duration: </strong>
-        </li>
-        <li>
-          <strong>End day:</strong>{' '}
-        </li>
-        <li>
-          <strong>Amount:</strong>
-        </li>
-        <li>
-          <strong>Payment Method: </strong>
-        </li>
-      </ul>
-    </div>
+    <>
+      {subscription ? (
+        <div className={styles.plan}>
+          <ul className={styles.info}>
+            <li>
+              <strong>Plan name:</strong>
+              {subscription?.type.title}
+            </li>
+            <li>
+              <strong>Status: </strong>
+              {subscription.status}
+            </li>
+            {subscription.type.type === 'unlimited' ? (
+              <li>
+                <strong>Valid Until: </strong>{' '}
+                {convertDateToString(subscription.validUntil)}
+              </li>
+            ) : (
+              <>
+                <li>
+                  <strong>Number of remaining trainings:</strong>
+                  {subscription.remainingTrainings}
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      ) : (
+        <div> You don't have active subscriptions</div>
+      )}
+    </>
   );
 };

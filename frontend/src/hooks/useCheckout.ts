@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { createCheckoutSession } from '../services/stripeService';
+import { AxiosError, isAxiosError } from 'axios';
 
 export const useCheckout = () => {
   const { setNotification, notification } = useAppContext();
@@ -13,11 +14,19 @@ export const useCheckout = () => {
         window.location.href = res.url;
       } else if (res.booking) {
         navigate('/success');
-      } else if (res.subscription) {
-        setNotification(res.message);
       }
     } catch (err) {
-      console.error('Error by payment:', err);
+      if (isAxiosError(err)) {
+        console.error(err);
+        if (err.response?.data) {
+          setNotification(err.response.data.message);
+        } else {
+          setNotification('Network or server error');
+        }
+      } else {
+        console.error('Unknown error:', err);
+        setNotification('Unexpected error occurred');
+      }
     }
   };
 

@@ -12,6 +12,7 @@ export function getNext7Days(): Date[] {
 }
 
 export const getTimeFromDate = (datetime: any) => {
+  console.log(datetime);
   const date = new Date(datetime);
   const hours = date.getHours();
   const minutes = date.getMinutes();
@@ -21,9 +22,7 @@ export const getTimeFromDate = (datetime: any) => {
 };
 export const getEndTime = (datetime: Date, duration: number) => {
   const startDate = new Date(datetime);
-  console.log(startDate);
   const endDate = new Date(startDate.getTime() + duration * 60000);
-  console.log(endDate);
   const hours = endDate.getHours();
   const minutes = endDate.getMinutes();
   const formattedMinutes = minutes.toString().padStart(2, '0');

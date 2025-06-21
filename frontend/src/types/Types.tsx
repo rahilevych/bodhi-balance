@@ -57,3 +57,11 @@ export type Booking = {
   date: Date;
   status: string;
 };
+export type Subscription = {
+  _id: string;
+  user: User;
+  type: Plan;
+  remainingTrainings: number;
+  validUntil: Date;
+  status: string;
+};

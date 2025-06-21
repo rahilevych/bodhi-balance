@@ -3,7 +3,7 @@ import { ProfileHeader } from '../../components/Header/ProfileHeader';
 import { ProfileNav } from '../../components/Nav/ProfileNav';
 import { PersonalData } from '../../components/profile/PersonalData';
 import styles from './Profile.module.css';
-import { Subscription } from '../../components/profile/Subscription';
+import { SubscriptionSection } from '../../components/profile/Subscription';
 import { Bookings } from '../../components/profile/Bookings';
 import { Payments } from '../../components/profile/Payments';
 import Button from '../../components/Button/Button';
@@ -27,7 +27,7 @@ const Profile = () => {
             {activeTab === 'Profile' ? (
               <PersonalData />
             ) : activeTab === 'Subscription' ? (
-              <Subscription />
+              <SubscriptionSection />
             ) : activeTab === 'My bookings' ? (
               <Bookings />
             ) : (

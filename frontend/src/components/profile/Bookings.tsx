@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import { useFetchDataWithParam } from '../../hooks/useFetchDataWithParam';
-import { getBookingsByUserId } from '../../services/bookingsService';
+import {
+  cancelBooking,
+  getBookingsByUserId,
+} from '../../services/bookingsService';
 import { Booking } from '../../types/Types';
 import { convertDateToString } from '../../utils/dateHelpers';
 import styles from './Bookings.module.css';
 import { BookingsCard } from './BookingsCard';
+import Button from '../Button/Button';
 export const Bookings = () => {
   const { user } = useAppContext();
   const [activeTab, setActiveTab] = useState<
@@ -73,6 +77,7 @@ export const Bookings = () => {
               <th>Booking date</th>
               <th>Training date</th>
               <th>Status</th>
+              {}
             </tr>
           </thead>
           <tbody>
@@ -84,6 +89,20 @@ export const Bookings = () => {
                 <td>{convertDateToString(booking.date)}</td>
                 <td>{convertDateToString(booking.training.datetime)}</td>
                 <td>{booking.status}</td>
+                <td>
+                  {booking.status === 'booked' &&
+                    new Date(booking.training.datetime).getTime() -
+                      now.getTime() >
+                      24 * 60 * 60 * 1000 && (
+                      <Button
+                        text='Cancel'
+                        onClick={() =>
+                          cancelBooking(booking._id, booking.training._id)
+                        }>
+                        Cancel
+                      </Button>
+                    )}
+                </td>
               </tr>
             ))}
           </tbody>

@@ -48,6 +48,7 @@ const ScheduleTable = ({ trainings }: Props) => {
                 ) : user?.bookings.some(
                     (booking) =>
                       booking.training &&
+                      booking.status === 'booked' &&
                       booking.training._id.toString() ===
                         training._id.toString()
                   ) ? (

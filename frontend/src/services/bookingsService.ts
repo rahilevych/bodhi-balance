@@ -6,3 +6,13 @@ export const getBookingsByUserId = async (id: string) => {
   });
   return res.data;
 };
+export const cancelBooking = async (bookingId: string, trainingId: string) => {
+  const res = await axios.patch(
+    `${BASE_URL}/booking/training/cancel`,
+    { bookingId, trainingId },
+    {
+      withCredentials: true,
+    }
+  );
+  return res.data;
+};

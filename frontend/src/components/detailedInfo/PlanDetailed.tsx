@@ -19,7 +19,9 @@ export const PlanDetailed = ({ id }: PlanDetailedProps) => {
     fetchFunction: getPlanById,
     param: id?.toString(),
   });
-
+  const handleBuyBtn = async (planId: string, type: string) => {
+    await startCheckout(planId, type);
+  };
   if (!plan || Array.isArray(plan)) return null;
   return (
     <div className={styles.content}>
@@ -35,10 +37,7 @@ export const PlanDetailed = ({ id }: PlanDetailedProps) => {
                 <p>Price:</p>
                 {plan?.price} $
               </div>
-              <Button
-                text='Buy'
-                onClick={() => startCheckout(plan._id, type)}
-              />
+              <Button text='Buy' onClick={() => handleBuyBtn(plan._id, type)} />
             </div>
           </div>
         </div>

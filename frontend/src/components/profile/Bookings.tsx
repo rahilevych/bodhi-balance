@@ -10,18 +10,21 @@ import { convertDateToString } from '../../utils/dateHelpers';
 import styles from './Bookings.module.css';
 import { BookingsCard } from './BookingsCard';
 import Button from '../Button/Button';
+import { useFetchData } from '../../hooks/useFetchData';
+import { ConfirmationWindow } from '../modal/ConfirmationWindow';
 export const Bookings = () => {
-  const { user } = useAppContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { setNotification } = useAppContext();
   const [activeTab, setActiveTab] = useState<
     'upcoming' | 'completed' | 'cancelled'
   >('upcoming');
   const {
     data: bookings,
+    refetch,
     loading,
     error,
-  } = useFetchDataWithParam<Booking, string>({
+  } = useFetchData<Booking>({
     fetchFunction: getBookingsByUserId,
-    param: user?._id,
   });
   const now = new Date();
   const filterBookings = Array.isArray(bookings)
@@ -42,6 +45,16 @@ export const Bookings = () => {
         return false;
       })
     : [];
+
+  const handleCancel = async (bookingId: string, trainingId: string) => {
+    try {
+      await cancelBooking(bookingId, trainingId);
+      setNotification('Your booking is canceled!');
+      refetch();
+    } catch (error) {
+      setNotification('Cancelletion failed. Please try again!');
+    }
+  };
 
   return (
     <div className={styles.bookings}>
@@ -77,6 +90,7 @@ export const Bookings = () => {
               <th>Booking date</th>
               <th>Training date</th>
               <th>Status</th>
+              <th>Cancellation</th>
               {}
             </tr>
           </thead>
@@ -91,17 +105,29 @@ export const Bookings = () => {
                 <td>{booking.status}</td>
                 <td>
                   {booking.status === 'booked' &&
-                    new Date(booking.training.datetime).getTime() -
-                      now.getTime() >
-                      24 * 60 * 60 * 1000 && (
+                  new Date(booking.training.datetime).getTime() -
+                    now.getTime() >
+                    24 * 60 * 60 * 1000 ? (
+                    <>
+                      {' '}
                       <Button
                         text='Cancel'
-                        onClick={() =>
-                          cancelBooking(booking._id, booking.training._id)
-                        }>
+                        onClick={() => setIsModalOpen(true)}>
                         Cancel
-                      </Button>
-                    )}
+                      </Button>{' '}
+                      <ConfirmationWindow
+                        isOpen={isModalOpen}
+                        message='Are you sure you want to cancel?'
+                        onConfirm={() => {
+                          setIsModalOpen(false);
+                          handleCancel(booking._id, booking.training._id);
+                        }}
+                        onCancel={() => setIsModalOpen(false)}
+                      />{' '}
+                    </>
+                  ) : (
+                    <p>Cancellation isn't availiable</p>
+                  )}
                 </td>
               </tr>
             ))}
@@ -112,7 +138,11 @@ export const Bookings = () => {
       )}
       <div className={styles.cardList}>
         {filterBookings.map((booking, index) => (
-          <BookingsCard key={index} booking={booking} />
+          <BookingsCard
+            key={index}
+            booking={booking}
+            handleCancel={handleCancel}
+          />
         ))}
       </div>
     </div>

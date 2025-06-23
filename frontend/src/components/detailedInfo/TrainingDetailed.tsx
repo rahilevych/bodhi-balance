@@ -20,13 +20,21 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const type = 'training';
   const {
     data: training,
+    refetch,
     loading,
     error,
   } = useFetchDataWithParam<Training, string>({
     fetchFunction: getTrainingById,
     param: id?.toString(),
   });
-
+  const handleBookBtn = async (trainingId: string, type: string) => {
+    try {
+      await startCheckout(trainingId, type);
+      refetch();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   if (!training || Array.isArray(training)) return null;
   return (
     <div className={styles.content}>
@@ -67,7 +75,7 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
               </div>
               <Button
                 text='Book'
-                onClick={() => startCheckout(training._id, type)}
+                onClick={() => handleBookBtn(training._id, type)}
               />
             </div>
           </div>

@@ -12,3 +12,11 @@ export const updateUser = async (data: UserFormData, id: string) => {
   );
   return res.data;
 };
+export const deleteUser = async () => {
+  const res = await axios.delete(
+    `${BASE_URL}/users/delete`,
+
+    { withCredentials: true }
+  );
+  return res.data;
+};

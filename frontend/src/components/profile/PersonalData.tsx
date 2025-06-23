@@ -5,7 +5,9 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAppContext } from '../../context/AppContext';
-import { updateUser } from '../../services/userService';
+import { deleteUser, updateUser } from '../../services/userService';
+import { useNavigate } from 'react-router';
+import { ConfirmationWindow } from '../modal/ConfirmationWindow';
 
 const schema = z.object({
   name: z.string().min(3, 'Name is required'),
@@ -21,8 +23,11 @@ const schema = z.object({
 
 export type UserFormData = z.infer<typeof schema>;
 export const PersonalData = () => {
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const { user, setUser } = useAppContext();
+  const { user, setUser, setNotification, setIsAuthenticated } =
+    useAppContext();
   const {
     register,
     handleSubmit,
@@ -35,13 +40,25 @@ export const PersonalData = () => {
   const onSubmit = async (data: UserFormData) => {
     try {
       const updatedUser = user && (await updateUser(data, user?._id));
-      console.log(updateUser);
+      console.log(updatedUser);
       setUser(updatedUser);
     } catch (error) {
       console.error(error);
     }
     setIsEditing(false);
     reset();
+  };
+  const handleDeleteUser = async () => {
+    try {
+      const res = await deleteUser();
+      setNotification(res);
+      setUser(null);
+      setIsAuthenticated(false);
+      navigate('/');
+    } catch (error) {
+      setNotification('Something went wrong. Please try again!');
+      console.error(error);
+    }
   };
 
   return (
@@ -67,11 +84,30 @@ export const PersonalData = () => {
           <p>
             <strong>Address:</strong> {user?.address || 'not provided'}
           </p>
-          <Button
-            text='Edit'
-            className={styles.btn}
-            onClick={() => setIsEditing(true)}
-          />
+          <div className={styles.btns}>
+            <Button
+              text='Edit'
+              className={styles.btn}
+              onClick={() => setIsEditing(true)}
+            />
+            <>
+              {' '}
+              <Button
+                text='Delete'
+                className={styles.delete}
+                onClick={() => setIsModalOpen(true)}
+              />
+              <ConfirmationWindow
+                isOpen={isModalOpen}
+                message='Are you sure you want to delete your account?'
+                onConfirm={() => {
+                  setIsModalOpen(false);
+                  handleDeleteUser();
+                }}
+                onCancel={() => setIsModalOpen(false)}
+              />{' '}
+            </>
+          </div>
         </div>
       ) : (
         <div className={styles.info}>

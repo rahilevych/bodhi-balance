@@ -1,7 +1,7 @@
 .info {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   gap: 2rem;
   height: 100%;
@@ -85,4 +85,13 @@
   height: 100%;
   border-radius: 50%;
   object-fit: contain;
+}
+.btns {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 2rem;
+}
+.delete {
+  background-color: var(--cancel-btn-color);
 }

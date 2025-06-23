@@ -12,6 +12,10 @@ export const useFetchDataWithParam = <T, P>({
   const [data, setData] = useState<T | T[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown>(null);
+  const [trigger, setTrigger] = useState(0);
+  const refetch = () => {
+    setTrigger((prev) => prev + 1);
+  };
 
   useEffect(() => {
     if (param === undefined || param === null) return;
@@ -28,7 +32,7 @@ export const useFetchDataWithParam = <T, P>({
     };
 
     fetchData();
-  }, [fetchFunction, param]);
+  }, [fetchFunction, param, trigger]);
 
-  return { data, loading, error };
+  return { data, loading, error, refetch };
 };

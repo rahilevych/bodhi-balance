@@ -20,7 +20,6 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const type = 'training';
   const {
     data: training,
-    refetch,
     loading,
     error,
   } = useFetchDataWithParam<Training, string>({
@@ -30,7 +29,6 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const handleBookBtn = async (trainingId: string, type: string) => {
     try {
       await startCheckout(trainingId, type);
-      refetch();
     } catch (error) {
       console.error(error);
     }

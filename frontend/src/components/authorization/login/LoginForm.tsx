@@ -30,7 +30,6 @@ export const LoginForm = () => {
     setServerError(null);
     try {
       const result = await loginUser(data);
-      console.log(result);
       setUser(result);
       setIsAuthenticated(true);
       setNotification('Successfully logged in!');

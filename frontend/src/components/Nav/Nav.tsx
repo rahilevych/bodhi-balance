@@ -28,6 +28,7 @@ const Nav = () => {
   return (
     <section className={styles.nav}>
       <div
+        data-testid='logo'
         className={styles.logo}
         onClick={() => {
           navigate('/');
@@ -37,6 +38,7 @@ const Nav = () => {
       <div className={styles.nav_menu}>
         {' '}
         <div
+          data-testid='burger'
           className={`${styles.burger_icon} ${
             isMenuOpen ? styles.burger_open : ''
           }`}
@@ -46,6 +48,7 @@ const Nav = () => {
           <span className={styles.line}></span>
         </div>
         <ul
+          data-testid='burger-menu'
           className={`${styles.menu} ${isMenuOpen ? styles.menu_opened : ''}`}>
           {sectionsList.map((section, id) => (
             <li className={styles.dropdown} key={id}>

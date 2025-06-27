@@ -39,15 +39,15 @@ describe('Nav', () => {
     expect(screen.getByText(/Bodhi balance/i)).toBeInTheDocument();
     expect(screen.getByText(/Sign in/i)).toBeInTheDocument();
   });
-  test('shows sebsections when main section is clicked', async () => {
+  test('shows subsections when main section is clicked', async () => {
     render(<Nav />);
-    sectionsList.forEach(async (section) => {
+    for (const section of sectionsList) {
       const mainSection = screen.getByText(section.name);
       await user.click(mainSection);
-      section.subSections.forEach((subSection) => {
+      for (const subSection of section.subSections) {
         expect(screen.getByText(subSection.name)).toBeInTheDocument();
-      });
-    });
+      }
+    }
   });
   test('burger menu toggles open and close', async () => {
     render(<Nav />);

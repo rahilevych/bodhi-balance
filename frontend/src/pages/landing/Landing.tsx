@@ -4,7 +4,7 @@ import Contact from '../../components/Contact/Contact';
 import FAQ from '../../components/FAQ/FAQ';
 import Home from '../../components/Home/Home';
 import { AuthorizationWindow } from '../../components/modal/AuthorizationWindow';
-import Pricing from '../../components/Pricing/Pricing';
+import { Pricing } from '../../components/Pricing/Pricing';
 import Schedule from '../../components/Schedule/Schedule';
 import YogaStyles from '../../components/YogaStyles/YogaStyles';
 import { useAppContext } from '../../context/AppContext';

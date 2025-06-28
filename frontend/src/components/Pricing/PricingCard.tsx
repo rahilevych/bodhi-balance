@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from '../Button/Button';
 import styles from './PricingCard.module.css';
 import { Plan } from '../../types/Types';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 interface Props {
   type: string;

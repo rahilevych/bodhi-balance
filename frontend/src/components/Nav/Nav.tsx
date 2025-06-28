@@ -1,18 +1,18 @@
 import styles from './Nav.module.css';
-import { Link } from 'react-scroll';
+import { scroller } from 'react-scroll';
 import Button from '../Button/Button';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { sectionsList } from '../../constants/sections';
-
 import LogoutButton from '../authorization/LogoutButton';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { openModal, isAuthenticated } = useAppContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleBurgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -23,6 +23,17 @@ const Nav = () => {
   const clickDropdown = (id: string | null | number) => {
     if (id === dropdownId) setDropdownId(null);
     else setDropdownId(id);
+  };
+  const handleSectionClick = (sectionLink: string) => {
+    setIsMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionLink } });
+    } else {
+      scroller.scrollTo(sectionLink, {
+        smooth: true,
+        duration: 500,
+      });
+    }
   };
 
   return (
@@ -73,13 +84,11 @@ const Nav = () => {
                   }`}>
                   {section.subSections.map((subSection) => (
                     <li key={subSection.link}>
-                      <Link
-                        to={subSection.link}
-                        smooth={true}
+                      <span
                         className={styles.sublink}
-                        onClick={() => setIsMenuOpen(false)}>
+                        onClick={() => handleSectionClick(subSection.link)}>
                         {subSection.name}
-                      </Link>
+                      </span>
                     </li>
                   ))}
                 </ul>

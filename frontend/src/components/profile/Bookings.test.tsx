@@ -120,7 +120,7 @@ describe('Bookings', () => {
       screen.getByText(/Are you sure you want to cancel?/i)
     ).toBeInTheDocument();
     const confirmButton = screen.getByRole('button', { name: /yes/i });
-    await userEvent.click(confirmButton);
+    await user.click(confirmButton);
     expect(cancelBooking).toHaveBeenCalledWith('booking1', 'training1');
   });
   test('doesnt cancel booking if user clicked canceled btn but didnt confirm it ', async () => {
@@ -136,7 +136,7 @@ describe('Bookings', () => {
     const cancelButton = within(confirmationWindow).getByRole('button', {
       name: /cancel/i,
     });
-    await userEvent.click(cancelButton);
+    await user.click(cancelButton);
     expect(cancelBooking).not.toHaveBeenCalledWith('booking1', 'training1');
   });
 });

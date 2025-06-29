@@ -15,7 +15,7 @@ export const ConfirmationWindow = ({
 }: ConfirmationWindowProps) => {
   if (!isOpen) return null;
   return (
-    <div className={styles['modal-overlay']}>
+    <div data-testid='confirm-window' className={styles['modal-overlay']}>
       <div className={styles['modal-content']}>
         <p>{message}</p>
         <div className={styles['modal-buttons']}>

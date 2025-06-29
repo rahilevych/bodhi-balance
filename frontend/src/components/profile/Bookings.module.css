@@ -46,8 +46,9 @@
   justify-content: center;
   width: 100%;
 }
-.cardList {
-  display: none;
+
+.centered {
+  margin: 0 auto;
 }
 @media (max-width: 768px) {
   .table {

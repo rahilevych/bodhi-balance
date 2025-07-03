@@ -8,9 +8,10 @@ import { useAppContext } from '../../context/AppContext';
 import { deleteUser, updateUser } from '../../services/userService';
 import { useNavigate } from 'react-router';
 import { ConfirmationWindow } from '../modal/ConfirmationWindow';
+import { BounceLoader } from 'react-spinners';
 
 const schema = z.object({
-  name: z.string().min(3, 'Name is required'),
+  name: z.string().min(3, 'Name must be at least 3 symbols'),
   email: z.string().email('Invalid email format'),
   phone: z
     .string()
@@ -26,8 +27,10 @@ export const PersonalData = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const { user, setUser, setNotification, setIsAuthenticated } =
+  const { user, setUser, setNotification, setIsAuthenticated, color } =
     useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -38,17 +41,23 @@ export const PersonalData = () => {
   });
 
   const onSubmit = async (data: UserFormData) => {
+    setIsLoading(true);
+    setError(null);
     try {
       const updatedUser = user && (await updateUser(data, user?._id));
-      console.log(updatedUser);
       setUser(updatedUser);
+      setIsEditing(false);
     } catch (error) {
       console.error(error);
+      setError('Failed to update user. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsEditing(false);
-    reset();
   };
+
   const handleDeleteUser = async () => {
+    setIsLoading(true);
+    setError(null);
     try {
       const res = await deleteUser();
       setNotification(res);
@@ -58,8 +67,25 @@ export const PersonalData = () => {
     } catch (error) {
       setNotification('Something went wrong. Please try again!');
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
+  if (isLoading) {
+    return (
+      <div className={styles.centered}>
+        <BounceLoader data-testid='loader' color={color} loading={isLoading} />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.centered}>
+        Something went wrong. Please try again later.
+      </div>
+    );
+  }
 
   return (
     <div className={styles.data}>
@@ -111,7 +137,10 @@ export const PersonalData = () => {
         </div>
       ) : (
         <div className={styles.info}>
-          <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <form
+            data-testid='form'
+            className={styles.form}
+            onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.fields}>
               <label>
                 <p>

@@ -1,9 +1,20 @@
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import styles from './Footer.module.css';
 import { sectionsList } from '../../constants/sections';
-import { Link } from 'react-scroll';
+import { scroller } from 'react-scroll';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = (sectionName: string) => {
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionName } });
+    } else {
+      scroller.scrollTo(sectionName, { smooth: true, duration: 500 });
+    }
+  };
   return (
     <div className={styles.footer}>
       <div className='container'>
@@ -16,9 +27,12 @@ const Footer = () => {
               {sectionsList.flatMap((section) =>
                 section.subSections.map((subSection) => (
                   <li key={subSection.link}>
-                    <Link to={subSection.link} smooth={true}>
-                      <p className={styles.link}> {subSection.name}</p>
-                    </Link>
+                    <p
+                      onClick={() => handleClick(subSection.link)}
+                      className={styles.link}>
+                      {' '}
+                      {subSection.name}
+                    </p>
                   </li>
                 ))
               )}

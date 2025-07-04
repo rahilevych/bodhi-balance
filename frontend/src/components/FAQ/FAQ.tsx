@@ -20,7 +20,11 @@ const FAQ = () => {
       <section id='faq' className={styles.faq}>
         <div className='container'>
           <h2>FAQ</h2>
-          {questions.length > 0 ? (
+          {loading ? (
+            <BounceLoader color={color} loading={loading} />
+          ) : error ? (
+            <p>Something went wrong. Please try again later.</p>
+          ) : questions.length > 0 ? (
             <div className={styles.content}>
               <div className={styles.questions}>
                 {questions.map((question, index) => (
@@ -39,7 +43,7 @@ const FAQ = () => {
               </div>
             </div>
           ) : (
-            <BounceLoader color={color} loading={loading} />
+            <p>No questions found</p>
           )}
         </div>
       </section>

@@ -24,6 +24,7 @@ export const Question = ({ question, answer }: Props) => {
         </div>
       </button>
       <div
+        data-testid='answer'
         className={`${styles.answer} ${
           isOpened ? styles['answer-opened'] : ''
         }`}>

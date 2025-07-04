@@ -7,7 +7,7 @@ import { useAppContext } from '../../context/AppContext';
 import { BounceLoader } from 'react-spinners';
 import { useFetchData } from '../../hooks/useFetchData';
 
-const Pricing = () => {
+export const Pricing = () => {
   const {
     data: plans,
     loading,
@@ -26,20 +26,21 @@ const Pricing = () => {
       <section id='pricing' className={styles.pricing}>
         <div className='container'>
           <h2>Pricing plans</h2>
-          {plans.length > 0 ? (
+          {loading ? (
+            <BounceLoader color={color} loading={loading} />
+          ) : error ? (
+            <p>Something went wrong. Please try again later.</p>
+          ) : plans.length === 0 ? (
+            <p>No plans available at the moment.</p>
+          ) : (
             <div className={styles.plans}>
-              {' '}
               {Object.entries(types).map(([type, plans]) => (
                 <PricingCard key={type} type={type} plans={plans} />
               ))}
             </div>
-          ) : (
-            <BounceLoader color={color} loading={loading} />
           )}
         </div>
       </section>
     </Element>
   );
 };
-
-export default Pricing;

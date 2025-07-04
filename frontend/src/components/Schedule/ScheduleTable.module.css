@@ -46,6 +46,14 @@ tbody tr:hover {
 .bookBtn:hover {
   color: var(--third-color);
 }
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
 
 @media (max-width: 1024px) {
   .tableWrapper {
@@ -56,10 +64,5 @@ tbody tr:hover {
   }
   .table {
     font-size: 0.75rem;
-  }
-}
-@media (max-width: 768px) {
-  .table {
-    display: none;
   }
 }

@@ -1,18 +1,18 @@
 import styles from './Nav.module.css';
-import { Link } from 'react-scroll';
+import { scroller } from 'react-scroll';
 import Button from '../Button/Button';
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useAppContext } from '../../context/AppContext';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { sectionsList } from '../../constants/sections';
-
 import LogoutButton from '../authorization/LogoutButton';
 
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { openModal, isAuthenticated } = useAppContext();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleBurgerClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,10 +24,22 @@ const Nav = () => {
     if (id === dropdownId) setDropdownId(null);
     else setDropdownId(id);
   };
+  const handleSectionClick = (sectionLink: string) => {
+    setIsMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionLink } });
+    } else {
+      scroller.scrollTo(sectionLink, {
+        smooth: true,
+        duration: 500,
+      });
+    }
+  };
 
   return (
     <section className={styles.nav}>
       <div
+        data-testid='logo'
         className={styles.logo}
         onClick={() => {
           navigate('/');
@@ -37,6 +49,7 @@ const Nav = () => {
       <div className={styles.nav_menu}>
         {' '}
         <div
+          data-testid='burger'
           className={`${styles.burger_icon} ${
             isMenuOpen ? styles.burger_open : ''
           }`}
@@ -46,6 +59,7 @@ const Nav = () => {
           <span className={styles.line}></span>
         </div>
         <ul
+          data-testid='burger-menu'
           className={`${styles.menu} ${isMenuOpen ? styles.menu_opened : ''}`}>
           {sectionsList.map((section, id) => (
             <li className={styles.dropdown} key={id}>
@@ -70,13 +84,11 @@ const Nav = () => {
                   }`}>
                   {section.subSections.map((subSection) => (
                     <li key={subSection.link}>
-                      <Link
-                        to={subSection.link}
-                        smooth={true}
+                      <span
                         className={styles.sublink}
-                        onClick={() => setIsMenuOpen(false)}>
+                        onClick={() => handleSectionClick(subSection.link)}>
                         {subSection.name}
-                      </Link>
+                      </span>
                     </li>
                   ))}
                 </ul>

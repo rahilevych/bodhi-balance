@@ -1,9 +1,6 @@
 import { render, screen, waitFor } from '@testing-library/react';
-
 import userEvent from '@testing-library/user-event';
-
 import '@testing-library/jest-dom';
-import { useAppContext } from '../../../context/AppContext';
 import { loginUser } from '../../../services/authService';
 import { LoginForm } from './LoginForm';
 
@@ -11,7 +8,7 @@ const setNotificationMock = jest.fn();
 const setUserMock = jest.fn();
 const setIsAuthenticatedMock = jest.fn();
 
-jest.mock('../../context/AppContext', () => ({
+jest.mock('../../../context/AppContext', () => ({
   useAppContext: () => ({
     setUser: setUserMock,
     setIsAuthenticated: setIsAuthenticatedMock,
@@ -19,7 +16,7 @@ jest.mock('../../context/AppContext', () => ({
   }),
 }));
 
-jest.mock('../../services/authService.ts', () => ({
+jest.mock('../../../services/authService.ts', () => ({
   loginUser: jest.fn(),
 }));
 

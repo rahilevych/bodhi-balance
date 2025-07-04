@@ -5,10 +5,10 @@ import { useAppContext } from '../../../context/AppContext';
 import { registerUser } from '../../../services/authService';
 import { RegistrationForm } from './RegistrationForm';
 
-jest.mock('../../context/AppContext.tsx', () => ({
+jest.mock('../../../context/AppContext.tsx', () => ({
   useAppContext: jest.fn(),
 }));
-jest.mock('../../services/authService.ts', () => ({
+jest.mock('../../../services/authService.ts', () => ({
   registerUser: jest.fn(),
 }));
 

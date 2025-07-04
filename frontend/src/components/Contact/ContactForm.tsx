@@ -7,9 +7,9 @@ import { sendMessage } from '../../services/contactService';
 import { useAppContext } from '../../context/AppContext';
 
 const schema = z.object({
-  fullName: z.string().min(1, 'Name ist required !'),
-  email: z.string().email('Invalid email format').min(1, 'Email is required !'),
-  message: z.string().min(1, 'Message is required'),
+  fullName: z.string().min(1, 'Name ist required!'),
+  email: z.string().min(1, 'Email is required!').email('Invalid email format!'),
+  message: z.string().min(1, 'Message is required!'),
 });
 
 export type ContactData = z.infer<typeof schema>;
@@ -20,18 +20,20 @@ export const ContactForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(schema),
   });
   const onSubmit = async (data: ContactData) => {
     try {
-      const res = await sendMessage(data);
-      if (res.status === 200) {
-        setNotification(res.data.message);
-      }
+      await sendMessage(data);
+      setNotification(
+        'Message sent successfully,we will contact you as soon as possible!'
+      );
     } catch (error) {
       setNotification('Try later, smth went wrong!');
     }
+    reset();
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>

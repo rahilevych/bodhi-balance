@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { RegisterFormData } from '../components/authorization/registration/RegistrationForm';
-import { LoginFormData } from '../components/authorization/login/LoginForm';
+import { RegisterFormData } from '../features/auth/registration/RegistrationForm';
+import { LoginFormData } from '../features/auth/login/LoginForm';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -22,7 +22,7 @@ export const loginUser = async (data: LoginFormData) => {
     },
     {
       withCredentials: true,
-    }
+    },
   );
   console.log(res.data);
   return res.data;

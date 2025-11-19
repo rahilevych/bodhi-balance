@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { ProfileHeader } from '../../components/Header/ProfileHeader';
-import { ProfileNav } from '../../components/Nav/ProfileNav';
-import { PersonalData } from '../../components/profile/PersonalData';
+import { ProfileHeader } from '../../layouts/header/components/profile-header/ProfileHeader';
+import { ProfileNav } from '../../features/nav/profile-nav/ProfileNav';
+import { PersonalData } from '../../features/profile/components/personal-data/PersonalData';
 import styles from './Profile.module.css';
-import { SubscriptionSection } from '../../components/profile/Subscription';
-import { Bookings } from '../../components/profile/Bookings';
-import { Payments } from '../../components/profile/Payments';
-import Button from '../../components/Button/Button';
+import { SubscriptionSection } from '../../features/profile/components/subscription/Subscription';
+import { Bookings } from '../../features/profile/components/bookings/Bookings';
+import { Payments } from '../../features/profile/components/payments/Payments';
+import Button from '../../shared/button/Button';
 import { useNavigate } from 'react-router';
 
 const Profile = () => {
@@ -38,7 +38,8 @@ const Profile = () => {
             <Button
               className={styles.btn}
               text='Back'
-              onClick={() => navigate(-1)}></Button>
+              onClick={() => navigate(-1)}
+            ></Button>
           </div>
         </div>
       </div>

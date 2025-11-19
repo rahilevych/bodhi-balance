@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Success.module.css';
-import Button from '../../components/Button/Button';
+import Button from '../../shared/button/Button';
 import { FaCheckCircle } from 'react-icons/fa';
 
 export const Success = () => {

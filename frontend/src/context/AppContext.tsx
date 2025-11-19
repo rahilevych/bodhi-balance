@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { User } from '../types/Types';
 import { getMe } from '../services/authService';
-import { NotificationWindow } from '../components/modal/NotificationWindow';
+import { NotificationWindow } from '../styles/modal/NotificationWindow';
 
 interface AppContextType {
   openModal: () => void;
@@ -85,7 +85,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         notification,
         setNotification,
         color,
-      }}>
+      }}
+    >
       {children}
       {notification && (
         <NotificationWindow

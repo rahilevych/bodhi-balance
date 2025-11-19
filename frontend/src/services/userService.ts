@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { UserFormData } from '../components/profile/PersonalData';
+import { UserFormData } from '../features/profile/components/personal-data/PersonalData';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const updateUser = async (data: UserFormData, id: string) => {
@@ -8,7 +8,7 @@ export const updateUser = async (data: UserFormData, id: string) => {
     {
       data,
     },
-    { withCredentials: true }
+    { withCredentials: true },
   );
   return res.data;
 };
@@ -16,7 +16,7 @@ export const deleteUser = async () => {
   const res = await axios.delete(
     `${BASE_URL}/users/delete`,
 
-    { withCredentials: true }
+    { withCredentials: true },
   );
   return res.data;
 };

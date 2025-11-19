@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './Cancel.module.css';
-import Button from '../../components/Button/Button';
+import Button from '../../shared/button/Button';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 export const Cancel = () => {

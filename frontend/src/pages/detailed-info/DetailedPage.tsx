@@ -1,8 +1,8 @@
 import { useLocation, useNavigate, useParams } from 'react-router';
 import styles from './DetailedPage.module.css';
-import { TrainingDetailed } from '../../components/detailedInfo/TrainingDetailed';
-import { PlanDetailed } from '../../components/detailedInfo/PlanDetailed';
-import Button from '../../components/Button/Button';
+import { TrainingDetailed } from '../../features/schedule/components/training-detailed/TrainingDetailed';
+import { PlanDetailed } from '../../features/pricing/components/plan-detailed/PlanDetailed';
+import Button from '../../shared/button/Button';
 
 const DetailedPage = () => {
   const { id } = useParams();

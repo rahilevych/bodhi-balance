@@ -1,7 +1,7 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AppProvider } from './context/AppContext';
-import App from './App';
+import App from './app/App';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -9,5 +9,5 @@ createRoot(document.getElementById('root')!).render(
       {' '}
       <App />
     </AppProvider>
-  </StrictMode>
+  </StrictMode>,
 );

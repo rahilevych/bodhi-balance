@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ContactData } from '../components/Contact/ContactForm';
+import { ContactData } from '../features/contact/components/contact-form/ContactForm';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 

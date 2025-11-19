@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './NotFound.module.css';
-import Button from '../../components/Button/Button';
+import Button from '../../shared/button/Button';
 import { FaTimesCircle } from 'react-icons/fa';
 
 export const NotFound = () => {

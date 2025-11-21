@@ -10,14 +10,20 @@ interface DropdownProps {
   title: string;
   subSections?: subSection[];
   onSelect?: (link: string) => void;
+  className?: string;
 }
-export const Dropdown = ({ title, subSections, onSelect }: DropdownProps) => {
+export const Dropdown = ({
+  title,
+  subSections,
+  onSelect,
+  className,
+}: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, () => setIsOpen(false));
 
   return (
-    <div className={styles.dropdown} ref={ref}>
+    <div className={`${styles.dropdown} ${className}`} ref={ref}>
       <span className={styles.link} onClick={() => setIsOpen((prev) => !prev)}>
         {title}
       </span>

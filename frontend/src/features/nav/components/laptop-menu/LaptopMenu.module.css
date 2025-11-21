@@ -2,11 +2,14 @@
   display: flex;
   justify-content: end;
   width: 100%;
-  gap: 1rem;
+  gap: 4rem;
 }
 .links {
   position: relative;
   display: flex;
-
-  gap: 0.5rem;
+  gap: 3rem;
+}
+.buttons {
+  display: flex;
+  gap: 1rem;
 }

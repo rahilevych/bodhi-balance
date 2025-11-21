@@ -9,7 +9,7 @@ import Button from '../../../../shared/button/Button';
 import LogoutButton from '../../../auth/LogoutButton';
 
 export const LaptopMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [, setIsMenuOpen] = useState(false);
   const { openModal, isAuthenticated } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();

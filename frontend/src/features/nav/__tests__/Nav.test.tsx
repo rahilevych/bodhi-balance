@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import Nav from '../nav/Nav';
+import Nav from '../components/nav/Nav';
 import { useAppContext } from '../../../context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import '@testing-library/jest-dom';

@@ -1,0 +1,12 @@
+.menu {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  gap: 1rem;
+}
+.links {
+  position: relative;
+  display: flex;
+
+  gap: 0.5rem;
+}

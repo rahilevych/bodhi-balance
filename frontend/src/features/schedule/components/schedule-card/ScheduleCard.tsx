@@ -1,7 +1,7 @@
-import { useAppContext } from '../../context/AppContext';
-import { Training } from '../../types/Types';
-import { getTimeFromDate } from '../../utils/dateHelpers';
-import Button from '../Button/Button';
+import { useAppContext } from '../../../../context/AppContext';
+import Button from '../../../../shared/button/Button';
+import { Training } from '../../../../types/Types';
+import { getTimeFromDate } from '../../../../utils/dateHelpers';
 import styles from './ScheduleCard.module.css';
 interface Props {
   item: Training;
@@ -38,17 +38,18 @@ export const ScheduleCard = ({ item, onClick }: Props) => {
             (booking) =>
               booking.training &&
               booking.status === 'booked' &&
-              booking.training._id.toString() === item._id.toString()
+              booking.training._id.toString() === item._id.toString(),
           ) ? (
           <p className={styles.disabledText}>Already booked</p>
         ) : (
           <Button
-            text='Book '
             className={styles.bookBtn}
             onClick={() => {
               onClick(item._id);
             }}
-          />
+          >
+            Book
+          </Button>
         )}
       </div>
     </div>

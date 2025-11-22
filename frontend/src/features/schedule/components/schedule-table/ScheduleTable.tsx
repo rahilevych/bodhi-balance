@@ -1,11 +1,12 @@
 import styles from './ScheduleTable.module.css';
 import Button from '../../../../shared/button/Button';
-import { ScheduleCard } from '../../../../components/Schedule/ScheduleCard';
+
 import { Training } from '../../../../types/Types';
 import { getTimeFromDate } from '../../../../utils/dateHelpers';
 import { useNavigate } from 'react-router';
 import { useAppContext } from '../../../../context/AppContext';
 import { useEffect, useState } from 'react';
+import { ScheduleCard } from '../schedule-card/ScheduleCard';
 
 interface Props {
   trainings: Training[] | null;
@@ -77,12 +78,13 @@ const ScheduleTable = ({ trainings }: Props) => {
                       <p className={styles.disabledText}>Already booked</p>
                     ) : (
                       <Button
-                        text='Book '
                         className={styles.bookBtn}
                         onClick={() => {
                           handleBookingBtn(training._id);
                         }}
-                      />
+                      >
+                        Book
+                      </Button>
                     )}
                   </td>
                 </tr>

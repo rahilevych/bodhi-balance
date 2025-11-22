@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import styles from './Schedule.module.css';
 import { Element } from 'react-scroll';
 import ScheduleTable from '../schedule-table/ScheduleTable';
@@ -8,7 +8,9 @@ import { getNext7Days } from '../../../../utils/dateHelpers';
 import { useAppContext } from '../../../../context/AppContext';
 import { BounceLoader } from 'react-spinners';
 import { useFetchDataWithParam } from '../../../../hooks/useFetchDataWithParam';
-
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import { container } from '../../../../animations/landing-variannts';
 const Schedule = () => {
   const today = new Date();
   const [day, setDay] = useState<Date>(today);
@@ -25,12 +27,19 @@ const Schedule = () => {
   const override: CSSProperties = {
     margin: '3rem',
   };
-
-  console.log(trainings);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
   return (
     <Element name='schedule'>
-      <section id='schedule' className={styles.schedule}>
-        <div className='container'>
+      <section id='schedule' className={styles.schedule} ref={ref}>
+        <motion.div
+          className='container'
+          variants={container}
+          initial='hidden'
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <h2>Schedule</h2>
 
           <div className={styles.timetable}>
@@ -71,7 +80,7 @@ const Schedule = () => {
               </p>
             )}
           </div>
-        </div>
+        </motion.div>
       </section>
     </Element>
   );

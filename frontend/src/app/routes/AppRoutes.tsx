@@ -1,14 +1,14 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useAppContext } from '../context/AppContext';
-import Header from '../components/Header/Header';
-import Landing from '../pages/landing/Landing';
-import ProtectedRoute from '../components/ProtectedRoute';
-import Profile from '../pages/profile/Profile';
-import { Success } from '../pages/success/Success';
-import DetailedPage from '../pages/detailed-info/DetailedPage';
-import Footer from '../components/Footer/Footer';
-import { Cancel } from '../pages/cancel/Cancel';
-import { NotFound } from '../pages/404/NotFound';
+import { useAppContext } from '../../context/AppContext';
+import Header from '../../layouts/header/components/header/Header';
+import Landing from '../../pages/landing/Landing';
+import { NotFound } from '../../pages/404/NotFound';
+import ProtectedRoute from './ProtectedRoute';
+import Profile from '../../pages/profile/Profile';
+import { Success } from '../../pages/success/Success';
+import { Cancel } from '../../pages/cancel/Cancel';
+import DetailedPage from '../../pages/detailed-info/DetailedPage';
+import Footer from '../../layouts/footer/components/footer/Footer';
 
 export const AppRoutes = () => {
   const location = useLocation();

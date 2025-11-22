@@ -9,7 +9,9 @@ import { useFetchData } from '../../../../hooks/useFetchData';
 import { Slider } from '../../../../shared/slider/Slider';
 import { SliderCard } from '../../../../shared/slider-card/SliderCard';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
-
+import { container } from '../../../../animations/landing-variannts';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
 const Trainers = () => {
   const { data: trainers } = useFetchData<Trainer>({
     fetchFunction: getAllTrainers,
@@ -17,7 +19,10 @@ const Trainers = () => {
   const [currentTrainer, setCurrentTrainer] = useState<Trainer | null>();
   const { width } = useWindowSize();
   const isMobile = width < 901;
-
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
   useEffect(() => {
     if (trainers && trainers.length > 0 && !currentTrainer) {
       setCurrentTrainer(trainers[0]);
@@ -26,8 +31,13 @@ const Trainers = () => {
 
   return (
     <Element name={'trainers'}>
-      <section className={styles.trainers}>
-        <div className='container'>
+      <section className={styles.trainers} ref={ref}>
+        <motion.div
+          className='container'
+          variants={container}
+          initial='hidden'
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <h2>Trainers</h2>
           <div className={styles.info}>
             <div className={styles.selectedTrainer}>
@@ -50,7 +60,7 @@ const Trainers = () => {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </Element>
   );

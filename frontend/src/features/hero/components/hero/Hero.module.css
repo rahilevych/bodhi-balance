@@ -98,7 +98,7 @@
     display: flex;
     align-items: start;
     justify-content: center;
-    background-color: rgb(206, 197, 204);
+    background-color: var(--color-bg-2);
     background-image: none;
     height: auto;
     padding-bottom: 2rem;

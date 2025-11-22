@@ -2,15 +2,27 @@ import { Element, Link } from 'react-scroll';
 import Button from '../../../../shared/button/Button';
 import styles from './Hero.module.css';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { container } from '../../../../animations/landing-variannts';
 
 const Hero = () => {
   const { width } = useWindowSize();
   const isMobile = width < 769;
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
 
   return (
     <Element name='home'>
-      <section className={styles.home}>
-        <div className={` ${styles.container}`}>
+      <section className={styles.home} ref={ref}>
+        <motion.div
+          className={` ${styles.container}`}
+          variants={container}
+          initial='hidden'
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <h1 className={styles.h1}>
             <span>Bodhi</span>
             <span>Balance</span>
@@ -31,7 +43,7 @@ const Hero = () => {
               <Button>Check classes</Button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
     </Element>
   );

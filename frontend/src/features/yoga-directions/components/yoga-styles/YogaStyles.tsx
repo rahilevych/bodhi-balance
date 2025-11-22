@@ -10,19 +10,29 @@ import { Slider } from '../../../../shared/slider/Slider';
 import { SliderCard } from '../../../../shared/slider-card/SliderCard';
 import { YogaFullCard } from '../yoga-full-card/YogaFullCard';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
-
+import { useInView } from 'react-intersection-observer';
+import { container } from '../../../../animations/landing-variannts';
+import { motion } from 'framer-motion';
 const YogaStyles = () => {
   const { width } = useWindowSize();
   const isMobile = width < 901;
   const { data: yogaStyles } = useFetchData<YogaStyle>({
     fetchFunction: getAllStyles,
   });
-  // const [activeIndex, setActiveIndex] = useState(0);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
 
   return (
     <Element name='yogastyles'>
-      <section className={styles.yogastyles}>
-        <div className='container'>
+      <section className={styles.yogastyles} ref={ref}>
+        <motion.div
+          className='container'
+          variants={container}
+          initial='hidden'
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <h2>Yoga styles</h2>
 
           <div className={styles.content}>
@@ -42,7 +52,7 @@ const YogaStyles = () => {
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </Element>
   );

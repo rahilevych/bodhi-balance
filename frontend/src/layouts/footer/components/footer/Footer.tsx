@@ -1,8 +1,9 @@
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import styles from './Footer.module.css';
-import { sectionsList } from '../../constants/sections';
+
 import { scroller } from 'react-scroll';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { sectionsList } from '../../../../constants/sections';
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -29,12 +30,13 @@ const Footer = () => {
                   <li key={subSection.link}>
                     <p
                       onClick={() => handleClick(subSection.link)}
-                      className={styles.link}>
+                      className={styles.link}
+                    >
                       {' '}
                       {subSection.name}
                     </p>
                   </li>
-                ))
+                )),
               )}
             </ul>
           </div>
@@ -42,19 +44,22 @@ const Footer = () => {
             <a
               href='https://instagram.com'
               target='_blank'
-              rel='noopener noreferrer'>
+              rel='noopener noreferrer'
+            >
               <FaInstagram className={styles.icon} />
             </a>
             <a
               href='https://facebook.com'
               target='_blank'
-              rel='noopener noreferrer'>
+              rel='noopener noreferrer'
+            >
               <FaFacebookF className={styles.icon} />
             </a>
             <a
               href='https://www.whatsapp.com/'
               target='_blank'
-              rel='noopener noreferrer'>
+              rel='noopener noreferrer'
+            >
               <FaWhatsapp className={styles.icon} />
             </a>
           </div>

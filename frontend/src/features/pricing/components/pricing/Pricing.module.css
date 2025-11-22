@@ -1,6 +1,6 @@
 .pricing {
   padding: 5rem 2rem;
-  background-color: var(--primary-color);
+  background-color: var(--color-bg-3);
 }
 .plans {
   display: flex;

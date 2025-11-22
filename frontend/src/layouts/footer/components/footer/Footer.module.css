@@ -2,7 +2,7 @@
   width: 100%;
   height: auto;
   padding: 4rem 2rem;
-  background-color: var(--third-color);
+  background-color: var(--color-header-bg);
 }
 .content {
   display: flex;

@@ -1,4 +1,4 @@
-import { About } from '../../features/about/About';
+import { About } from '../../features/about/components/about/About';
 import Atmosphere from '../../features/atmosphere/components/atmosphere/Atmosphere';
 import Contact from '../../features/contact/components/contact/Contact';
 import FAQ from '../../features/faq/components/faq/FAQ';
@@ -6,7 +6,7 @@ import Hero from '../../features/hero/components/hero/Hero';
 import { AuthorizationWindow } from '../../styles/modal/AuthorizationWindow';
 import { Pricing } from '../../features/pricing/components/pricing/Pricing';
 import Schedule from '../../features/schedule/components/schedule/Schedule';
-import YogaStyles from '../../components/YogaStyles/YogaStyles';
+
 import { useAppContext } from '../../context/AppContext';
 import { Authorization } from '../../features/auth/Authorization';
 import styles from './Landing.module.css';
@@ -14,6 +14,7 @@ import Trainers from '../../features/trainers/components/trainers/Trainers';
 import { useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { scroller } from 'react-scroll';
+import YogaStyles from '../../features/yoga-directions/components/yoga-styles/YogaStyles';
 
 const Landing = () => {
   const location = useLocation();
@@ -32,7 +33,7 @@ const Landing = () => {
     }
   }, [location.state]);
   return (
-    <main className={styles.main}>
+    <div className={styles.main}>
       <Hero />
       <About />
       <YogaStyles />
@@ -47,7 +48,7 @@ const Landing = () => {
           <Authorization />
         </AuthorizationWindow>
       )}
-    </main>
+    </div>
   );
 };
 

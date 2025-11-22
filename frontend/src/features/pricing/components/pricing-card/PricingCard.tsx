@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import Button from '../../../../components/Button/Button';
+
 import styles from './PricingCard.module.css';
-import { Plan } from '../../../../types/Types';
+
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
+import { Plan } from '../../../../types/Types';
+import Button from '../../../../shared/button/Button';
 interface Props {
   type: string;
   plans: Plan[];
@@ -30,7 +32,7 @@ export const PricingCard = ({ plans, type }: Props) => {
     <div className={styles.card}>
       <h3>{type}</h3>
       <div className={styles.categories}>
-        {plans.map((plan: Plan, index: any) => (
+        {plans.map((plan: Plan, index) => (
           <p
             key={index}
             className={selectedOption.title === plan.title ? styles.active : ''}
@@ -45,9 +47,11 @@ export const PricingCard = ({ plans, type }: Props) => {
       <div>
         {' '}
         <Button
-          text='Buy now'
+          className={styles.btn}
           onClick={() => handleBookingBtn(selectedOption)}
-        />
+        >
+          Buy now
+        </Button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-import './styles/null.css';
-import './styles/global.css';
-import './App.css';
+import '../styles/null.css';
+import '../styles/global.css';
+
 import { BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './routes/AppRoutes';
 

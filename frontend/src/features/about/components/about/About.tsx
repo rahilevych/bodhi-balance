@@ -1,8 +1,13 @@
 import { Element, Link } from 'react-scroll';
 import styles from './About.module.css';
 import { aboutInfo } from '../../../../constants/about';
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import {
+  container,
+  item,
+  staggerContainer,
+} from '../../../../animations/landing-variannts';
 
 export const About = () => {
   const { ref, inView } = useInView({
@@ -10,30 +15,6 @@ export const About = () => {
     threshold: 0.2,
   });
 
-  const container: Variants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const staggerContainer = {
-    visible: {
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 25 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
   return (
     <Element name='about'>
       <section className={styles.about} ref={ref}>

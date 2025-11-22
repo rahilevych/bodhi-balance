@@ -3,6 +3,7 @@ import { ConfirmationWindow } from '../../styles/modal/ConfirmationWindow';
 import { logout } from '../../services/authService';
 import { useAppContext } from '../../context/AppContext';
 import { useState } from 'react';
+import Button from '../../shared/button/Button';
 
 const LogoutButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,9 +26,9 @@ const LogoutButton = () => {
 
   return (
     <>
-      <p className={styles.button} onClick={() => setIsModalOpen(true)}>
+      <Button className={styles.button} onClick={() => setIsModalOpen(true)}>
         Log out
-      </p>
+      </Button>
       <ConfirmationWindow
         isOpen={isModalOpen}
         message='Are you sure you want to log out?'

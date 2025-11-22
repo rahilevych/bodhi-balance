@@ -3,16 +3,28 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './Atmosphere.module.css';
 import { Pagination } from 'swiper/modules';
 import { Element } from 'react-scroll';
+import { useInView } from 'react-intersection-observer';
+import { motion } from 'framer-motion';
+import { container } from '../../../../animations/landing-variannts';
 const images = [
   'https://i.pinimg.com/736x/63/9a/55/639a5571c1081ef65155096efc4bf372.jpg',
   'https://i.pinimg.com/736x/91/5b/0c/915b0cf814f5d6b0608ce5cb1140d72a.jpg',
   'https://i.pinimg.com/736x/58/3f/b0/583fb01fcfd3208b2ff3a22828caa142.jpg',
 ];
 const Atmosphere = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
   return (
     <Element name='atmosphere'>
-      <section id='atmosphere' className={styles.atmosphere}>
-        <div className='container'>
+      <section id='atmosphere' className={styles.atmosphere} ref={ref}>
+        <motion.div
+          className='container'
+          variants={container}
+          initial='hidden'
+          animate={inView ? 'visible' : 'hidden'}
+        >
           <h2>Atmosphere</h2>
           <div className={styles.photos}>
             {' '}
@@ -60,7 +72,8 @@ const Atmosphere = () => {
               modules={[Pagination]}
               slidesPerView={1}
               spaceBetween={30}
-              style={{ height: '28rem' }}>
+              style={{ height: '28rem' }}
+            >
               {images.map((image, index) => (
                 <SwiperSlide key={index}>
                   <div className={styles.image}>
@@ -70,7 +83,7 @@ const Atmosphere = () => {
               ))}
             </Swiper>
           </div>
-        </div>
+        </motion.div>
       </section>
     </Element>
   );

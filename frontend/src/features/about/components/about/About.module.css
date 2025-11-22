@@ -1,7 +1,7 @@
 .about {
   width: 100%;
   height: auto;
-  background-color: var(--secondary-color);
+  background-color: var(--color-bg-1);
   padding: 5rem 2rem;
 }
 

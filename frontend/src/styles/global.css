@@ -9,20 +9,21 @@
   --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   /* Main colors */
-  --color-bg: #f7f3ee;
-  --color-bg-light: #faf8f5;
-  --color-bg-muted: #ede7df;
-  --color-accent: #dde6db;
-  --color-text: #4a4a4a;
+  --color-text: #4e4a55;
   --color-text-light: #f7f3ee;
+  --color-bg-1: #f4efea;
+  --color-bg-2: #f1ece7;
+  --color-bg-3: #ebe6e1;
 
   /* Header */
   --color-header-bg: rgb(128, 112, 135);
-  --color-header-text: #3a3a3a;
 
   /* Buttons */
-  --color-btn-default: #e7e1d8;
-  --color-btn-default-hover: #d9d1c6;
+  --color-btn-default: #ede8e2;
+  --color-btn-default-hover: #e1dad2;
+  --color-btn-accent: var(--color-header-bg);
+  --color-swiper-accent: var(--color-header-bg);
+
   --color-btn-confirm: #bfcfba;
   --color-btn-confirm-hover: #afc2aa;
   --color-btn-cancel: #d8b5b5;
@@ -39,6 +40,10 @@ body {
   font-family: var(--font-primary);
   color: var(--color-text);
   background-color: var(--color-bg);
+}
+header,
+footer {
+  color: var(--color-text-light);
 }
 h1,
 h2,
@@ -75,9 +80,9 @@ a:hover {
   align-items: center;
   flex-direction: column;
   width: 100%;
-
   margin: 0 auto;
   max-width: 1440px;
+  padding: 2rem;
 }
 .confirm-btn {
   background-color: var(--confirm-btn-color);
@@ -116,5 +121,6 @@ a:hover {
   }
   .container {
     width: 95%;
+    height: auto;
   }
 }

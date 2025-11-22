@@ -9,7 +9,7 @@
 }
 
 thead {
-  color: var(--text-color);
+  color: var(--color-text);
   font-weight: 500;
 }
 
@@ -17,19 +17,19 @@ thead th {
   padding: 12px;
   font-weight: 500;
   text-align: left;
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--color-text);
   text-transform: uppercase;
   color: var(--text-color);
 }
 
 tbody td {
   padding: 1rem;
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid var(--color-text);
   color: var(--text-color);
 }
 
 tbody tr:hover {
-  background-color: var(--secondary-color);
+  background-color: var(--color-bg-3);
 }
 .icon {
   width: auto;
@@ -39,12 +39,14 @@ tbody tr:hover {
 
 .bookBtn {
   width: 100%;
+  background-color: var(--color-header-bg);
+  color: var(--color-text-light);
 }
 .bookBtnDeact {
   cursor: not-allowed;
 }
 .bookBtn:hover {
-  color: var(--third-color);
+  background-color: var(--color-header-bg);
 }
 .cardsWrapper {
   display: flex;

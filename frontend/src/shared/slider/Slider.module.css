@@ -1,0 +1,58 @@
+.wrapper {
+  position: relative;
+}
+.wrapper :global(.swiper) {
+  padding-bottom: 3rem;
+}
+
+.wrapper :global(.swiper-pagination) {
+  bottom: 0 !important;
+  color: yellow !important;
+}
+:global(.swiper-pagination-bullet-active) {
+  background: purple !important;
+}
+
+.prev,
+.next {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: purple;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.prev {
+  left: -32px;
+}
+.next {
+  right: -32px;
+}
+.prev,
+.next {
+  visibility: visible;
+  transition: background-color 0.5s ease-in-out;
+}
+.prev:hover,
+.next:hover {
+  background-color: lightpink;
+}
+.hidden {
+  visibility: hidden;
+}
+
+@media (max-width: 900px) {
+  .next,
+  .prev {
+    display: none;
+  }
+}

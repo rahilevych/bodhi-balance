@@ -3,10 +3,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Element } from 'react-scroll';
 import styles from './YogaStyles.module.css';
-import { useFetchData } from '../../../../hooks/useFetchData';
 import { YogaStyle } from '../../../../types/Types';
-import { getAllStyles } from '../../../../services/stylesService';
-
 import { SliderCard } from '../../../../shared/ui/slider-card/SliderCard';
 import { YogaFullCard } from '../yoga-full-card/YogaFullCard';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
@@ -14,17 +11,17 @@ import { useInView } from 'react-intersection-observer';
 import { container } from '../../../../animations/landing-variannts';
 import { motion } from 'framer-motion';
 import { Slider } from '../../../../shared/ui/slider/Slider';
+import { useGetAllStyles } from '../../hooks/useGetAllStyles';
 const YogaStyles = () => {
   const { width } = useWindowSize();
   const isMobile = width < 901;
-  const { data: yogaStyles } = useFetchData<YogaStyle>({
-    fetchFunction: getAllStyles,
-  });
+  const { data: yogaStyles, isPending } = useGetAllStyles();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
+  if (isPending) return <p>is loading</p>;
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles} ref={ref}>
@@ -43,7 +40,7 @@ const YogaStyles = () => {
               {' '}
               <Slider
                 items={yogaStyles}
-                renderItem={(item) =>
+                renderItem={(item: YogaStyle) =>
                   isMobile ? (
                     <YogaFullCard currentStyle={item} />
                   ) : (

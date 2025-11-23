@@ -2,10 +2,8 @@ import styles from './ContactForm.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-
-import { sendMessage } from '../../../../services/contactService';
-import { useAppContext } from '../../../../context/AppContext';
 import Button from '../../../../shared/ui/button/Button';
+import { useSendMessage } from '../../hooks/useSendMessage';
 
 const schema = z.object({
   fullName: z.string().min(1, 'Name ist required!'),
@@ -16,7 +14,7 @@ const schema = z.object({
 export type ContactData = z.infer<typeof schema>;
 
 export const ContactForm = () => {
-  const { setNotification } = useAppContext();
+  const { mutate: sendMessage } = useSendMessage();
   const {
     register,
     handleSubmit,
@@ -26,14 +24,7 @@ export const ContactForm = () => {
     resolver: zodResolver(schema),
   });
   const onSubmit = async (data: ContactData) => {
-    try {
-      await sendMessage(data);
-      setNotification(
-        'Message sent successfully,we will contact you as soon as possible!',
-      );
-    } catch (error) {
-      setNotification('Try later, smth went wrong!');
-    }
+    sendMessage(data);
     reset();
   };
   return (

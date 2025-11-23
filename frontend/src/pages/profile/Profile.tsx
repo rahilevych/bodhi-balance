@@ -6,8 +6,9 @@ import styles from './Profile.module.css';
 import { SubscriptionSection } from '../../features/profile/components/subscription/Subscription';
 import { Bookings } from '../../features/profile/components/bookings/Bookings';
 import { Payments } from '../../features/profile/components/payments/Payments';
-import Button from '../../shared/button/Button';
+
 import { useNavigate } from 'react-router';
+import Button from '../../shared/ui/button/Button';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('Profile');
@@ -35,11 +36,9 @@ const Profile = () => {
             )}
           </div>
           <div className={styles.button}>
-            <Button
-              className={styles.btn}
-              text='Back'
-              onClick={() => navigate(-1)}
-            ></Button>
+            <Button className={styles.btn} onClick={() => navigate(-1)}>
+              Back
+            </Button>
           </div>
         </div>
       </div>

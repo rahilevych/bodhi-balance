@@ -1,4 +1,4 @@
-import Button from '../../shared/button/Button';
+import Button from '../../shared/ui/button/Button';
 import styles from './ConfirmationWindow.module.css';
 
 interface ConfirmationWindowProps {
@@ -21,20 +21,16 @@ export const ConfirmationWindow = ({
         <div className={styles['modal-buttons']}>
           <div onClick={onConfirm}>
             {' '}
-            <Button
-              text='Yes'
-              type='button'
-              className={styles['confirm-btn']}
-            />
+            <Button type='button' className={styles['confirm-btn']}>
+              Yes
+            </Button>
           </div>
 
           <div onClick={onCancel}>
             {' '}
-            <Button
-              text='Cancel'
-              type='button'
-              className={styles['cancel-btn']}
-            />
+            <Button type='button' className={styles['cancel-btn']}>
+              Cancel
+            </Button>
           </div>
         </div>
       </div>

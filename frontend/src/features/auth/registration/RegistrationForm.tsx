@@ -6,7 +6,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from '../../../context/AppContext';
 import { registerUser } from '../../../services/authService';
-import Button from '../../../shared/button/Button';
+import Button from '../../../shared/ui/button/Button';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),
@@ -49,7 +49,9 @@ export const RegistrationForm = () => {
       {errors.email && <p>{errors.email.message}</p>}
       <input type='password' {...register('password')} placeholder='Password' />
       {errors.password && <p>{errors.password.message}</p>}{' '}
-      <Button text='Sign up' type='submit' className={styles.btn} />
+      <Button type='submit' className={styles.btn}>
+        Sign up
+      </Button>
       {serverError && <p className={styles.error}>{serverError}</p>}
     </form>
   );

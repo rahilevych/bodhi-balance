@@ -9,8 +9,9 @@ import {
   getEndTime,
   getTimeFromDate,
 } from '../../../../utils/dateHelpers';
-import Button from '../../../../shared/button/Button';
+
 import { useCheckout } from '../../../../hooks/useCheckout';
+import Button from '../../../../shared/ui/button/Button';
 
 interface TrainingDetailedProps {
   id: string;
@@ -71,10 +72,9 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
                 <p>Price:</p>
                 {training?.price} $
               </div>
-              <Button
-                text='Book'
-                onClick={() => handleBookBtn(training._id, type)}
-              />
+              <Button onClick={() => handleBookBtn(training._id, type)}>
+                Back
+              </Button>
             </div>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { ConfirmationWindow } from '../../styles/modal/ConfirmationWindow';
 import { logout } from '../../services/authService';
 import { useAppContext } from '../../context/AppContext';
 import { useState } from 'react';
-import Button from '../../shared/button/Button';
+import Button from '../../shared/ui/button/Button';
 
 const LogoutButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

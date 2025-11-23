@@ -6,12 +6,13 @@ import { Element } from 'react-scroll';
 import { Trainer } from '../../../../types/Types';
 import { getAllTrainers } from '../../../../services/trainerService';
 import { useFetchData } from '../../../../hooks/useFetchData';
-import { Slider } from '../../../../shared/slider/Slider';
-import { SliderCard } from '../../../../shared/slider-card/SliderCard';
+
+import { SliderCard } from '../../../../shared/ui/slider-card/SliderCard';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { container } from '../../../../animations/landing-variannts';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import { Slider } from '../../../../shared/ui/slider/Slider';
 const Trainers = () => {
   const { data: trainers } = useFetchData<Trainer>({
     fetchFunction: getAllTrainers,

@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
-import { useClickOutside } from '../../hooks/useClickOutside';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Dropdown.module.css';
+import { useClickOutside } from '../../../hooks/useClickOutside';
 interface subSection {
   name: string;
   link: string;

@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { cancelBooking } from '../../../../services/bookingsService';
+
 import { Booking } from '../../../../types/Types';
 import { convertDateToString } from '../../../../utils/dateHelpers';
-import Button from '../../../../shared/button/Button';
+
 import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
 import styles from './BookingsCard.module.css';
+import Button from '../../../../shared/ui/button/Button';
 interface BookingsCardProps {
   booking: Booking;
   handleCancel: (bookingId: string, trainingId: string) => void;
@@ -35,9 +36,7 @@ export const BookingsCard = ({ booking, handleCancel }: BookingsCardProps) => {
           24 * 60 * 60 * 1000 ? (
           <>
             {' '}
-            <Button text='Cancel' onClick={() => setIsModalOpen(true)}>
-              Cancel
-            </Button>{' '}
+            <Button onClick={() => setIsModalOpen(true)}>Cancel</Button>{' '}
             <ConfirmationWindow
               isOpen={isModalOpen}
               message='Are you sure you want to cancel?'

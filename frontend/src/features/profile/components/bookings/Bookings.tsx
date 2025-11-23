@@ -8,11 +8,12 @@ import { Booking } from '../../../../types/Types';
 import { convertDateToString } from '../../../../utils/dateHelpers';
 import styles from './Bookings.module.css';
 import { BookingsCard } from '../booking-card/BookingsCard';
-import Button from '../../../../shared/button/Button';
+
 import { useFetchData } from '../../../../hooks/useFetchData';
 import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
 import { filterBookings } from '../../../../utils/filterBookings';
 import { BounceLoader } from 'react-spinners';
+import Button from '../../../../shared/ui/button/Button';
 
 export const Bookings = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -133,10 +134,9 @@ export const Bookings = () => {
                         now.getTime() >
                         24 * 60 * 60 * 1000 ? (
                         <>
-                          <Button
-                            text='Cancel'
-                            onClick={() => setIsModalOpen(true)}
-                          />
+                          <Button onClick={() => setIsModalOpen(true)}>
+                            Cancel
+                          </Button>
                           <ConfirmationWindow
                             isOpen={isModalOpen}
                             message='Are you sure you want to cancel?'

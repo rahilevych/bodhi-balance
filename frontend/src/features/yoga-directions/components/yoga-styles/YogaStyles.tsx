@@ -6,13 +6,14 @@ import styles from './YogaStyles.module.css';
 import { useFetchData } from '../../../../hooks/useFetchData';
 import { YogaStyle } from '../../../../types/Types';
 import { getAllStyles } from '../../../../services/stylesService';
-import { Slider } from '../../../../shared/slider/Slider';
-import { SliderCard } from '../../../../shared/slider-card/SliderCard';
+
+import { SliderCard } from '../../../../shared/ui/slider-card/SliderCard';
 import { YogaFullCard } from '../yoga-full-card/YogaFullCard';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { useInView } from 'react-intersection-observer';
 import { container } from '../../../../animations/landing-variannts';
 import { motion } from 'framer-motion';
+import { Slider } from '../../../../shared/ui/slider/Slider';
 const YogaStyles = () => {
   const { width } = useWindowSize();
   const isMobile = width < 901;

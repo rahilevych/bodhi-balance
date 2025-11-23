@@ -1,5 +1,4 @@
 import styles from './ScheduleTable.module.css';
-import Button from '../../../../shared/button/Button';
 
 import { Training } from '../../../../types/Types';
 import { getTimeFromDate } from '../../../../utils/dateHelpers';
@@ -7,6 +6,7 @@ import { useNavigate } from 'react-router';
 import { useAppContext } from '../../../../context/AppContext';
 import { useEffect, useState } from 'react';
 import { ScheduleCard } from '../schedule-card/ScheduleCard';
+import Button from '../../../../shared/ui/button/Button';
 
 interface Props {
   trainings: Training[] | null;

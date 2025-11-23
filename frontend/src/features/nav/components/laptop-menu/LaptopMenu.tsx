@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { sectionsList } from '../../../../constants/sections';
-import { Dropdown } from '../../../../shared/dropdown/Dropdown';
+
 import styles from './LaptopMenu.module.css';
 import { useAppContext } from '../../../../context/AppContext';
 import { useLocation, useNavigate } from 'react-router';
 import { scroller } from 'react-scroll';
-import Button from '../../../../shared/button/Button';
+
 import LogoutButton from '../../../auth/LogoutButton';
+import { Dropdown } from '../../../../shared/ui/dropdown/Dropdown';
+import Button from '../../../../shared/ui/button/Button';
 
 export const LaptopMenu = () => {
   const [, setIsMenuOpen] = useState(false);

@@ -1,12 +1,13 @@
 import { z } from 'zod';
 import styles from '../Form.module.css';
-import Button from '../../../shared/button/Button';
+
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import axios from 'axios';
 import { useAppContext } from '../../../context/AppContext';
 import { loginUser } from '../../../services/authService';
+import Button from '../../../shared/ui/button/Button';
 
 const schema = z.object({
   email: z.string().min(1, 'Email is required!').email('Invalid email format'),
@@ -49,7 +50,10 @@ export const LoginForm = () => {
       {errors.email && <p>{errors.email.message}</p>}
       <input type='password' {...register('password')} placeholder='Password' />
       {errors.password && <p>{errors.password.message}</p>}{' '}
-      <Button text='Sign in' type='submit' className={styles.btn} />
+      <Button type='submit' className={styles.btn}>
+        {' '}
+        Sign in
+      </Button>
       {serverError && <p className={styles.error}>{serverError}</p>}
     </form>
   );

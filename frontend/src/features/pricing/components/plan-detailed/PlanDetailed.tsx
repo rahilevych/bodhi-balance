@@ -1,8 +1,9 @@
 import { useCheckout } from '../../../../hooks/useCheckout';
 import { useFetchDataWithParam } from '../../../../hooks/useFetchDataWithParam';
 import { getPlanById } from '../../../../services/planService';
+import Button from '../../../../shared/ui/button/Button';
 import { Plan } from '../../../../types/Types';
-import Button from '../../../../shared/button/Button';
+
 import styles from './PlanDetailed.module.css';
 
 interface PlanDetailedProps {
@@ -33,7 +34,7 @@ export const PlanDetailed = ({ id }: PlanDetailedProps) => {
                 <p>Price:</p>
                 {plan?.price} $
               </div>
-              <Button text='Buy' onClick={() => handleBuyBtn(plan._id, type)} />
+              <Button onClick={() => handleBuyBtn(plan._id, type)}>Buy</Button>
             </div>
           </div>
         </div>

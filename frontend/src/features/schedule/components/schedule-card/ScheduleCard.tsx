@@ -1,5 +1,6 @@
 import { useAppContext } from '../../../../context/AppContext';
-import Button from '../../../../shared/button/Button';
+import Button from '../../../../shared/ui/button/Button';
+
 import { Training } from '../../../../types/Types';
 import { getTimeFromDate } from '../../../../utils/dateHelpers';
 import styles from './ScheduleCard.module.css';

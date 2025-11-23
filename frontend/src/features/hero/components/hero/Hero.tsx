@@ -1,10 +1,11 @@
 import { Element, Link } from 'react-scroll';
-import Button from '../../../../shared/button/Button';
+
 import styles from './Hero.module.css';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { container } from '../../../../animations/landing-variannts';
+import Button from '../../../../shared/ui/button/Button';
 
 const Hero = () => {
   const { width } = useWindowSize();

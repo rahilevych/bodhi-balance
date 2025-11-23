@@ -5,7 +5,8 @@ import styles from './PricingCard.module.css';
 import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { Plan } from '../../../../types/Types';
-import Button from '../../../../shared/button/Button';
+import Button from '../../../../shared/ui/button/Button';
+
 interface Props {
   type: string;
   plans: Plan[];

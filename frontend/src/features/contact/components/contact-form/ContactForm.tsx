@@ -2,9 +2,10 @@ import styles from './ContactForm.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import Button from '../../../../shared/button/Button';
+
 import { sendMessage } from '../../../../services/contactService';
 import { useAppContext } from '../../../../context/AppContext';
+import Button from '../../../../shared/ui/button/Button';
 
 const schema = z.object({
   fullName: z.string().min(1, 'Name ist required!'),

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Button from '../../../../shared/button/Button';
+
 import styles from './PersonalData.module.css';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -9,6 +9,7 @@ import { deleteUser, updateUser } from '../../../../services/userService';
 import { useNavigate } from 'react-router';
 import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
 import { BounceLoader } from 'react-spinners';
+import Button from '../../../../shared/ui/button/Button';
 
 const schema = z.object({
   name: z.string().min(3, 'Name must be at least 3 symbols'),
@@ -111,18 +112,17 @@ export const PersonalData = () => {
             <strong>Address:</strong> {user?.address || 'not provided'}
           </p>
           <div className={styles.btns}>
-            <Button
-              text='Edit'
-              className={styles.btn}
-              onClick={() => setIsEditing(true)}
-            />
+            <Button className={styles.btn} onClick={() => setIsEditing(true)}>
+              Edit
+            </Button>
             <>
               {' '}
               <Button
-                text='Delete'
                 className={styles.delete}
                 onClick={() => setIsModalOpen(true)}
-              />
+              >
+                Delete
+              </Button>
               <ConfirmationWindow
                 isOpen={isModalOpen}
                 message='Are you sure you want to delete your account?'
@@ -203,12 +203,15 @@ export const PersonalData = () => {
             <div className={styles.buttons}>
               {' '}
               <Button
-                text='Cancel'
                 type='button'
                 className={styles.cancel}
                 onClick={() => setIsEditing(false)}
-              />
-              <Button text='Save' type='submit' className={styles.confirm} />
+              >
+                Cancel
+              </Button>
+              <Button type='submit' className={styles.confirm}>
+                Save
+              </Button>
             </div>
           </form>
         </div>

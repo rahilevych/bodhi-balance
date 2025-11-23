@@ -4,8 +4,9 @@ import { MenuItem } from '../menu-item/MenuItem';
 import styles from './Navigation.module.css';
 import { motion, stagger } from 'framer-motion';
 import { useAppContext } from '../../../../context/AppContext';
-import Button from '../../../button/Button';
+
 import LogoutButton from '../../../../features/auth/LogoutButton';
+import Button from '../../../../shared/ui/button/Button';
 const navVariants = {
   open: {
     transition: { delayChildren: stagger(0.07, { startDelay: 0.2 }) },

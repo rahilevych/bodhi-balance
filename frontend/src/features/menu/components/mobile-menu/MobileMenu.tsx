@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import styles from './Menu.module.css';
+import styles from './MobileMenu.module.css';
 import { motion, Variants } from 'framer-motion';
 import { useDimensions } from '../../hooks/useDimensions';
 import { Navigation } from '../../ui/navigation/Navigation';
-import { MenuToggle } from '../../../mobile-menu/ui/menu-toggle/MenuToggle';
+import { MenuToggle } from '../../ui/menu-toggle/MenuToggle';
 
 const sidebarVariants: Variants = {
   open: (height = 1000) => ({

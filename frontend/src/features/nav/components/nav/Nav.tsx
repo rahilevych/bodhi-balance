@@ -1,8 +1,7 @@
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { Logo } from '../../../../shared/ui/logo/Logo';
+import { LaptopMenu } from '../../../menu/components/laptop-menu/LaptopMenu';
 import { MobileMenu } from '../../../menu/components/mobile-menu/MobileMenu';
-
-import { LaptopMenu } from '../laptop-menu/LaptopMenu';
 
 import styles from './Nav.module.css';
 

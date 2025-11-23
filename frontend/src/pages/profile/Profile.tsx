@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ProfileHeader } from '../../layouts/header/components/profile-header/ProfileHeader';
-import { ProfileNav } from '../../features/nav/profile-nav/ProfileNav';
+import { ProfileNav } from '../../features/nav/components/profile-nav/ProfileNav';
 import { PersonalData } from '../../features/profile/components/personal-data/PersonalData';
 import styles from './Profile.module.css';
 import { SubscriptionSection } from '../../features/profile/components/subscription/Subscription';

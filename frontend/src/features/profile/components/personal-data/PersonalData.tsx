@@ -1,92 +1,19 @@
 import { useState } from 'react';
-
 import styles from './PersonalData.module.css';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useAppContext } from '../../../../context/AppContext';
-import { deleteUser, updateUser } from '../../../../services/userService';
 import { useNavigate } from 'react-router';
 import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
-import { BounceLoader } from 'react-spinners';
-import Button from '../../../../shared/ui/button/Button';
+import { useProfile } from '../../../auth/hooks/useProfile';
+import { useDeleteUser } from '../../hooks/useDeleteUser';
+import { PersonalDataForm } from '../personal-data-form/PersonalDataForm';
+import { DeleteBtn } from '../../ui/delete-btn/DeleteBtn';
+import { EditBtn } from '../../ui/edit-btn/EditBtn';
 
-const schema = z.object({
-  name: z.string().min(3, 'Name must be at least 3 symbols'),
-  email: z.string().email('Invalid email format'),
-  phone: z
-    .string()
-    .optional()
-    .refine((val) => !val || /^[0-9()+\- ]+$/.test(val), {
-      message: 'Invalid phone number',
-    }),
-  address: z.string().optional(),
-});
-
-export type UserFormData = z.infer<typeof schema>;
 export const PersonalData = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const { user, setUser, setNotification, setIsAuthenticated, color } =
-    useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: zodResolver(schema),
-  });
-
-  const onSubmit = async (data: UserFormData) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const updatedUser = user && (await updateUser(data, user?._id));
-      setUser(updatedUser);
-      setIsEditing(false);
-    } catch (error) {
-      console.error(error);
-      setError('Failed to update user. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleDeleteUser = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const res = await deleteUser();
-      setNotification(res);
-      setUser(null);
-      setIsAuthenticated(false);
-      navigate('/');
-    } catch (error) {
-      setNotification('Something went wrong. Please try again!');
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  if (isLoading) {
-    return (
-      <div className={styles.centered}>
-        <BounceLoader data-testid='loader' color={color} loading={isLoading} />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.centered}>
-        Something went wrong. Please try again later.
-      </div>
-    );
-  }
+  const { data: user } = useProfile();
+  const { mutate: deleteUser } = useDeleteUser();
 
   return (
     <div className={styles.data}>
@@ -112,109 +39,22 @@ export const PersonalData = () => {
             <strong>Address:</strong> {user?.address || 'not provided'}
           </p>
           <div className={styles.btns}>
-            <Button className={styles.btn} onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
-            <>
-              {' '}
-              <Button
-                className={styles.delete}
-                onClick={() => setIsModalOpen(true)}
-              >
-                Delete
-              </Button>
-              <ConfirmationWindow
-                isOpen={isModalOpen}
-                message='Are you sure you want to delete your account?'
-                onConfirm={() => {
-                  setIsModalOpen(false);
-                  handleDeleteUser();
-                }}
-                onCancel={() => setIsModalOpen(false)}
-              />{' '}
-            </>
+            <EditBtn onEdit={setIsEditing} />
+            <DeleteBtn onClick={setIsModalOpen} />
+            <ConfirmationWindow
+              isOpen={isModalOpen}
+              message='Are you sure you want to delete your account?'
+              onConfirm={() => {
+                setIsModalOpen(false);
+                deleteUser();
+                navigate('/');
+              }}
+              onCancel={() => setIsModalOpen(false)}
+            />
           </div>
         </div>
       ) : (
-        <div className={styles.info}>
-          <form
-            data-testid='form'
-            className={styles.form}
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className={styles.fields}>
-              <label>
-                <p>
-                  <strong>Full Name:</strong>
-                </p>
-                <input
-                  {...register('name')}
-                  placeholder='Full Name'
-                  defaultValue={user?.name}
-                />
-              </label>
-              {errors.name && (
-                <p className={styles.error}>{errors.name.message}</p>
-              )}
-              <label>
-                <p>
-                  <strong>Email:</strong>
-                </p>
-                <input
-                  {...register('email')}
-                  placeholder='Email'
-                  disabled
-                  defaultValue={user?.email}
-                />
-              </label>
-
-              {errors.email && (
-                <p className={styles.error}>{errors.email.message}</p>
-              )}
-              <label>
-                <p>
-                  <strong>Phone:</strong>
-                </p>
-                <input
-                  {...register('phone')}
-                  placeholder='Phone (optional)'
-                  defaultValue={user?.phone || ''}
-                />
-              </label>
-              {errors.phone && (
-                <p className={styles.error}>{errors.phone.message}</p>
-              )}
-              <label>
-                <p>
-                  <strong>Address:</strong>
-                </p>
-                <input
-                  {...register('address')}
-                  placeholder='Address (optional)'
-                  defaultValue={user?.address || ''}
-                />
-              </label>
-
-              {errors.address && (
-                <p className={styles.error}>{errors.address.message}</p>
-              )}
-            </div>
-
-            <div className={styles.buttons}>
-              {' '}
-              <Button
-                type='button'
-                className={styles.cancel}
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </Button>
-              <Button type='submit' className={styles.confirm}>
-                Save
-              </Button>
-            </div>
-          </form>
-        </div>
+        <PersonalDataForm onEditing={setIsEditing} />
       )}
     </div>
   );

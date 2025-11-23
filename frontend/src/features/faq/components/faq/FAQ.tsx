@@ -1,9 +1,7 @@
 import { Element } from 'react-scroll';
 import styles from './FAQ.module.css';
 import { QuestionType } from '../../../../types/Types';
-import { getAllFAQ } from '../../../../services/questionService';
 import { Question } from '../question/Question';
-import { useFetchData } from '../../../../hooks/useFetchData';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import {
@@ -11,11 +9,10 @@ import {
   item,
   staggerContainer,
 } from '../../../../animations/landing-variannts';
+import { useGetQuestions } from '../../hooks/useGetQuestions';
 
 const FAQ = () => {
-  const { data: questions } = useFetchData<QuestionType>({
-    fetchFunction: getAllFAQ,
-  });
+  const { data: questions } = useGetQuestions();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -37,18 +34,19 @@ const FAQ = () => {
             animate={inView ? 'visible' : 'hidden'}
           >
             <ul className={styles.questions}>
-              {questions.map((question, index) => (
-                <motion.li variants={item} key={index}>
-                  <Question
-                    question={question.question}
-                    answer={question.answer}
-                  />
-                </motion.li>
-              ))}
+              {questions &&
+                questions.map((question: QuestionType, index: number) => (
+                  <motion.li variants={item} key={index}>
+                    <Question
+                      question={question.question}
+                      answer={question.answer}
+                    />
+                  </motion.li>
+                ))}
             </ul>
             <motion.div className={styles.image} variants={item}>
               <img
-                src='https://i.pinimg.com/736x/23/4c/79/234c7989811ee5f64dc9c31471770537.jpg'
+                src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=799&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                 alt=''
               />
             </motion.div>

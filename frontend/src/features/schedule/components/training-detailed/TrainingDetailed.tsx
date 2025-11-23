@@ -19,11 +19,7 @@ interface TrainingDetailedProps {
 export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const { startCheckout } = useCheckout();
   const type = 'training';
-  const {
-    data: training,
-    loading,
-    error,
-  } = useFetchDataWithParam<Training, string>({
+  const { data: training } = useFetchDataWithParam<Training, string>({
     fetchFunction: getTrainingById,
     param: id?.toString(),
   });
@@ -73,7 +69,7 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
                 {training?.price} $
               </div>
               <Button onClick={() => handleBookBtn(training._id, type)}>
-                Back
+                Book
               </Button>
             </div>
           </div>

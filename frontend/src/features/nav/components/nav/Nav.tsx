@@ -1,6 +1,6 @@
 import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { Logo } from '../../../../shared/ui/logo/Logo';
-import { Menu } from '../../../mobile-menu/components/menu/Menu';
+import { MobileMenu } from '../../../menu/components/mobile-menu/MobileMenu';
 
 import { LaptopMenu } from '../laptop-menu/LaptopMenu';
 
@@ -14,7 +14,7 @@ const Nav = () => {
     <section className={styles.nav}>
       <div className={`container  ${styles.container}`}>
         <Logo />
-        {isMobile ? <Menu /> : <LaptopMenu />}
+        {isMobile ? <MobileMenu /> : <LaptopMenu />}
       </div>
     </section>
   );

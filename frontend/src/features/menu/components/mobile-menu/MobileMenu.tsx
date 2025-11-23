@@ -3,7 +3,7 @@ import styles from './Menu.module.css';
 import { motion, Variants } from 'framer-motion';
 import { useDimensions } from '../../hooks/useDimensions';
 import { Navigation } from '../../ui/navigation/Navigation';
-import { MenuToggle } from '../../ui/menu-toggle/MenuToggle';
+import { MenuToggle } from '../../../mobile-menu/ui/menu-toggle/MenuToggle';
 
 const sidebarVariants: Variants = {
   open: (height = 1000) => ({
@@ -24,7 +24,7 @@ const sidebarVariants: Variants = {
     },
   },
 };
-export const Menu = () => {
+export const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const { height } = useDimensions(containerRef);

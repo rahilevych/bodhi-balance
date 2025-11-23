@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { ProfileNav } from '../profile-nav/ProfileNav';
+import { ProfileNav } from '../components/profile-nav/ProfileNav';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 

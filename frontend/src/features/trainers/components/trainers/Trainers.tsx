@@ -1,11 +1,9 @@
 import 'swiper/swiper-bundle.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './Trainers.module.css';
 import { FullCard } from '../full-card/FullCard';
 import { Element } from 'react-scroll';
 import { Trainer } from '../../../../types/Types';
-import { getAllTrainers } from '../../../../services/trainerService';
-import { useFetchData } from '../../../../hooks/useFetchData';
 
 import { SliderCard } from '../../../../shared/ui/slider-card/SliderCard';
 import { useWindowSize } from '../../../../hooks/useWindowSize';
@@ -13,10 +11,9 @@ import { container } from '../../../../animations/landing-variannts';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Slider } from '../../../../shared/ui/slider/Slider';
+import { useGetTrainers } from '../../hooks/useGetTrainers';
 const Trainers = () => {
-  const { data: trainers } = useFetchData<Trainer>({
-    fetchFunction: getAllTrainers,
-  });
+  const { data: trainers, isPending } = useGetTrainers();
   const [currentTrainer, setCurrentTrainer] = useState<Trainer | null>();
   const { width } = useWindowSize();
   const isMobile = width < 901;
@@ -24,11 +21,7 @@ const Trainers = () => {
     triggerOnce: true,
     threshold: 0.2,
   });
-  useEffect(() => {
-    if (trainers && trainers.length > 0 && !currentTrainer) {
-      setCurrentTrainer(trainers[0]);
-    }
-  }, [trainers]);
+  if (isPending) return <p>loading</p>;
 
   return (
     <Element name={'trainers'}>
@@ -49,16 +42,18 @@ const Trainers = () => {
             </div>
             <div className={styles.slider}>
               {' '}
-              <Slider
-                items={trainers}
-                renderItem={(item) =>
-                  isMobile ? (
-                    <FullCard currentTrainer={item} />
-                  ) : (
-                    <SliderCard img={item.photo} title={item.fullName} />
-                  )
-                }
-              />
+              {
+                <Slider
+                  items={trainers}
+                  renderItem={(item: Trainer) =>
+                    isMobile ? (
+                      <FullCard currentTrainer={item} />
+                    ) : (
+                      <SliderCard img={item.photo} title={item.fullName} />
+                    )
+                  }
+                />
+              }
             </div>
           </div>
         </motion.div>

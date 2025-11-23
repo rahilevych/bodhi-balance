@@ -2,11 +2,9 @@ import { z } from 'zod';
 import styles from '../Form.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import axios from 'axios';
-import { useAppContext } from '../../../context/AppContext';
-import { registerUser } from '../../../services/authService';
-import Button from '../../../shared/ui/button/Button';
+import Button from '../../../../shared/ui/button/Button';
+import { useRegistration } from '../../hooks/useRegistration';
+import { useAppContext } from '../../../../context/AppContext';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),
@@ -15,10 +13,9 @@ const schema = z.object({
 });
 
 export type RegisterFormData = z.infer<typeof schema>;
-
 export const RegistrationForm = () => {
-  const [serverError, setServerError] = useState<string | null>(null);
-  const { setNotification } = useAppContext();
+  const { mutate: registeration } = useRegistration();
+  const { closeModal } = useAppContext();
   const {
     register,
     handleSubmit,
@@ -27,18 +24,8 @@ export const RegistrationForm = () => {
     resolver: zodResolver(schema),
   });
   const onSubmit = async (data: RegisterFormData) => {
-    setServerError(null);
-    try {
-      await registerUser(data);
-      setNotification('Successfully registered!');
-    } catch (error: any) {
-      setNotification('Registration failed!');
-      if (axios.isAxiosError(error)) {
-        setServerError(error.response?.data?.error || 'Server error');
-      } else {
-        setServerError('Unknown error');
-      }
-    }
+    registeration(data);
+    closeModal();
   };
 
   return (
@@ -52,7 +39,6 @@ export const RegistrationForm = () => {
       <Button type='submit' className={styles.btn}>
         Sign up
       </Button>
-      {serverError && <p className={styles.error}>{serverError}</p>}
     </form>
   );
 };

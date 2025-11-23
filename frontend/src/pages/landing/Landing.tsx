@@ -8,7 +8,7 @@ import { Pricing } from '../../features/pricing/components/pricing/Pricing';
 import Schedule from '../../features/schedule/components/schedule/Schedule';
 
 import { useAppContext } from '../../context/AppContext';
-import { Authorization } from '../../features/auth/Authorization';
+import { Authorization } from '../../features/auth/components/Authorization';
 import styles from './Landing.module.css';
 import Trainers from '../../features/trainers/components/trainers/Trainers';
 import { useLocation } from 'react-router';

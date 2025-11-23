@@ -6,13 +6,15 @@ import { useAppContext } from '../../../../context/AppContext';
 import { useLocation, useNavigate } from 'react-router';
 import { scroller } from 'react-scroll';
 
-import LogoutButton from '../../../auth/LogoutButton';
+import LogoutButton from '../../../auth/ui/logout-btn/LogoutButton';
 import { Dropdown } from '../../../../shared/ui/dropdown/Dropdown';
 import Button from '../../../../shared/ui/button/Button';
+import { useProfile } from '../../../auth/hooks/useProfile';
 
 export const LaptopMenu = () => {
+  const { data: user } = useProfile();
   const [, setIsMenuOpen] = useState(false);
-  const { openModal, isAuthenticated } = useAppContext();
+  const { openModal } = useAppContext();
   const navigate = useNavigate();
   const location = useLocation();
   const handleSectionClick = (sectionLink: string) => {
@@ -38,7 +40,7 @@ export const LaptopMenu = () => {
           />
         ))}
       </div>
-      {isAuthenticated ? (
+      {user ? (
         <div className={styles.buttons}>
           {' '}
           <div

@@ -1,13 +1,10 @@
 import { z } from 'zod';
 import styles from '../Form.module.css';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import axios from 'axios';
-import { useAppContext } from '../../../context/AppContext';
-import { loginUser } from '../../../services/authService';
-import Button from '../../../shared/ui/button/Button';
+import Button from '../../../../shared/ui/button/Button';
+import { useLogin } from '../../hooks/useLogin';
+import { useAppContext } from '../../../../context/AppContext';
 
 const schema = z.object({
   email: z.string().min(1, 'Email is required!').email('Invalid email format'),
@@ -17,8 +14,9 @@ const schema = z.object({
 export type LoginFormData = z.infer<typeof schema>;
 
 export const LoginForm = () => {
-  const { setUser, setIsAuthenticated, setNotification } = useAppContext();
-  const [serverError, setServerError] = useState<string | null>(null);
+  const { closeModal } = useAppContext();
+
+  const { mutate: login } = useLogin();
   const {
     register,
     handleSubmit,
@@ -28,20 +26,8 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    setServerError(null);
-    try {
-      const result = await loginUser(data);
-      setUser(result);
-      setIsAuthenticated(true);
-      setNotification('Successfully logged in!');
-    } catch (error: any) {
-      if (axios.isAxiosError(error)) {
-        setServerError(error.response?.data?.error || 'Server error');
-      } else {
-        setServerError('Unknown error');
-      }
-      setNotification('Login failed!');
-    }
+    login(data);
+    closeModal();
   };
 
   return (
@@ -54,7 +40,6 @@ export const LoginForm = () => {
         {' '}
         Sign in
       </Button>
-      {serverError && <p className={styles.error}>{serverError}</p>}
     </form>
   );
 };

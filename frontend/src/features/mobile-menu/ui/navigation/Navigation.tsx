@@ -4,9 +4,9 @@ import { MenuItem } from '../menu-item/MenuItem';
 import styles from './Navigation.module.css';
 import { motion, stagger } from 'framer-motion';
 import { useAppContext } from '../../../../context/AppContext';
-
-import LogoutButton from '../../../../features/auth/LogoutButton';
+import LogoutButton from '../../../auth/ui/logout-btn/LogoutButton';
 import Button from '../../../../shared/ui/button/Button';
+import { useProfile } from '../../../auth/hooks/useProfile';
 const navVariants = {
   open: {
     transition: { delayChildren: stagger(0.07, { startDelay: 0.2 }) },
@@ -32,7 +32,8 @@ interface NavigationProps {
 export const Navigation = ({ setIsOpen }: NavigationProps) => {
   const allSubSections = sectionsList.flatMap((section) => section.subSections);
   const navigate = useNavigate();
-  const { openModal, isAuthenticated } = useAppContext();
+  const { openModal } = useAppContext();
+  const { data: user } = useProfile();
   return (
     <div className={styles.nav}>
       {' '}
@@ -42,7 +43,7 @@ export const Navigation = ({ setIsOpen }: NavigationProps) => {
         ))}
       </motion.ul>
       <motion.div variants={buttonsVariants} className={styles.buttons}>
-        {isAuthenticated ? (
+        {user ? (
           <div className={styles.buttons}>
             <div onClick={() => navigate('/profile')} className={styles.btn}>
               <Button>Profile</Button>

@@ -38,8 +38,8 @@ export const Dropdown = ({
               transition={{ duration: 0.3 }}
               className={styles.dropdownMenu}
             >
-              {subSections.map((sub) => (
-                <li key={sub.link}>
+              {subSections.map((sub, index) => (
+                <li key={index}>
                   <span
                     className={styles.sublink}
                     onClick={() => onSelect?.(sub.link)}

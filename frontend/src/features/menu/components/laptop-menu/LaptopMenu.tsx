@@ -32,8 +32,9 @@ export const LaptopMenu = () => {
     <div className={styles.menu}>
       <div className={styles.links}>
         {' '}
-        {sectionsList.map((section) => (
+        {sectionsList.map((section, index) => (
           <Dropdown
+            key={index}
             title={section.name}
             subSections={section.subSections}
             onSelect={handleSectionClick}

@@ -114,7 +114,7 @@ describe('Bookings', () => {
     (cancelBooking as jest.Mock).mockReturnValue({ undefined });
     render(<Bookings />);
     const cancelBtn = screen.getByRole('button', { name: /cancel/i });
-    expect(cancelBtn).toBeInTheDocument;
+    expect(cancelBtn).toBeInTheDocument();
     await user.click(cancelBtn);
     expect(
       screen.getByText(/Are you sure you want to cancel?/i),
@@ -127,7 +127,7 @@ describe('Bookings', () => {
     (cancelBooking as jest.Mock).mockReturnValue({ undefined });
     render(<Bookings />);
     const cancelBtn = screen.getByRole('button', { name: /cancel/i });
-    expect(cancelBtn).toBeInTheDocument;
+    expect(cancelBtn).toBeInTheDocument();
     await user.click(cancelBtn);
     const confirmationWindow = screen.getByTestId('confirm-window');
     expect(

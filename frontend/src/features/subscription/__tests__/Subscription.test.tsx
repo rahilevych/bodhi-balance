@@ -1,4 +1,4 @@
-import { SubscriptionSection } from '../components/subscription/Subscription';
+import { SubscriptionSection } from '../../subscription/components/subscription/Subscription';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { useAppContext } from '../../../context/AppContext';

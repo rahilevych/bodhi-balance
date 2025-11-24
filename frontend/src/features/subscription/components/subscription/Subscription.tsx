@@ -1,37 +1,10 @@
-import { BounceLoader } from 'react-spinners';
-import { useAppContext } from '../../../../context/AppContext';
-import { useFetchDataWithParam } from '../../../../hooks/useFetchDataWithParam';
-import { getSubscriptionByUserId } from '../../../../services/subscriptionService';
-import { Subscription } from '../../../../types/Types';
 import { convertDateToString } from '../../../../utils/dateHelpers';
 import styles from './Subscription.module.css';
+import { useGetSubscription } from '../../hooks/useGetSubscription';
 
 export const SubscriptionSection = () => {
-  const { user, color } = useAppContext();
-  const {
-    data: subscription,
-    loading,
-    error,
-  } = useFetchDataWithParam<Subscription, string>({
-    fetchFunction: getSubscriptionByUserId,
-    param: user?._id,
-  });
-
-  if (loading) {
-    return (
-      <div className={styles.centered}>
-        <BounceLoader data-testid='loader' color={color} loading={loading} />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.centered}>
-        Failed to load subscription. Please try again later.
-      </div>
-    );
-  }
+  const { data: subscription, isPending } = useGetSubscription();
+  if (isPending) return <p>loading</p>;
 
   if (!subscription || Array.isArray(subscription)) {
     return (

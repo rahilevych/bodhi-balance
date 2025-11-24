@@ -1,15 +1,14 @@
-import { useAppContext } from '../../../../context/AppContext';
 import Button from '../../../../shared/ui/button/Button';
-
-import { Training } from '../../../../types/Types';
+import { Booking, Training } from '../../../../types/Types';
 import { getTimeFromDate } from '../../../../utils/dateHelpers';
+import { useProfile } from '../../../auth/hooks/useProfile';
 import styles from './ScheduleCard.module.css';
 interface Props {
   item: Training;
   onClick: (id: string) => void;
 }
 export const ScheduleCard = ({ item, onClick }: Props) => {
-  const { user } = useAppContext();
+  const { data: user } = useProfile();
   const now = new Date();
   return (
     <div className={styles.card}>
@@ -36,7 +35,7 @@ export const ScheduleCard = ({ item, onClick }: Props) => {
         item.spots_taken === item.spots_total ? (
           <p>Booking closed</p>
         ) : user?.bookings.some(
-            (booking) =>
+            (booking: Booking) =>
               booking.training &&
               booking.status === 'booked' &&
               booking.training._id.toString() === item._id.toString(),

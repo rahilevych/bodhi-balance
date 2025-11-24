@@ -1,36 +1,22 @@
-import { CSSProperties, useState } from 'react';
+import { useState } from 'react';
 import styles from './Schedule.module.css';
 import { Element } from 'react-scroll';
 import ScheduleTable from '../schedule-table/ScheduleTable';
-import { Training } from '../../../../types/Types';
-import { getAllTrainingForDay } from '../../../../services/scheduleService';
 import { getNext7Days } from '../../../../utils/dateHelpers';
-import { useAppContext } from '../../../../context/AppContext';
-import { BounceLoader } from 'react-spinners';
-import { useFetchDataWithParam } from '../../../../hooks/useFetchDataWithParam';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { container } from '../../../../animations/landing-variannts';
+import { useGetTrainingsDay } from '../../hooks/useGetTrainingDay';
+
 const Schedule = () => {
   const today = new Date();
   const [day, setDay] = useState<Date>(today);
-  const {
-    data: trainings,
-    loading,
-    error,
-  } = useFetchDataWithParam<Training, Date>({
-    fetchFunction: getAllTrainingForDay,
-    param: day,
-  });
-  const { color } = useAppContext();
-
-  const override: CSSProperties = {
-    margin: '3rem',
-  };
+  const { data: trainings, isPending } = useGetTrainingsDay(day);
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
+  if (isPending) return <p>loading</p>;
   return (
     <Element name='schedule'>
       <section id='schedule' className={styles.schedule} ref={ref}>
@@ -41,7 +27,6 @@ const Schedule = () => {
           animate={inView ? 'visible' : 'hidden'}
         >
           <h2>Schedule</h2>
-
           <div className={styles.timetable}>
             <div className={styles.days}>
               <ul>
@@ -68,17 +53,7 @@ const Schedule = () => {
                 ))}
               </ul>
             </div>{' '}
-            {loading ? (
-              <BounceLoader color={color} cssOverride={override} />
-            ) : error ? (
-              <p className={styles.err}>Error loading schedule</p>
-            ) : Array.isArray(trainings) && trainings.length > 0 ? (
-              <ScheduleTable trainings={trainings} />
-            ) : (
-              <p className={styles.err}>
-                Schedule for this day is not available, try later!
-              </p>
-            )}
+            <ScheduleTable trainings={trainings} />
           </div>
         </motion.div>
       </section>

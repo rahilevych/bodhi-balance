@@ -1,37 +1,29 @@
 import styles from './ScheduleTable.module.css';
-
-import { Training } from '../../../../types/Types';
+import { Booking, Training } from '../../../../types/Types';
 import { getTimeFromDate } from '../../../../utils/dateHelpers';
 import { useNavigate } from 'react-router';
-import { useAppContext } from '../../../../context/AppContext';
-import { useEffect, useState } from 'react';
 import { ScheduleCard } from '../schedule-card/ScheduleCard';
 import Button from '../../../../shared/ui/button/Button';
+import { useProfile } from '../../../auth/hooks/useProfile';
+import { useWindowSize } from '../../../../hooks/useWindowSize';
 
 interface Props {
   trainings: Training[] | null;
 }
 
 const ScheduleTable = ({ trainings }: Props) => {
+  const { data: user } = useProfile();
   const navigate = useNavigate();
-  const { user } = useAppContext();
-  const [showCard, setShowCard] = useState(false);
+  const { width } = useWindowSize();
+  const isMobile = width < 769;
   const handleBookingBtn = (id: string) => {
     navigate(`/detailed/training/${id}`);
   };
   const now = new Date();
-  useEffect(() => {
-    const checkWidth = () => {
-      const width = window.innerWidth;
-      setShowCard(width <= 768);
-    };
-    checkWidth();
-    window.addEventListener('resize', checkWidth);
-    return () => window.removeEventListener('resize', checkWidth);
-  }, []);
+
   return (
     <>
-      {showCard ? (
+      {isMobile ? (
         <div className={styles.cardsWrapper}>
           {trainings?.map((item, index) => (
             <ScheduleCard
@@ -69,7 +61,7 @@ const ScheduleTable = ({ trainings }: Props) => {
                     training.spots_taken === training.spots_total ? (
                       <p>Booking closed</p>
                     ) : user?.bookings.some(
-                        (booking) =>
+                        (booking: Booking) =>
                           booking.training &&
                           booking.status === 'booked' &&
                           booking.training._id.toString() ===

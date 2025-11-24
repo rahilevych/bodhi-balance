@@ -1,28 +1,25 @@
 import { FaCalendarAlt, FaClock } from 'react-icons/fa';
-import { useFetchDataWithParam } from '../../../../hooks/useFetchDataWithParam';
-import { getTrainingById } from '../../../../services/scheduleService';
-import { Training } from '../../../../types/Types';
-
 import styles from './TrainingDetailed.module.css';
 import {
   convertDateToString,
   getEndTime,
   getTimeFromDate,
 } from '../../../../utils/dateHelpers';
-
 import { useCheckout } from '../../../../hooks/useCheckout';
 import Button from '../../../../shared/ui/button/Button';
+import { useGetTrainingById } from '../../hooks/useGetTrainingById';
 
 interface TrainingDetailedProps {
   id: string;
 }
+
 export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const { startCheckout } = useCheckout();
   const type = 'training';
-  const { data: training } = useFetchDataWithParam<Training, string>({
-    fetchFunction: getTrainingById,
-    param: id?.toString(),
-  });
+  const { data: training, isPending } = useGetTrainingById(id);
+
+  if (isPending) return <p>loading</p>;
+
   const handleBookBtn = async (trainingId: string, type: string) => {
     try {
       await startCheckout(trainingId, type);

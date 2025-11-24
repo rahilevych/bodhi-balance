@@ -1,9 +1,6 @@
 import { useCheckout } from '../../../../hooks/useCheckout';
-import { useFetchDataWithParam } from '../../../../hooks/useFetchDataWithParam';
-import { getPlanById } from '../../../../services/planService';
 import Button from '../../../../shared/ui/button/Button';
-import { Plan } from '../../../../types/Types';
-
+import { useGetPlan } from '../../hooks/useGetPlan';
 import styles from './PlanDetailed.module.css';
 
 interface PlanDetailedProps {
@@ -12,10 +9,7 @@ interface PlanDetailedProps {
 export const PlanDetailed = ({ id }: PlanDetailedProps) => {
   const { startCheckout } = useCheckout();
   const type = 'subscription';
-  const { data: plan } = useFetchDataWithParam<Plan, string>({
-    fetchFunction: getPlanById,
-    param: id?.toString(),
-  });
+  const { data: plan } = useGetPlan(id);
   const handleBuyBtn = async (planId: string, type: string) => {
     await startCheckout(planId, type);
   };

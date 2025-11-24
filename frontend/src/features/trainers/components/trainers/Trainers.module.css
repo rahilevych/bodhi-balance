@@ -21,4 +21,7 @@
   .slider {
     width: 100%;
   }
+  .selectedTrainer {
+    display: none;
+  }
 }

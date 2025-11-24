@@ -7,8 +7,13 @@ import 'swiper/css/pagination';
 interface SliderProps<T> {
   items: T[];
   renderItem: (item: T, index: number) => React.ReactNode;
+  onSlideChange: (index: number) => void;
 }
-export const Slider = <T,>({ items, renderItem }: SliderProps<T>) => {
+export const Slider = <T,>({
+  items,
+  renderItem,
+  onSlideChange,
+}: SliderProps<T>) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [isBeginn, setIsBeginn] = useState(true);
@@ -42,6 +47,7 @@ export const Slider = <T,>({ items, renderItem }: SliderProps<T>) => {
         onSlideChange={(swiper) => {
           setIsBeginn(swiper.isBeginning);
           setIsEnd(swiper.isEnd);
+          onSlideChange(swiper.realIndex);
         }}
         navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
         pagination={{
@@ -50,12 +56,26 @@ export const Slider = <T,>({ items, renderItem }: SliderProps<T>) => {
         }}
         spaceBetween={5}
         slidesPerView={1}
+        slidesPerGroup={1}
+        slideToClickedSlide={true}
         breakpoints={{
-          900: { slidesPerView: 2, pagination: { clickable: true } },
-          1200: { slidesPerView: 2, pagination: false },
-          1440: { slidesPerView: 2.5, pagination: false },
+          900: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+            pagination: { clickable: true },
+          },
+          1200: {
+            slidesPerView: 2,
+            slidesPerGroup: 1,
+            pagination: { clickable: true },
+          },
+          1440: {
+            slidesPerView: 2.5,
+            slidesPerGroup: 1,
+            pagination: { clickable: true },
+          },
         }}
-        centeredSlides={false}
+        centeredSlides={true}
         grabCursor={true}
       >
         {items.map((item, index) => (

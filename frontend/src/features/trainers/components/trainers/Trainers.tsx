@@ -14,7 +14,7 @@ import { Slider } from '../../../../shared/ui/slider/Slider';
 import { useGetTrainers } from '../../hooks/useGetTrainers';
 const Trainers = () => {
   const { data: trainers, isPending } = useGetTrainers();
-  const [currentTrainer, setCurrentTrainer] = useState<Trainer | null>();
+  const [currentTrainer, setCurrentTrainer] = useState(0);
   const { width } = useWindowSize();
   const isMobile = width < 901;
   const { ref, inView } = useInView({
@@ -36,14 +36,15 @@ const Trainers = () => {
           <div className={styles.info}>
             <div className={styles.selectedTrainer}>
               {' '}
-              {!isMobile && currentTrainer && (
-                <FullCard currentTrainer={currentTrainer} />
+              {!isMobile && (
+                <FullCard currentTrainer={trainers[currentTrainer]} />
               )}
             </div>
             <div className={styles.slider}>
               {' '}
               {
                 <Slider
+                  onSlideChange={setCurrentTrainer}
                   items={trainers}
                   renderItem={(item: Trainer) =>
                     isMobile ? (

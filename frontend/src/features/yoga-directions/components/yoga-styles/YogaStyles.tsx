@@ -12,10 +12,13 @@ import { container } from '../../../../animations/landing-variannts';
 import { motion } from 'framer-motion';
 import { Slider } from '../../../../shared/ui/slider/Slider';
 import { useGetAllStyles } from '../../hooks/useGetAllStyles';
+import { useState } from 'react';
+
 const YogaStyles = () => {
+  const { data: yogaStyles, isPending } = useGetAllStyles();
+  const [currentStyle, setCurrentStyle] = useState(0);
   const { width } = useWindowSize();
   const isMobile = width < 901;
-  const { data: yogaStyles, isPending } = useGetAllStyles();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -34,12 +37,17 @@ const YogaStyles = () => {
           <h2>Yoga styles</h2>
 
           <div className={styles.content}>
-            {!isMobile && <YogaFullCard currentStyle={yogaStyles[0]} />}
+            {!isMobile && (
+              <div className={styles.selected}>
+                <YogaFullCard currentStyle={yogaStyles[currentStyle]} />
+              </div>
+            )}
 
             <div className={styles.slider}>
               {' '}
               <Slider
                 items={yogaStyles}
+                onSlideChange={(index) => setCurrentStyle(index)}
                 renderItem={(item: YogaStyle) =>
                   isMobile ? (
                     <YogaFullCard currentStyle={item} />

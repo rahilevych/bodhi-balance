@@ -5,27 +5,24 @@ import {
   getEndTime,
   getTimeFromDate,
 } from '../../../../utils/dateHelpers';
-import { useCheckout } from '../../../../hooks/useCheckout';
+
 import Button from '../../../../shared/ui/button/Button';
 import { useGetTrainingById } from '../../hooks/useGetTrainingById';
+import { useCreateCheckoutSession } from '../../../payment/hooks/useCreateCheckoutSession';
 
 interface TrainingDetailedProps {
   id: string;
 }
 
 export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
-  const { startCheckout } = useCheckout();
+  const { mutate: startCheckout } = useCreateCheckoutSession();
   const type = 'training';
   const { data: training, isPending } = useGetTrainingById(id);
 
   if (isPending) return <p>loading</p>;
 
-  const handleBookBtn = async (trainingId: string, type: string) => {
-    try {
-      await startCheckout(trainingId, type);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleBookBtn = (trainingId: string, type: string) => {
+    startCheckout({ productId: id, type: type });
   };
   if (!training || Array.isArray(training)) return null;
   return (

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import UserService from '../service/UserService';
-import { UserFormData } from '../components/personal-data/PersonalData';
+import { UserFormData } from '../components/personal-data-form/schema';
+
 interface UpdateUserPayload {
   id: string;
   data: UserFormData;

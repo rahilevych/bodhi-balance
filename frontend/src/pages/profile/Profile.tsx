@@ -3,12 +3,12 @@ import { ProfileHeader } from '../../layouts/header/components/profile-header/Pr
 import { ProfileNav } from '../../features/nav/components/profile-nav/ProfileNav';
 import { PersonalData } from '../../features/profile/components/personal-data/PersonalData';
 import styles from './Profile.module.css';
-import { SubscriptionSection } from '../../features/profile/components/subscription/Subscription';
-import { Bookings } from '../../features/profile/components/bookings/Bookings';
-import { Payments } from '../../features/profile/components/payments/Payments';
+import { SubscriptionSection } from '../../features/subscription/components/subscription/Subscription';
+import { Bookings } from '../../features/booking/components/bookings/Bookings';
 
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../shared/ui/button/Button';
+import { Payments } from '../../features/payment/components/payments/Payments';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('Profile');

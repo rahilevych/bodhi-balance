@@ -6,6 +6,7 @@ export const useGetAllStyles = () => {
   return useQuery({
     queryKey: ['styles'],
     queryFn: StylesService.getAllStyles,
-    staleTime: 1000 * 60 * 5,
+    // staleTime: 1000 * 60 * 5,
+    staleTime: 0,
   });
 };

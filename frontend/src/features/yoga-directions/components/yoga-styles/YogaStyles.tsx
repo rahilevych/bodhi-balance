@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import { Slider } from '../../../../shared/ui/slider/Slider';
 import { useGetAllStyles } from '../../hooks/useGetAllStyles';
 import { useState } from 'react';
+import { YogaStylesSkeleton } from './YogaStylesSkeleton';
 
 const YogaStyles = () => {
   const { data: yogaStyles, isPending } = useGetAllStyles();
@@ -24,7 +25,7 @@ const YogaStyles = () => {
     threshold: 0.2,
   });
 
-  if (isPending) return <p>is loading</p>;
+  if (isPending) return <YogaStylesSkeleton isMobile={isMobile} />;
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles} ref={ref}>

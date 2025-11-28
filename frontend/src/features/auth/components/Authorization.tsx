@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './Authorization.module.css';
 import { LoginForm } from './login/LoginForm';
 import { RegistrationForm } from './registration/RegistrationForm';
+import { Logo } from '../../../shared/ui/logo/Logo';
 
 export const Authorization = () => {
   const [type, setType] = useState<'signin' | 'signup'>('signin');
@@ -11,6 +12,7 @@ export const Authorization = () => {
     <>
       {type === 'signin' ? (
         <div className={styles.content}>
+          <Logo className={styles.logo} />
           <h4>Sign in</h4>
           <LoginForm />
           <p>
@@ -19,7 +21,8 @@ export const Authorization = () => {
               onClick={() => {
                 setType('signup');
               }}
-              className={styles.link}>
+              className={styles.link}
+            >
               {' '}
               Sign up
             </span>
@@ -27,6 +30,7 @@ export const Authorization = () => {
         </div>
       ) : (
         <div className={styles.content}>
+          <Logo className={styles.logo} />
           <h4>Sign up</h4>
           <RegistrationForm />
           <p>
@@ -35,7 +39,8 @@ export const Authorization = () => {
               onClick={() => {
                 setType('signin');
               }}
-              className={styles.link}>
+              className={styles.link}
+            >
               {' '}
               Sign in
             </span>

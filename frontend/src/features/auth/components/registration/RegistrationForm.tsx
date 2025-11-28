@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../../../shared/ui/button/Button';
 import { useRegistration } from '../../hooks/useRegistration';
-import { useAppContext } from '../../../../context/AppContext';
+import { useNavigate } from 'react-router';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),
@@ -15,7 +15,7 @@ const schema = z.object({
 export type RegisterFormData = z.infer<typeof schema>;
 export const RegistrationForm = () => {
   const { mutate: registeration } = useRegistration();
-  const { closeModal } = useAppContext();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ export const RegistrationForm = () => {
   });
   const onSubmit = async (data: RegisterFormData) => {
     registeration(data);
-    closeModal();
+    navigate('/');
   };
 
   return (

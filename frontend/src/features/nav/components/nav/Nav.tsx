@@ -1,4 +1,4 @@
-import { useWindowSize } from '../../../../hooks/useWindowSize';
+import { useAppContext } from '../../../../context/AppContext';
 import { Logo } from '../../../../shared/ui/logo/Logo';
 import { LaptopMenu } from '../../../menu/components/laptop-menu/LaptopMenu';
 import { MobileMenu } from '../../../menu/components/mobile-menu/MobileMenu';
@@ -6,8 +6,7 @@ import { MobileMenu } from '../../../menu/components/mobile-menu/MobileMenu';
 import styles from './Nav.module.css';
 
 const Nav = () => {
-  const { width } = useWindowSize();
-  const isMobile = width < 768;
+  const { isMobile } = useAppContext();
 
   return (
     <section className={styles.nav}>

@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 }
 const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
   const { data: user } = useProfile();
-  return user ? element : <Navigate to='/' replace />;
+  return user ? element : <Navigate to='/auth' replace />;
 };
 
 export default ProtectedRoute;

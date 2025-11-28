@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../../../shared/ui/button/Button';
 import { useLogin } from '../../hooks/useLogin';
-import { useAppContext } from '../../../../context/AppContext';
+import { useNavigate } from 'react-router';
 
 const schema = z.object({
   email: z.string().min(1, 'Email is required!').email('Invalid email format'),
@@ -14,8 +14,7 @@ const schema = z.object({
 export type LoginFormData = z.infer<typeof schema>;
 
 export const LoginForm = () => {
-  const { closeModal } = useAppContext();
-
+  const navigate = useNavigate();
   const { mutate: login } = useLogin();
   const {
     register,
@@ -27,7 +26,7 @@ export const LoginForm = () => {
 
   const onSubmit = async (data: LoginFormData) => {
     login(data);
-    closeModal();
+    navigate('/');
   };
 
   return (
@@ -37,7 +36,6 @@ export const LoginForm = () => {
       <input type='password' {...register('password')} placeholder='Password' />
       {errors.password && <p>{errors.password.message}</p>}{' '}
       <Button type='submit' className={styles.btn}>
-        {' '}
         Sign in
       </Button>
     </form>

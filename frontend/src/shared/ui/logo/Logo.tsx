@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router';
 import styles from './Logo.module.css';
 
-export const Logo = () => {
+interface LogoProps {
+  className?: string;
+}
+export const Logo = ({ className }: LogoProps) => {
   const navigate = useNavigate();
   return (
     <div
@@ -11,7 +14,7 @@ export const Logo = () => {
         navigate('/');
       }}
     >
-      <span>Bodhi balance</span>
+      <span className={className}>Bodhi balance</span>
     </div>
   );
 };

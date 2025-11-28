@@ -8,11 +8,14 @@ import { Success } from '../../pages/success/Success';
 import { Cancel } from '../../pages/cancel/Cancel';
 import DetailedPage from '../../pages/detailed-info/DetailedPage';
 import Footer from '../../layouts/footer/components/footer/Footer';
+import { AuthPage } from '../../pages/auth/AuthPage';
 
 export const AppRoutes = () => {
   const location = useLocation();
 
-  const hideLayout = ['/success', '/cancel'].includes(location.pathname);
+  const hideLayout = ['/success', '/cancel', '/auth'].includes(
+    location.pathname,
+  );
   return (
     <>
       {!hideLayout && <Header />}
@@ -21,6 +24,8 @@ export const AppRoutes = () => {
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='*' element={<NotFound />} />
+          <Route path='/auth' element={<AuthPage />} />
+
           <Route
             path='/profile'
             element={<ProtectedRoute element={<Profile />} />}

@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { sectionsList } from '../../../../constants/sections';
-
 import styles from './LaptopMenu.module.css';
-import { useAppContext } from '../../../../context/AppContext';
 import { useLocation, useNavigate } from 'react-router';
 import { scroller } from 'react-scroll';
 
@@ -14,9 +12,10 @@ import { useProfile } from '../../../auth/hooks/useProfile';
 export const LaptopMenu = () => {
   const { data: user } = useProfile();
   const [, setIsMenuOpen] = useState(false);
-  const { openModal } = useAppContext();
+
   const navigate = useNavigate();
   const location = useLocation();
+
   const handleSectionClick = (sectionLink: string) => {
     setIsMenuOpen(false);
     if (location.pathname !== '/') {
@@ -28,6 +27,7 @@ export const LaptopMenu = () => {
       });
     }
   };
+
   return (
     <div className={styles.menu}>
       <div className={styles.links}>
@@ -55,7 +55,7 @@ export const LaptopMenu = () => {
           <LogoutButton />
         </div>
       ) : (
-        <div onClick={openModal} className={styles.btn}>
+        <div onClick={() => navigate('/auth')} className={styles.btn}>
           <Button>Sign in</Button>
         </div>
       )}

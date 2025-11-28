@@ -4,19 +4,19 @@ import styles from './Trainers.module.css';
 import { FullCard } from '../full-card/FullCard';
 import { Element } from 'react-scroll';
 import { Trainer } from '../../../../types/Types';
-
 import { SliderCard } from '../../../../shared/ui/slider-card/SliderCard';
-import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { container } from '../../../../animations/landing-variannts';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Slider } from '../../../../shared/ui/slider/Slider';
 import { useGetTrainers } from '../../hooks/useGetTrainers';
+import { useAppContext } from '../../../../context/AppContext';
+
 const Trainers = () => {
   const { data: trainers, isPending } = useGetTrainers();
   const [currentTrainer, setCurrentTrainer] = useState(0);
-  const { width } = useWindowSize();
-  const isMobile = width < 901;
+
+  const { isMobile } = useAppContext();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,

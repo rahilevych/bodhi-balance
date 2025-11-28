@@ -6,7 +6,6 @@ import styles from './YogaStyles.module.css';
 import { YogaStyle } from '../../../../types/Types';
 import { SliderCard } from '../../../../shared/ui/slider-card/SliderCard';
 import { YogaFullCard } from '../yoga-full-card/YogaFullCard';
-import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { useInView } from 'react-intersection-observer';
 import { container } from '../../../../animations/landing-variannts';
 import { motion } from 'framer-motion';
@@ -14,18 +13,19 @@ import { Slider } from '../../../../shared/ui/slider/Slider';
 import { useGetAllStyles } from '../../hooks/useGetAllStyles';
 import { useState } from 'react';
 import { YogaStylesSkeleton } from './YogaStylesSkeleton';
+import { useAppContext } from '../../../../context/AppContext';
 
 const YogaStyles = () => {
   const { data: yogaStyles, isPending } = useGetAllStyles();
   const [currentStyle, setCurrentStyle] = useState(0);
-  const { width } = useWindowSize();
-  const isMobile = width < 901;
+
+  const { isMobile } = useAppContext();
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
 
-  if (isPending) return <YogaStylesSkeleton isMobile={isMobile} />;
+  if (isPending) return <YogaStylesSkeleton />;
   return (
     <Element name='yogastyles'>
       <section className={styles.yogastyles} ref={ref}>

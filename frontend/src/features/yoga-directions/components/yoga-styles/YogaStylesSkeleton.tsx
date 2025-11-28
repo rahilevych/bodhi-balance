@@ -1,8 +1,10 @@
 import styles from './YogaStyles.module.css';
 import { YogaFullCardSkeleton } from '../yoga-full-card/YogaFullCardSkeleton';
 import { SliderCardSkeleton } from '../../../../shared/ui/slider-card/SliderCardSkeleton';
+import { useAppContext } from '../../../../context/AppContext';
 
-export const YogaStylesSkeleton = ({ isMobile }: { isMobile: boolean }) => {
+export const YogaStylesSkeleton = () => {
+  const { isMobile } = useAppContext();
   return (
     <section className={styles.yogastyles}>
       <div className='container'>

@@ -6,11 +6,13 @@ import { Element } from 'react-scroll';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { container } from '../../../../animations/landing-variannts';
+
 const images = [
   'https://i.pinimg.com/736x/63/9a/55/639a5571c1081ef65155096efc4bf372.jpg',
   'https://i.pinimg.com/736x/91/5b/0c/915b0cf814f5d6b0608ce5cb1140d72a.jpg',
   'https://i.pinimg.com/736x/58/3f/b0/583fb01fcfd3208b2ff3a22828caa142.jpg',
 ];
+
 const Atmosphere = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,

@@ -2,11 +2,12 @@ import { useState } from 'react';
 import styles from './Schedule.module.css';
 import { Element } from 'react-scroll';
 import ScheduleTable from '../schedule-table/ScheduleTable';
-import { getNext7Days } from '../../../../utils/dateHelpers';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { container } from '../../../../animations/landing-variannts';
 import { useGetTrainingsDay } from '../../hooks/useGetTrainingDay';
+import { ScheduleDays } from '../schedule-days/ScheduleDays';
+import { ScheduleSkeleton } from './ScheduleSkeleton';
 
 const Schedule = () => {
   const today = new Date();
@@ -16,7 +17,7 @@ const Schedule = () => {
     triggerOnce: true,
     threshold: 0.2,
   });
-  if (isPending) return <p>loading</p>;
+  if (isPending) return <ScheduleSkeleton />;
   return (
     <Element name='schedule'>
       <section id='schedule' className={styles.schedule} ref={ref}>
@@ -28,31 +29,7 @@ const Schedule = () => {
         >
           <h2>Schedule</h2>
           <div className={styles.timetable}>
-            <div className={styles.days}>
-              <ul>
-                {getNext7Days().map((date, index) => (
-                  <li
-                    className={
-                      date.toDateString() === day.toDateString()
-                        ? styles.active
-                        : ''
-                    }
-                    key={index}
-                    onClick={() => setDay(date)}
-                  >
-                    <p className={styles.weekday}>
-                      {date.toLocaleDateString('en-US', { weekday: 'long' })}
-                    </p>
-                    <p className={styles.dayMonth}>
-                      {date.toLocaleDateString('en-GB', {
-                        day: 'numeric',
-                        month: 'numeric',
-                      })}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>{' '}
+            <ScheduleDays day={day} setDay={setDay} />
             <ScheduleTable trainings={trainings} />
           </div>
         </motion.div>

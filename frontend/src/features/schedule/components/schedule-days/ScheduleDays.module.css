@@ -1,0 +1,52 @@
+.days {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: auto;
+}
+.days > ul {
+  display: flex;
+  flex-direction: row;
+  text-decoration: none;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.days > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.weekday {
+  font-size: 14px;
+  margin: 0;
+}
+
+.dayMonth {
+  font-size: 12px;
+
+  margin: 0;
+  margin-top: 4px;
+}
+.active {
+  font-weight: 700;
+  color: var(--third-color);
+}
+.err {
+  margin-top: 3rem;
+}
+@media (max-width: 1024px) {
+  .days {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+  .days > ul {
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+  }
+}

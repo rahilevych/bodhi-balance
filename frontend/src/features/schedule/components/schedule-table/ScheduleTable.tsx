@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { ScheduleCard } from '../schedule-card/ScheduleCard';
 import Button from '../../../../shared/ui/button/Button';
 import { useProfile } from '../../../auth/hooks/useProfile';
-import { useWindowSize } from '../../../../hooks/useWindowSize';
+import { useAppContext } from '../../../../context/AppContext';
 
 interface Props {
   trainings: Training[] | null;
@@ -14,8 +14,8 @@ interface Props {
 const ScheduleTable = ({ trainings }: Props) => {
   const { data: user } = useProfile();
   const navigate = useNavigate();
-  const { width } = useWindowSize();
-  const isMobile = width < 769;
+
+  const { isMobile } = useAppContext();
   const handleBookingBtn = (id: string) => {
     navigate(`/detailed/training/${id}`);
   };

@@ -31,6 +31,9 @@
   height: 100%;
   object-fit: cover;
 }
+.skeletonli {
+  margin: 2rem 0;
+}
 @media (max-width: 1024px) {
   .image {
     display: none;

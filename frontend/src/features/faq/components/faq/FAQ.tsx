@@ -10,14 +10,16 @@ import {
   staggerContainer,
 } from '../../../../animations/landing-variannts';
 import { useGetQuestions } from '../../hooks/useGetQuestions';
+import { FAQSkeleton } from './FAQSkeleton';
 
 const FAQ = () => {
-  const { data: questions } = useGetQuestions();
+  const { data: questions, isPending } = useGetQuestions();
 
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
+  if (isPending) return <FAQSkeleton />;
   return (
     <Element name='faq'>
       <section id='faq' className={styles.faq} ref={ref}>

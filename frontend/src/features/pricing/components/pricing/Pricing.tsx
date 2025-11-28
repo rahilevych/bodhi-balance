@@ -6,12 +6,12 @@ import { useInView } from 'react-intersection-observer';
 import { container } from '../../../../animations/landing-variannts';
 import { useGetPlans } from '../../hooks/useGetPlans';
 import { Plan } from '../../../../types/Types';
+import { PricingSkeleton } from './PricingSkeleton';
 export const Pricing = () => {
-  const { data: plans } = useGetPlans();
-  console.log(plans);
+  const { data: plans, isPending } = useGetPlans();
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
-  if (!plans) return <p>Loading plans...</p>;
+  if (isPending) return <PricingSkeleton />;
   const types = plans.reduce((acc: Record<string, Plan[]>, plan: Plan) => {
     if (!acc[plan.type]) acc[plan.type] = [];
     acc[plan.type].push(plan);

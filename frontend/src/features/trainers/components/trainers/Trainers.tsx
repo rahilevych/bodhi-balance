@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import { Slider } from '../../../../shared/ui/slider/Slider';
 import { useGetTrainers } from '../../hooks/useGetTrainers';
 import { useAppContext } from '../../../../context/AppContext';
+import { YogaStylesSkeleton } from '../../../yoga-directions/components/yoga-styles/YogaStylesSkeleton';
 
 const Trainers = () => {
   const { data: trainers, isPending } = useGetTrainers();
@@ -21,7 +22,7 @@ const Trainers = () => {
     triggerOnce: true,
     threshold: 0.2,
   });
-  if (isPending) return <p>loading</p>;
+  if (isPending) return <YogaStylesSkeleton />;
 
   return (
     <Element name={'trainers'}>

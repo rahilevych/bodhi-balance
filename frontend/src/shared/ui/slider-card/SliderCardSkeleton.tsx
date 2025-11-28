@@ -4,7 +4,7 @@ export const SliderCardSkeleton = () => {
   return (
     <div className={styles.card}>
       <Skeleton width='10rem' height='15rem' />
-      <Skeleton width={100} />
+      <Skeleton width={100} height={16} />
     </div>
   );
 };

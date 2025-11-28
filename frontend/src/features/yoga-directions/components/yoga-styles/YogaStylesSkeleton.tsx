@@ -1,4 +1,3 @@
-import Skeleton from 'react-loading-skeleton';
 import styles from './YogaStyles.module.css';
 import { YogaFullCardSkeleton } from '../yoga-full-card/YogaFullCardSkeleton';
 import { SliderCardSkeleton } from '../../../../shared/ui/slider-card/SliderCardSkeleton';
@@ -7,7 +6,7 @@ export const YogaStylesSkeleton = ({ isMobile }: { isMobile: boolean }) => {
   return (
     <section className={styles.yogastyles}>
       <div className='container'>
-        <Skeleton width={100} />
+        <h2>Yoga styles</h2>
 
         <div className={styles.content}>
           {!isMobile && (
@@ -16,7 +15,7 @@ export const YogaStylesSkeleton = ({ isMobile }: { isMobile: boolean }) => {
             </div>
           )}
 
-          <div className={styles.slider}>
+          <div className={styles.sliderSkeleton}>
             {Array.from({ length: 3 }).map((_, i) =>
               isMobile ? (
                 <YogaFullCardSkeleton key={i} />

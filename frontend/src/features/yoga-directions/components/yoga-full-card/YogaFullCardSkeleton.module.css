@@ -1,0 +1,18 @@
+/* YogaFullCard.module.css */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 15rem; /* совпадает с фото */
+}
+
+.photo {
+  width: 100%;
+  height: 20rem; /* совпадает с Skeleton */
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

@@ -16,6 +16,11 @@
 .slider {
   width: 40%;
 }
+.sliderSkeleton {
+  width: 40%;
+  display: flex;
+  gap: 1rem;
+}
 @media (max-width: 900px) {
   .slider {
     width: 100%;

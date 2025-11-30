@@ -6,13 +6,14 @@ import { ScheduleCard } from '../schedule-card/ScheduleCard';
 import Button from '../../../../shared/ui/button/Button';
 import { useProfile } from '../../../auth/hooks/useProfile';
 import { useAppContext } from '../../../../context/AppContext';
+import { Loader } from '../../../../shared/ui/loader/Loader';
 
 interface Props {
   trainings: Training[] | null;
 }
 
 const ScheduleTable = ({ trainings }: Props) => {
-  const { data: user } = useProfile();
+  const { data: user, isPending } = useProfile();
   const navigate = useNavigate();
 
   const { isMobile } = useAppContext();
@@ -20,7 +21,7 @@ const ScheduleTable = ({ trainings }: Props) => {
     navigate(`/detailed/training/${id}`);
   };
   const now = new Date();
-
+  if (isPending) return <Loader />;
   return (
     <>
       {isMobile ? (

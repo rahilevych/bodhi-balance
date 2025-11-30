@@ -12,13 +12,14 @@
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-bg-2);
   padding: 30px;
   border-radius: 10px;
   width: 90%;
   max-width: 400px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: var(--color-text);
 }
 
 .modal-buttons {
@@ -38,12 +39,12 @@
 
 .confirm-btn:hover {
   background-color: var(--color-btn-confirm-hover);
-  color: var(--secondary-color);
+  color: var(--color-text);
 }
 
 .cancel-btn:hover {
   background-color: var(--color-btn-cancel-hover);
-  color: var(--secondary-color);
+  color: var(--color-text);
 }
 
 .confirm-btn:hover span,

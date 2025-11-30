@@ -19,7 +19,7 @@ export default class AuthService {
     return res.data;
   }
   static async getMe() {
-    const res = await api.get(`/auth/me`, {});
+    const res = await api.get(`/auth/me`);
     return res.data;
   }
   static async logout() {

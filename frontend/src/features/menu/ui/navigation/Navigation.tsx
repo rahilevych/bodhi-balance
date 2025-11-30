@@ -6,6 +6,7 @@ import { motion, stagger } from 'framer-motion';
 import LogoutButton from '../../../auth/ui/logout-btn/LogoutButton';
 import Button from '../../../../shared/ui/button/Button';
 import { useProfile } from '../../../auth/hooks/useProfile';
+import { Loader } from '../../../../shared/ui/loader/Loader';
 const navVariants = {
   open: {
     transition: { delayChildren: stagger(0.07, { startDelay: 0.2 }) },
@@ -31,7 +32,8 @@ interface NavigationProps {
 export const Navigation = ({ setIsOpen }: NavigationProps) => {
   const allSubSections = sectionsList.flatMap((section) => section.subSections);
   const navigate = useNavigate();
-  const { data: user } = useProfile();
+  const { data: user, isPending } = useProfile();
+  if (isPending) return <Loader />;
   return (
     <div className={styles.nav}>
       {' '}

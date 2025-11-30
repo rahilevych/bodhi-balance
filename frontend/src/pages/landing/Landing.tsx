@@ -3,12 +3,8 @@ import Atmosphere from '../../features/atmosphere/components/atmosphere/Atmosphe
 import Contact from '../../features/contact/components/contact/Contact';
 import FAQ from '../../features/faq/components/faq/FAQ';
 import Hero from '../../features/hero/components/hero/Hero';
-import { AuthorizationWindow } from '../../styles/modal/AuthorizationWindow';
 import { Pricing } from '../../features/pricing/components/pricing/Pricing';
 import Schedule from '../../features/schedule/components/schedule/Schedule';
-
-import { useAppContext } from '../../context/AppContext';
-import { Authorization } from '../../features/auth/components/Authorization';
 import styles from './Landing.module.css';
 import Trainers from '../../features/trainers/components/trainers/Trainers';
 import { useLocation } from 'react-router';
@@ -18,7 +14,6 @@ import YogaStyles from '../../features/yoga-directions/components/yoga-styles/Yo
 
 const Landing = () => {
   const location = useLocation();
-  const { isModalOpen, closeModal } = useAppContext();
 
   useEffect(() => {
     if (location.state?.scrollTo) {
@@ -43,11 +38,6 @@ const Landing = () => {
       <Atmosphere />
       <FAQ />
       <Contact />
-      {isModalOpen && (
-        <AuthorizationWindow onClose={closeModal}>
-          <Authorization />
-        </AuthorizationWindow>
-      )}
     </div>
   );
 };

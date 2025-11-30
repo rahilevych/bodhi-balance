@@ -13,6 +13,7 @@ import { Payments } from '../../features/payment/components/payments/Payments';
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('Profile');
   const navigate = useNavigate();
+
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };

@@ -1,7 +1,7 @@
 .container {
   position: fixed;
   display: flex;
-
+  pointer-events: none;
   justify-content: flex-start;
   align-items: stretch;
   flex: 1;
@@ -15,6 +15,10 @@
 }
 .nav {
   width: 300px;
+  pointer-events: none;
+}
+.nav.open {
+  pointer-events: auto;
 }
 .background {
   background-color: #f5f5f5;

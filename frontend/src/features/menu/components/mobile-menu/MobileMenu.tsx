@@ -37,7 +37,7 @@ export const MobileMenu = () => {
           animate={isOpen ? 'open' : 'closed'}
           custom={height}
           ref={containerRef}
-          className={styles.nav}
+          className={`${styles.nav} ${isOpen ? styles.open : ''}`}
         >
           <motion.div
             variants={sidebarVariants}

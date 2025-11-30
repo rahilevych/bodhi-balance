@@ -6,14 +6,14 @@ import { BookingsCard } from '../booking-card/BookingsCard';
 import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
 import { filterBookings } from '../../../../utils/filterBookings';
 import Button from '../../../../shared/ui/button/Button';
-import { useWindowSize } from '../../../../hooks/useWindowSize';
 import { useGetBookingsByUser } from '../../hooks/useGetBookingByUser';
 import { useCancelBooking } from '../../hooks/useCancelBooking';
+import { useAppContext } from '../../../../context/AppContext';
 
 export const Bookings = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { width } = useWindowSize();
-  const isMobile = width < 769;
+
+  const { isMobile } = useAppContext();
   const [activeTab, setActiveTab] = useState<
     'upcoming' | 'completed' | 'cancelled'
   >('upcoming');
@@ -34,7 +34,6 @@ export const Bookings = () => {
   return (
     <div className={styles.bookings}>
       <>
-        {' '}
         <ul className={styles.tabs}>
           <li
             className={`${styles.tab} ${

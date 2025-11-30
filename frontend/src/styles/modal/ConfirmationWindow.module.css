@@ -29,27 +29,24 @@
 }
 
 .confirm-btn {
-  background-color: var(--confirm-btn-color);
+  background-color: var(--color-btn-confirm);
 }
 
 .cancel-btn {
-  background-color: var(--cancel-btn-color);
+  background-color: var(--color-btn-cancel);
 }
 
 .confirm-btn:hover {
-  background-color: var(--confirm-btn-color-hover);
+  background-color: var(--color-btn-confirm-hover);
   color: var(--secondary-color);
 }
 
 .cancel-btn:hover {
-  background-color: var(--cancel-btn-color-hover);
+  background-color: var(--color-btn-cancel-hover);
   color: var(--secondary-color);
 }
-.confirm-btn:hover,
-.cancel-btn:hover {
-  border: 1px solid var(--secondary-color);
-}
+
 .confirm-btn:hover span,
 .cancel-btn:hover span {
-  color: var(--secondary-color);
+  color: var(--color-text);
 }

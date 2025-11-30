@@ -1,5 +1,5 @@
 import api from '../../../shared/api/axiosInstance';
-import { UserFormData } from '../components/personal-data/PersonalData';
+import { UserFormData } from '../components/personal-data-form/schema';
 
 export default class UserService {
   static async updateUser(data: UserFormData, id: string) {

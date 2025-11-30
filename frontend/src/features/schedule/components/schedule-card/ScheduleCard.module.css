@@ -5,30 +5,34 @@
   .table {
     display: none;
   }
-
   .card {
     display: flex;
-    align-items: start;
-    justify-content: center;
-    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
     gap: 0.5rem;
     background: var(--color-bg-3);
-    border: 1px solid var(--primary-color);
-    padding: 12px;
+    padding: 1rem;
     margin-bottom: 16px;
     border-radius: 5px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     height: 100%;
-    min-height: 17rem;
-    min-width: 13rem;
+    width: 100%;
   }
-
-  .card p {
-    margin: 4px 0;
+  .card h3 {
+    font-size: 1.25rem;
+    margin-top: 0;
   }
-
+  .nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 2rem;
+  }
+  .info {
+    height: 100%;
+  }
   .bookBtn {
-    margin-top: 10px;
     padding: 10px 12px;
     background-color: var(--color-header-bg);
     color: var(--color-text-light);

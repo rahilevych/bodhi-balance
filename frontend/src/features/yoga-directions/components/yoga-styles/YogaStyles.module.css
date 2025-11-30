@@ -21,7 +21,7 @@
   display: flex;
   gap: 1rem;
 }
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .slider {
     width: 100%;
   }

@@ -12,4 +12,5 @@
   border-radius: 50%;
   background: transparent;
   z-index: 25;
+  pointer-events: auto;
 }

@@ -3,7 +3,6 @@ import { sectionsList } from '../../../../constants/sections';
 import { MenuItem } from '../menu-item/MenuItem';
 import styles from './Navigation.module.css';
 import { motion, stagger } from 'framer-motion';
-import { useAppContext } from '../../../../context/AppContext';
 import LogoutButton from '../../../auth/ui/logout-btn/LogoutButton';
 import Button from '../../../../shared/ui/button/Button';
 import { useProfile } from '../../../auth/hooks/useProfile';
@@ -32,7 +31,6 @@ interface NavigationProps {
 export const Navigation = ({ setIsOpen }: NavigationProps) => {
   const allSubSections = sectionsList.flatMap((section) => section.subSections);
   const navigate = useNavigate();
-  const { openModal } = useAppContext();
   const { data: user } = useProfile();
   return (
     <div className={styles.nav}>
@@ -51,7 +49,7 @@ export const Navigation = ({ setIsOpen }: NavigationProps) => {
             <LogoutButton />
           </div>
         ) : (
-          <div onClick={openModal} className={styles.btn}>
+          <div onClick={() => navigate('/auth')} className={styles.btn}>
             <Button>Sign in</Button>
           </div>
         )}

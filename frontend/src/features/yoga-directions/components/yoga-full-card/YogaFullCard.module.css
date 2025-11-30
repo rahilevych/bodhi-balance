@@ -20,3 +20,12 @@
   gap: 1rem;
   width: 60%;
 }
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .info {
+    width: 100%;
+  }
+}

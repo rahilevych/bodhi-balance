@@ -3,8 +3,8 @@ import AuthService from '../service/AuthService';
 
 export const useProfile = () => {
   return useQuery({
-    queryKey: ['auth'],
+    queryKey: ['currentUser'],
     queryFn: AuthService.getMe,
-    staleTime: 1000 * 60 * 5,
+    refetchOnMount: true,
   });
 };

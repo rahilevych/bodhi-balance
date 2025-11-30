@@ -1,7 +1,7 @@
 .nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: auto;
   width: 100%;
   padding: 2rem;
@@ -46,10 +46,9 @@
     padding: 1rem;
   }
   .nav > ul {
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    width: auto;
     gap: 0.25rem;
   }
   .nav > ul > li {

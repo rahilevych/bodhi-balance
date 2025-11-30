@@ -3,7 +3,7 @@ import { BookingService } from '../service/BookingService';
 
 export const useGetBookingsByUser = () => {
   return useQuery({
-    queryKey: ['bookings', 'user'],
+    queryKey: ['bookings', 'currentUser'],
     queryFn: BookingService.getBookingsByUserId,
     staleTime: 1000 * 60 * 5,
   });

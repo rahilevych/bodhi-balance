@@ -7,7 +7,7 @@ export const useDeleteUser = () => {
     mutationFn: UserService.deleteUser,
     onSuccess: () => {
       queryClient.removeQueries({
-        queryKey: ['auth'],
+        queryKey: ['currentUser'],
       });
     },
   });

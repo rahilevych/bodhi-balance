@@ -3,14 +3,15 @@ import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow'
 import { useState } from 'react';
 import Button from '../../../../shared/ui/button/Button';
 import { useLogout } from '../../hooks/useLogout';
+import { Loader } from '../../../../shared/ui/loader/Loader';
 
 const LogoutButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { mutate: logout } = useLogout();
+  const { mutate: logout, isPending } = useLogout();
   const handleLogout = async () => {
     logout();
   };
-
+  if (isPending) return <Loader />;
   return (
     <>
       <Button className={styles.button} onClick={() => setIsModalOpen(true)}>

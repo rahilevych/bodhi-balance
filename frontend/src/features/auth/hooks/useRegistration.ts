@@ -6,7 +6,7 @@ export const useRegistration = () => {
   return useMutation({
     mutationFn: AuthService.registerUser,
     onSuccess: (data) => {
-      queryClient.setQueryData(['auth'], data);
+      queryClient.setQueryData(['currentUser'], data.user);
     },
   });
 };

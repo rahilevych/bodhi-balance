@@ -15,7 +15,7 @@ export const useUpdateUser = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['auth'],
+        queryKey: ['currentUser'],
       });
     },
   });

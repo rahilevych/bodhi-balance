@@ -6,7 +6,9 @@ export const useLogout = () => {
   return useMutation({
     mutationFn: AuthService.logout,
     onSuccess: () => {
-      queryClient.removeQueries({ queryKey: ['auth'] });
+      queryClient.setQueryData(['currentUser'], null);
+      queryClient.removeQueries({ queryKey: ['bookings', 'currentUser'] });
+      queryClient.removeQueries({ queryKey: ['subscription', 'active'] });
     },
   });
 };

@@ -12,7 +12,6 @@ export function getNext7Days(): Date[] {
 }
 
 export const getTimeFromDate = (datetime: any) => {
-  console.log(datetime);
   const date = new Date(datetime);
   const hours = date.getHours();
   const minutes = date.getMinutes();

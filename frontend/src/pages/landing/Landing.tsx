@@ -1,19 +1,20 @@
-import { About } from '../../components/About/About';
-import Atmosphere from '../../components/Atmosphere/Atmosphere';
-import Contact from '../../components/Contact/Contact';
-import FAQ from '../../components/FAQ/FAQ';
-import Home from '../../components/Home/Home';
-import { AuthorizationWindow } from '../../components/modal/AuthorizationWindow';
-import { Pricing } from '../../components/Pricing/Pricing';
-import Schedule from '../../components/Schedule/Schedule';
-import YogaStyles from '../../components/YogaStyles/YogaStyles';
+import { About } from '../../features/about/components/about/About';
+import Atmosphere from '../../features/atmosphere/components/atmosphere/Atmosphere';
+import Contact from '../../features/contact/components/contact/Contact';
+import FAQ from '../../features/faq/components/faq/FAQ';
+import Hero from '../../features/hero/components/hero/Hero';
+import { AuthorizationWindow } from '../../styles/modal/AuthorizationWindow';
+import { Pricing } from '../../features/pricing/components/pricing/Pricing';
+import Schedule from '../../features/schedule/components/schedule/Schedule';
+
 import { useAppContext } from '../../context/AppContext';
-import { Authorization } from '../../components/authorization/Authorization';
+import { Authorization } from '../../features/auth/components/Authorization';
 import styles from './Landing.module.css';
-import Trainers from '../../components/trainers/Trainers';
+import Trainers from '../../features/trainers/components/trainers/Trainers';
 import { useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { scroller } from 'react-scroll';
+import YogaStyles from '../../features/yoga-directions/components/yoga-styles/YogaStyles';
 
 const Landing = () => {
   const location = useLocation();
@@ -32,8 +33,8 @@ const Landing = () => {
     }
   }, [location.state]);
   return (
-    <main className={styles.main}>
-      <Home />
+    <div className={styles.main}>
+      <Hero />
       <About />
       <YogaStyles />
       <Schedule />
@@ -47,7 +48,7 @@ const Landing = () => {
           <Authorization />
         </AuthorizationWindow>
       )}
-    </main>
+    </div>
   );
 };
 

@@ -1,0 +1,31 @@
+.yogastyles {
+  background-color: var(--color-bg-3);
+  width: 100%;
+  height: auto;
+  padding: 5rem 2rem;
+}
+
+.content {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.slider {
+  width: 40%;
+}
+.sliderSkeleton {
+  width: 40%;
+  display: flex;
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .slider {
+    width: 100%;
+  }
+  .selected {
+    display: none;
+  }
+}

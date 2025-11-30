@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './Cancel.module.css';
-import Button from '../../components/Button/Button';
+
 import { AiFillCloseCircle } from 'react-icons/ai';
+import Button from '../../shared/ui/button/Button';
 
 export const Cancel = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const Cancel = () => {
         </h1>
         <p>Your booking process was canceled. No charges were made.</p>
         <div className={styles.actions}>
-          <Button text='Go Home' onClick={() => navigate('/')} />
+          <Button onClick={() => navigate('/')}>Go Home</Button>
         </div>
       </div>
     </div>

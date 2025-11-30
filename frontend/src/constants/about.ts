@@ -1,6 +1,6 @@
 export const aboutInfo = {
   info: "Welcome to Bodhi Balance, a serene space where mind, body, and soul unite. Our studio is designed to provide a peaceful and inspiring environment for your yoga journey, whether you're a beginner or an experienced practitioner.",
-  img: 'https://i.pinimg.com/236x/41/fd/27/41fd27979325f866d134b077de5d9bca.jpg',
+  img: 'https://images.unsplash.com/photo-1687783615476-f4c12358ca9d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
   links: [
     {
       name: '8 Yoga styles',

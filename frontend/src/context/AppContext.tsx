@@ -1,26 +1,14 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from 'react';
-import { User } from '../types/Types';
-import { getMe } from '../services/authService';
-import { NotificationWindow } from '../components/modal/NotificationWindow';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { NotificationWindow } from '../styles/modal/NotificationWindow';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 interface AppContextType {
   openModal: () => void;
   closeModal: () => void;
   isModalOpen: boolean;
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-  isAuthenticated: boolean;
-  isLoading: boolean;
   notification: string | null;
   setNotification: React.Dispatch<React.SetStateAction<string | null>>;
-  color: string;
+  isMobile: boolean;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -38,10 +26,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [notification, setNotification] = useState<string | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [color, setColor] = useState('#5d6d5c');
-  const [user, setUser] = useState<User | null>(null);
+  const { width } = useWindowSize();
+  const isMobile = width < 769;
 
   const openModal = () => {
     document.body.style.overflow = 'hidden';
@@ -53,39 +39,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await getMe();
-        setUser(res);
-        setIsAuthenticated(true);
-        setIsLoading(false);
-      } catch (err) {
-        setUser(null);
-        setIsAuthenticated(false);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
   return (
     <AppContext.Provider
       value={{
-        user,
-        setUser,
-        setIsAuthenticated,
-        isLoading,
         openModal,
         closeModal,
         isModalOpen,
-        isAuthenticated,
         notification,
         setNotification,
-        color,
-      }}>
+        isMobile,
+      }}
+    >
       {children}
       {notification && (
         <NotificationWindow

@@ -1,34 +1,56 @@
+@import 'react-loading-skeleton/dist/skeleton.css';
 :root {
-  --primary-font: 'Raleway', serif;
-  --secondary-font: 'Lora', serif;
-  --header-height: 85px;
-  --primary-color: #d4cdc5;
-  --secondary-color: rgb(245, 245, 245);
-  --third-color: #5d6d5c;
-  --text-color: #404040;
-  --confirm-btn-color: #6a8f6b;
-  --confirm-btn-color-hover: #5c7e5d;
-  --cancel-btn-color: #b35c5c;
-  --cancel-btn-color-hover: #a14f4f;
+  /* Fonts */
+  --font-primary: 'Raleway', serif;
+  --font-secondary: 'Lora', serif;
 
-  --blocks-bg-color: rgb(245, 245, 245);
+  /* Measures */
+  --header-height: 85px;
   --border-radius: 6px;
   --box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-}
+  /* Main colors */
+  --color-text: #4e4a55;
+  --color-text-light: #f7f3ee;
+  --color-bg-1: #f4efea;
+  --color-bg-2: #f1ece7;
+  --color-bg-3: #ebe6e1;
+  --color-border: var(--color-text);
 
+  /* Header */
+  --color-header-bg: rgb(128, 112, 135);
+
+  /* Buttons */
+  --color-btn-default: #ede8e2;
+  --color-btn-default-hover: #e1dad2;
+  --color-btn-accent: var(--color-header-bg);
+  --color-swiper-accent: var(--color-header-bg);
+
+  --color-btn-confirm: #bfcfba;
+  --color-btn-confirm-hover: #afc2aa;
+  --color-btn-cancel: #d8b5b5;
+  --color-btn-cancel-hover: #c69f9f;
+}
+.wrapper {
+  width: 100%;
+}
 html {
   font-size: 16px;
 }
 
 body {
-  font-family: var(--primary-font);
-  color: var(--text-color);
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+header,
+footer {
+  color: var(--color-text-light);
 }
 h1,
 h2,
 h3 {
-  font-family: var(--secondary-font);
+  font-family: var(--font-secondary);
   color: var(--third-color);
 }
 h2 {
@@ -41,6 +63,10 @@ h3 {
   font-size: 2.5rem;
   font-weight: 400;
   margin: 1.5rem 0;
+}
+button,
+a {
+  cursor: pointer;
 }
 a {
   color: var(--text-color);
@@ -55,8 +81,10 @@ a:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
+  max-width: 1440px;
+  padding: 2rem;
 }
 .confirm-btn {
   background-color: var(--confirm-btn-color);
@@ -95,5 +123,7 @@ a:hover {
   }
   .container {
     width: 95%;
+    height: auto;
+    padding: 0.5rem;
   }
 }

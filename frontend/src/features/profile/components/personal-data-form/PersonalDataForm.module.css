@@ -1,0 +1,40 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  height: 100%;
+  gap: 4rem;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.fields > label > input {
+  all: unset;
+  height: 2rem;
+  background-color: none;
+  border: 1px solid var(--third-color);
+  border-radius: 2px;
+  padding: 5px;
+  width: 12rem;
+  cursor: pointer;
+}
+.fields > label {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--third-color);
+}
+.fields > label > p {
+  width: 6rem;
+}
+.error {
+  color: var(--cancel-btn-color);
+}
+
+.buttons {
+  display: flex;
+  gap: 2rem;
+}

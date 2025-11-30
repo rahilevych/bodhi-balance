@@ -1,0 +1,58 @@
+.wrapper {
+  position: relative;
+}
+.wrapper :global(.swiper) {
+  padding-bottom: 3rem;
+}
+
+.wrapper :global(.swiper-pagination) {
+  bottom: 0 !important;
+  color: yellow !important;
+}
+:global(.swiper-pagination-bullet-active) {
+  background: var(--color-swiper-accent) !important;
+}
+
+.prev,
+.next {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-swiper-accent);
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  transform: translateY(-40%);
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+}
+.prev {
+  left: -32px;
+}
+.next {
+  right: -32px;
+}
+.prev,
+.next {
+  visibility: visible;
+  transition: background-color 0.5s ease-in-out;
+}
+.prev:hover,
+.next:hover {
+  background-color: lightpink;
+}
+.hidden {
+  visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  .next,
+  .prev {
+    display: none;
+  }
+}

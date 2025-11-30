@@ -1,0 +1,57 @@
+import { useRef, useState } from 'react';
+
+import { motion, AnimatePresence } from 'framer-motion';
+import styles from './Dropdown.module.css';
+import { useClickOutside } from '../../../hooks/useClickOutside';
+interface subSection {
+  name: string;
+  link: string;
+}
+interface DropdownProps {
+  title: string;
+  subSections?: subSection[];
+  onSelect?: (link: string) => void;
+  className?: string;
+}
+export const Dropdown = ({
+  title,
+  subSections,
+  onSelect,
+  className,
+}: DropdownProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref, () => setIsOpen(false));
+
+  return (
+    <div className={`${styles.dropdown} ${className}`} ref={ref}>
+      <span className={styles.link} onClick={() => setIsOpen((prev) => !prev)}>
+        {title}
+      </span>
+      {subSections && (
+        <AnimatePresence>
+          {isOpen && (
+            <motion.ul
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className={styles.dropdownMenu}
+            >
+              {subSections.map((sub, index) => (
+                <li key={index}>
+                  <span
+                    className={styles.sublink}
+                    onClick={() => onSelect?.(sub.link)}
+                  >
+                    {sub.name}
+                  </span>
+                </li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
+      )}
+    </div>
+  );
+};

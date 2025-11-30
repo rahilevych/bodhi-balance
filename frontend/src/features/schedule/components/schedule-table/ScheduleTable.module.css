@@ -1,0 +1,70 @@
+.tableWrapper {
+  margin: 4rem auto;
+  width: 90%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+thead th {
+  padding: 12px;
+  font-weight: 500;
+  text-align: left;
+  border-bottom: 1px solid var(--color-text);
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+tbody td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-text);
+  color: var(--text-color);
+}
+
+tbody tr:hover {
+  background-color: var(--color-bg-3);
+}
+.icon {
+  width: auto;
+  font-weight: normal;
+  font-size: 1rem;
+}
+
+.bookBtn {
+  width: 100%;
+  background-color: var(--color-header-bg);
+  color: var(--color-text-light);
+}
+.bookBtnDeact {
+  cursor: not-allowed;
+}
+.bookBtn:hover {
+  background-color: var(--color-header-bg);
+}
+.cardsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .tableWrapper {
+    width: 100%;
+  }
+  .icon {
+    display: none;
+  }
+  .table {
+    font-size: 0.75rem;
+  }
+}

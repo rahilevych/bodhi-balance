@@ -1,0 +1,11 @@
+.pricing {
+  padding: 5rem 2rem;
+  background-color: var(--color-bg-3);
+}
+.plans {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}

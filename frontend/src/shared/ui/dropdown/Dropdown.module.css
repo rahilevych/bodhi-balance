@@ -1,0 +1,37 @@
+.dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: fit-content;
+}
+.link {
+  cursor: pointer;
+}
+
+.dropdownMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: absolute;
+  list-style: none;
+  top: 60px;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  width: 150px;
+}
+
+.dropdownMenu li {
+  background-color: transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem;
+  transition: all 0.3s ease-in-out;
+}
+.dropdownMenu li:hover {
+  background-color: var(--color-btn-default-hover);
+}

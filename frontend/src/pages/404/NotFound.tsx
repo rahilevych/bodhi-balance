@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './NotFound.module.css';
-import Button from '../../components/Button/Button';
+
 import { FaTimesCircle } from 'react-icons/fa';
+import Button from '../../shared/ui/button/Button';
 
 export const NotFound = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export const NotFound = () => {
         </h1>
         <p>Oops! The page you're looking for doesn't exist.</p>
         <div className={styles.actions}>
-          <Button text='Go Home' onClick={() => navigate('/')} />
+          <Button onClick={() => navigate('/')}>Go Home</Button>
         </div>
       </div>
     </div>

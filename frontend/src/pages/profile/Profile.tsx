@@ -1,17 +1,19 @@
 import { useState } from 'react';
-import { ProfileHeader } from '../../components/Header/ProfileHeader';
-import { ProfileNav } from '../../components/Nav/ProfileNav';
-import { PersonalData } from '../../components/profile/PersonalData';
+import { ProfileHeader } from '../../layouts/header/components/profile-header/ProfileHeader';
+import { ProfileNav } from '../../features/nav/components/profile-nav/ProfileNav';
+import { PersonalData } from '../../features/profile/components/personal-data/PersonalData';
 import styles from './Profile.module.css';
-import { SubscriptionSection } from '../../components/profile/Subscription';
-import { Bookings } from '../../components/profile/Bookings';
-import { Payments } from '../../components/profile/Payments';
-import Button from '../../components/Button/Button';
-import { useNavigate } from 'react-router';
+import { SubscriptionSection } from '../../features/subscription/components/subscription/Subscription';
+import { Bookings } from '../../features/booking/components/bookings/Bookings';
+
+import { useNavigate } from 'react-router-dom';
+import Button from '../../shared/ui/button/Button';
+import { Payments } from '../../features/payment/components/payments/Payments';
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState('Profile');
   const navigate = useNavigate();
+
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
@@ -35,10 +37,9 @@ const Profile = () => {
             )}
           </div>
           <div className={styles.button}>
-            <Button
-              className={styles.btn}
-              text='Back'
-              onClick={() => navigate(-1)}></Button>
+            <Button className={styles.btn} onClick={() => navigate(-1)}>
+              Back
+            </Button>
           </div>
         </div>
       </div>

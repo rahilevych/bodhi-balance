@@ -10,9 +10,12 @@ export default {
     ...tsJestTransformCfg,
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-
   moduleNameMapper: {
     '\\.module\\.css$': 'identity-obj-proxy',
     '\\.css$': '<rootDir>/__mocks__/styleMock.js',
   },
+  collectCoverage: true,
+  coverageDirectory: '<rootDir>/coverage',
+  coverageReporters: ['text', 'html'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/src/main.tsx'],
 };

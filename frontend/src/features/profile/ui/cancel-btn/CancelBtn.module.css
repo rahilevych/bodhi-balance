@@ -1,0 +1,6 @@
+.cancel {
+  background-color: var(--color-btn-cancel);
+}
+.cancel:hover {
+  background-color: var(--color-btn-cancel-hover);
+}

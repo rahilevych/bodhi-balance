@@ -1,0 +1,19 @@
+.logo {
+  display: flex;
+  align-items: space-between;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.logo span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--secondary-font);
+  color: var(--third-color);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  text-align: center;
+  width: 7rem;
+}

@@ -1,0 +1,27 @@
+.trainers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-bg-1);
+  width: 100%;
+  height: auto;
+  padding: 5rem 2rem;
+}
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+.slider {
+  width: 40%;
+}
+@media (max-width: 900px) {
+  .slider {
+    width: 100%;
+  }
+  .selectedTrainer {
+    display: none;
+  }
+}

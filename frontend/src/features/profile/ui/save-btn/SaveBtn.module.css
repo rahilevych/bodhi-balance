@@ -1,0 +1,7 @@
+.confirm {
+  background-color: var(--color-btn-confirm);
+}
+
+.confirm:hover {
+  background-color: var(--color-btn-confirm-hover);
+}

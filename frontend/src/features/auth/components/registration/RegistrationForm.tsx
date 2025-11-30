@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../../../shared/ui/button/Button';
 import { useRegistration } from '../../hooks/useRegistration';
 import { useNavigate } from 'react-router';
+import { Loader } from '../../../../shared/ui/loader/Loader';
 
 const schema = z.object({
   fullName: z.string().min(3, 'Name is required!'),
@@ -14,7 +15,7 @@ const schema = z.object({
 
 export type RegisterFormData = z.infer<typeof schema>;
 export const RegistrationForm = () => {
-  const { mutate: registeration } = useRegistration();
+  const { mutate: registeration, isPending } = useRegistration();
   const navigate = useNavigate();
   const {
     register,
@@ -27,7 +28,7 @@ export const RegistrationForm = () => {
     registeration(data);
     navigate('/');
   };
-
+  if (isPending) return <Loader />;
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <input {...register('fullName')} placeholder='Full Name' />

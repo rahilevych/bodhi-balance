@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../../../shared/ui/button/Button';
 import { useLogin } from '../../hooks/useLogin';
 import { useNavigate } from 'react-router';
+import { Loader } from '../../../../shared/ui/loader/Loader';
 
 const schema = z.object({
   email: z.string().min(1, 'Email is required!').email('Invalid email format'),
@@ -15,7 +16,7 @@ export type LoginFormData = z.infer<typeof schema>;
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const { mutate: login } = useLogin();
+  const { mutate: login, isPending } = useLogin();
   const {
     register,
     handleSubmit,
@@ -28,7 +29,7 @@ export const LoginForm = () => {
     login(data);
     navigate('/');
   };
-
+  if (isPending) return <Loader />;
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <input {...register('email')} placeholder='Email' />

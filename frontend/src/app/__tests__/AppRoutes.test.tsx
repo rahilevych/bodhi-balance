@@ -1,17 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MemoryRouter } from 'react-router';
 import { useProfile } from '../../features/auth/hooks/useProfile';
 import { render, screen } from '@testing-library/react';
 import { AppRoutes } from '../routes/AppRoutes';
 import { AppProvider } from '../../context/AppContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
-jest.mock('../../shared/api/axiosInstance.ts', () => ({
-  get: jest.fn(),
-  post: jest.fn(),
-  put: jest.fn(),
-  delete: jest.fn(),
-}));
 
 jest.mock('../../features/auth/hooks/useProfile');
 const mockedUseProfile = useProfile as jest.Mock;
@@ -34,22 +26,6 @@ jest.mock('../../pages/landing/Landing', () => ({
   __esModule: true,
   default: () => <div>Landing Page</div>,
 }));
-
-jest.mock('swiper/react', () => ({
-  Swiper: ({ children }: any) => <div data-testid='swiper'>{children}</div>,
-  SwiperSlide: ({ children }: any) => (
-    <div data-testid='swiper-slide'>{children}</div>
-  ),
-}));
-jest.mock('swiper/modules', () => ({
-  Pagination: ({ children }: any) => (
-    <div data-testid='pagination'>{children}</div>
-  ),
-}));
-jest.mock('swiper/swiper-bundle.css', () => ({}));
-jest.mock('swiper/css/pagination', () => ({}));
-jest.mock('swiper/css/navigation', () => ({}));
-jest.mock('swiper/css', () => ({}));
 
 describe('App Routes', () => {
   afterEach(() => {

@@ -25,7 +25,6 @@ export const AppRoutes = () => {
           <Route path='/' element={<Landing />} />
           <Route path='*' element={<NotFound />} />
           <Route path='/auth' element={<AuthPage />} />
-
           <Route
             path='/profile'
             element={<ProtectedRoute element={<Profile />} />}

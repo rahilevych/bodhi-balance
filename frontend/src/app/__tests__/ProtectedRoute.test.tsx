@@ -9,6 +9,7 @@ jest.mock('../../shared/api/axiosInstance.ts', () => ({
   put: jest.fn(),
   delete: jest.fn(),
 }));
+
 jest.mock('../../features/auth/hooks/useProfile.ts');
 const mockedUseProfile = useProfile as jest.Mock;
 

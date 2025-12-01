@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Authorization } from '../components/Authorization';
+import { Authorization } from '../components/authorization/Authorization';
 import '@testing-library/jest-dom';
 jest.mock('../../services/authService', () => ({
   registerUser: jest.fn(),

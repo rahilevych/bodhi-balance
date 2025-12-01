@@ -31,7 +31,11 @@ export const LoginForm = () => {
   };
   if (isPending) return <Loader />;
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      data-testid='login-form'
+    >
       <input {...register('email')} placeholder='Email' />
       {errors.email && <p>{errors.email.message}</p>}
       <input type='password' {...register('password')} placeholder='Password' />

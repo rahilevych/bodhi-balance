@@ -2,16 +2,23 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Authorization } from '../components/authorization/Authorization';
 import '@testing-library/jest-dom';
-jest.mock('../../services/authService', () => ({
-  registerUser: jest.fn(),
-  loginUser: jest.fn(),
+
+const navigateMock = jest.fn();
+jest.mock('../hooks/useLogin', () => ({
+  useLogin: jest.fn(() => ({
+    mutate: jest.fn(),
+    isPending: false,
+  })),
 }));
-jest.mock('../../context/AppContext', () => ({
-  useAppContext: () => ({
-    setUser: jest.fn(),
-    setIsAuthenticated: jest.fn(),
-    setNotification: jest.fn(),
-  }),
+jest.mock('../hooks/useRegistration.ts', () => ({
+  useRegistration: jest.fn(() => ({
+    mutate: jest.fn(),
+    isPending: false,
+  })),
+}));
+jest.mock('react-router', () => ({
+  ...jest.requireActual('react-router'),
+  useNavigate: () => navigateMock,
 }));
 describe('Authorization component', () => {
   test('renders Sign in form by default', () => {
@@ -25,6 +32,11 @@ describe('Authorization component', () => {
       screen.getByRole('button', { name: /sign in/i }),
     ).toBeInTheDocument();
   });
+  test('renders Logo component', () => {
+    render(<Authorization />);
+    expect(screen.getByTestId('logo')).toBeInTheDocument();
+  });
+
   test('switches to Sign up form when clicking "Sign up" link', async () => {
     render(<Authorization />);
     const signUpLink = screen.getByText(/Sign up/i);

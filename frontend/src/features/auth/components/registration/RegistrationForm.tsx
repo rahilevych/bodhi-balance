@@ -30,7 +30,11 @@ export const RegistrationForm = () => {
   };
   if (isPending) return <Loader />;
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      data-testid='registration-form'
+    >
       <input {...register('fullName')} placeholder='Full Name' />
       {errors.fullName && <p>{errors.fullName.message}</p>}
       <input {...register('email')} placeholder='Email' />

@@ -4,7 +4,7 @@ import { useGetSubscription } from '../../hooks/useGetSubscription';
 
 export const SubscriptionSection = () => {
   const { data: subscription, isPending } = useGetSubscription();
-  if (isPending) return <p>loading</p>;
+  if (isPending) return <p>Loading...</p>;
 
   if (!subscription || Array.isArray(subscription)) {
     return (

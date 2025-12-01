@@ -20,7 +20,7 @@ export const Bookings = () => {
 
   const { data: bookings, isPending } = useGetBookingsByUser();
   const cancelBooking = useCancelBooking();
-  if (isPending) return <p>loading</p>;
+  if (isPending) return <p>Loading...</p>;
   const now = new Date();
 
   const filtered = Array.isArray(bookings)

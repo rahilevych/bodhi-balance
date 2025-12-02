@@ -5,7 +5,8 @@ export const useLogin = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: AuthService.loginUser,
+    mutationFn: (data: { email: string; password: string }) =>
+      AuthService.loginUser(data),
     onSuccess: (data) => {
       queryClient.setQueryData(['currentUser'], data.user);
     },

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { Booking } from '../../../../types/Types';
 import { convertDateToString } from '../../../../utils/dateHelpers';
 
-import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
 import styles from './BookingsCard.module.css';
 import Button from '../../../../shared/ui/button/Button';
+import { ConfirmationWindow } from '../../../../shared/modal/ConfirmationWindow';
 interface BookingsCardProps {
   booking: Booking;
   handleCancel: (bookingId: string, trainingId: string) => void;

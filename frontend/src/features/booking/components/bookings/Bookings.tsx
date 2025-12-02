@@ -3,12 +3,13 @@ import { Booking } from '../../../../types/Types';
 import { convertDateToString } from '../../../../utils/dateHelpers';
 import styles from './Bookings.module.css';
 import { BookingsCard } from '../booking-card/BookingsCard';
-import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
+
 import { filterBookings } from '../../../../utils/filterBookings';
 import Button from '../../../../shared/ui/button/Button';
 import { useGetBookingsByUser } from '../../hooks/useGetBookingByUser';
 import { useCancelBooking } from '../../hooks/useCancelBooking';
 import { useAppContext } from '../../../../context/AppContext';
+import { ConfirmationWindow } from '../../../../shared/modal/ConfirmationWindow';
 
 export const Bookings = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

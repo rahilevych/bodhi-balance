@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { NotificationWindow } from '../styles/modal/NotificationWindow';
+
 import { useWindowSize } from '../hooks/useWindowSize';
+import { NotificationWindow } from '../shared/modal/NotificationWindow';
 
 interface AppContextType {
   openModal: () => void;

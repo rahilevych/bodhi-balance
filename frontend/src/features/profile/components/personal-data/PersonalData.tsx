@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styles from './PersonalData.module.css';
 import { useNavigate } from 'react-router';
-import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
 import { useProfile } from '../../../auth/hooks/useProfile';
 import { useDeleteUser } from '../../hooks/useDeleteUser';
 import { PersonalDataForm } from '../personal-data-form/PersonalDataForm';
 import { DeleteBtn } from '../../ui/delete-btn/DeleteBtn';
 import { EditBtn } from '../../ui/edit-btn/EditBtn';
+import { ConfirmationWindow } from '../../../../shared/modal/ConfirmationWindow';
 
 export const PersonalData = () => {
   const navigate = useNavigate();

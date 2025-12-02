@@ -1,142 +1,140 @@
-// import { screen, render, within } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import '@testing-library/jest-dom';
-// import { Bookings } from '../components/bookings/Bookings';
-// import { useFetchData } from '../../../hooks/useFetchData';
-// import { bookingsMockData } from '../../../__mocks__/bookingsMock';
-// import { cancelBooking } from '../../../services/bookingsService';
+import { screen, render, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+import { Bookings } from '../components/bookings/Bookings';
+import { bookingsMockData } from '../../../__mocks__/bookingsMock';
+import { useGetBookingsByUser } from '../hooks/useGetBookingByUser';
+import { useCancelBooking } from '../hooks/useCancelBooking';
+import { useAppContext } from '../../../context/AppContext';
 
-// jest.mock('../../services/bookingsService', () => ({
-//   cancelBooking: jest.fn(),
-//   getBookingsByUserId: jest.fn(),
-// }));
-// jest.mock('../../context/AppContext', () => ({
-//   useAppContext: () => ({
-//     setNotification: jest.fn(),
-//     color: '#000',
-//   }),
-// }));
-// jest.mock('react-spinners', () => ({
-//   BounceLoader: ({ loading }: { loading: boolean }) =>
-//     loading ? <div data-testid='loader'>Loading...</div> : null,
-// }));
-// jest.mock('../../hooks/useFetchData', () => ({
-//   useFetchData: jest.fn(),
-// }));
-// jest.mock('../../services/authService', () => ({
-//   getMe: jest.fn(),
-// }));
+const mutateMock = jest.fn();
 
-// describe('Bookings', () => {
-//   const user = userEvent.setup();
+jest.mock('../hooks/useGetBookingByUser', () => ({
+  useGetBookingsByUser: jest.fn(),
+}));
 
-//   beforeEach(() => {
-//     jest.clearAllMocks();
-//     (useFetchData as jest.Mock).mockReturnValue({
-//       data: bookingsMockData,
-//       loading: false,
-//       error: null,
-//       refetch: jest.fn(),
-//     });
-//   });
-//   test('renders correct filter sections', () => {
-//     render(<Bookings />);
-//     expect(screen.getByText(/upcoming/i)).toBeInTheDocument();
-//     expect(screen.getByText(/completed/i)).toBeInTheDocument();
-//     expect(screen.getByText(/cancelled/i)).toBeInTheDocument();
-//   });
-//   test('renders correct table headers', () => {
-//     render(<Bookings />);
-//     expect(screen.getByText('№')).toBeInTheDocument();
-//     expect(screen.getByText('Training')).toBeInTheDocument();
-//     expect(screen.getByText('Booking date')).toBeInTheDocument();
-//     expect(screen.getByText('Training date')).toBeInTheDocument();
-//     expect(screen.getByText('Status')).toBeInTheDocument();
-//     expect(screen.getByText('Cancellation')).toBeInTheDocument();
-//   });
-//   test('renders correct amount of rows for activeTab "upcoming" ', () => {
-//     const upcomingBookings = bookingsMockData.filter(
-//       (b) => b.status === 'booked',
-//     );
-//     render(<Bookings />);
-//     expect(screen.getByText(/upcoming/i)).toHaveClass('active');
-//     const rows = screen.getAllByRole('row');
-//     expect(rows.length - 1).toBe(upcomingBookings.length);
-//   });
-//   test('renders correct amount of rows for activeTab "completed" ', async () => {
-//     const upcomingBookings = bookingsMockData.filter(
-//       (b) => b.status === 'completed',
-//     );
-//     render(<Bookings />);
-//     await user.click(screen.getByText(/completed/i));
-//     expect(screen.getByText('Completed')).toHaveClass('active');
-//     const rows = screen.getAllByRole('row');
-//     expect(rows.length - 1).toBe(upcomingBookings.length);
-//   });
-//   test('renders correct amount of rows for activeTab "cancelled" ', async () => {
-//     const upcomingBookings = bookingsMockData.filter(
-//       (b) => b.status === 'cancelled',
-//     );
-//     render(<Bookings />);
-//     await user.click(screen.getByText(/cancelled/i));
-//     expect(screen.getByText('Cancelled')).toHaveClass('active');
-//     const rows = screen.getAllByRole('row');
-//     expect(rows.length - 1).toBe(upcomingBookings.length);
-//   });
+jest.mock('../hooks/useCancelBooking', () => ({
+  useCancelBooking: jest.fn(),
+}));
 
-//   test('renders correct amount of rows for activeTab "cancelled" ', async () => {
-//     (useFetchData as jest.Mock).mockReturnValue({
-//       data: [],
-//       loading: false,
-//       error: new Error(),
-//       refetch: jest.fn(),
-//     });
-//     render(<Bookings />);
+jest.mock('../../../context/AppContext.tsx', () => ({
+  useAppContext: jest.fn(),
+}));
 
-//     expect(
-//       screen.getByText(/Something went wrong. Please try again later/i),
-//     ).toBeInTheDocument();
-//   });
-//   test('renders correct amount of rows for activeTab "cancelled" ', async () => {
-//     (useFetchData as jest.Mock).mockReturnValue({
-//       data: [],
-//       loading: false,
-//       error: null,
-//       refetch: jest.fn(),
-//     });
-//     render(<Bookings />);
+describe('Bookings', () => {
+  const user = userEvent.setup();
 
-//     expect(
-//       screen.getByText(/You haven't made any bookings yet./i),
-//     ).toBeInTheDocument();
-//   });
-//   test('cancels booking if user clicked canceled btn and confirm it ', async () => {
-//     (cancelBooking as jest.Mock).mockReturnValue({ undefined });
-//     render(<Bookings />);
-//     const cancelBtn = screen.getByRole('button', { name: /cancel/i });
-//     expect(cancelBtn).toBeInTheDocument();
-//     await user.click(cancelBtn);
-//     expect(
-//       screen.getByText(/Are you sure you want to cancel?/i),
-//     ).toBeInTheDocument();
-//     const confirmButton = screen.getByRole('button', { name: /yes/i });
-//     await user.click(confirmButton);
-//     expect(cancelBooking).toHaveBeenCalledWith('booking1', 'training1');
-//   });
-//   test('doesnt cancel booking if user clicked canceled btn but didnt confirm it ', async () => {
-//     (cancelBooking as jest.Mock).mockReturnValue({ undefined });
-//     render(<Bookings />);
-//     const cancelBtn = screen.getByRole('button', { name: /cancel/i });
-//     expect(cancelBtn).toBeInTheDocument();
-//     await user.click(cancelBtn);
-//     const confirmationWindow = screen.getByTestId('confirm-window');
-//     expect(
-//       screen.getByText(/Are you sure you want to cancel?/i),
-//     ).toBeInTheDocument();
-//     const cancelButton = within(confirmationWindow).getByRole('button', {
-//       name: /cancel/i,
-//     });
-//     await user.click(cancelButton);
-//     expect(cancelBooking).not.toHaveBeenCalledWith('booking1', 'training1');
-//   });
-// });
+  beforeEach(() => {
+    jest.clearAllMocks();
+
+    (useGetBookingsByUser as jest.Mock).mockReturnValue({
+      data: bookingsMockData,
+      isPending: false,
+    });
+
+    (useCancelBooking as jest.Mock).mockReturnValue({
+      mutate: mutateMock,
+    });
+
+    (useAppContext as jest.Mock).mockReturnValue({
+      isMobile: false,
+    });
+  });
+
+  test('renders filter tabs', () => {
+    render(<Bookings />);
+    expect(screen.getByText(/upcoming/i)).toBeInTheDocument();
+    expect(screen.getByText(/completed/i)).toBeInTheDocument();
+    expect(screen.getByText(/cancelled/i)).toBeInTheDocument();
+  });
+
+  test('renders table headers', () => {
+    render(<Bookings />);
+    [
+      '№',
+      'Training',
+      'Booking date',
+      'Training date',
+      'Status',
+      'Cancellation',
+    ].forEach((text) => expect(screen.getByText(text)).toBeInTheDocument());
+  });
+
+  test('renders correct rows for upcoming bookings', () => {
+    render(<Bookings />);
+    const rows = screen.getAllByRole('row').slice(1);
+    const upcomingBookings = bookingsMockData.filter(
+      (b) => b.status === 'booked',
+    );
+    expect(rows.length).toBe(upcomingBookings.length);
+    rows.forEach((row) => expect(row).toHaveTextContent(/booked/i));
+  });
+
+  test('renders correct rows for completed bookings', async () => {
+    render(<Bookings />);
+    await user.click(screen.getByText(/completed/i));
+    const rows = screen.getAllByRole('row').slice(1);
+    const completedBookings = bookingsMockData.filter(
+      (b) => b.status === 'completed',
+    );
+    expect(rows.length).toBe(completedBookings.length);
+    rows.forEach((row) => expect(row).toHaveTextContent(/completed/i));
+  });
+
+  test('renders correct rows for cancelled bookings', async () => {
+    render(<Bookings />);
+    await user.click(screen.getByText(/cancelled/i));
+    const rows = screen.getAllByRole('row').slice(1);
+    const cancelledBookings = bookingsMockData.filter(
+      (b) => b.status === 'cancelled',
+    );
+    expect(rows.length).toBe(cancelledBookings.length);
+    rows.forEach((row) => expect(row).toHaveTextContent(/cancelled/i));
+  });
+
+  test('renders empty state if no bookings', () => {
+    (useGetBookingsByUser as jest.Mock).mockReturnValue({
+      data: [],
+      isPending: false,
+    });
+    render(<Bookings />);
+    expect(screen.getByText(/No bookings found/i)).toBeInTheDocument();
+  });
+
+  test('opens and confirms cancellation', async () => {
+    render(<Bookings />);
+    const cancelBtn = screen.getAllByRole('button', { name: /cancel/i })[0];
+    await user.click(cancelBtn);
+    expect(
+      await screen.findByText(/Are you sure you want to cancel/i),
+    ).toBeInTheDocument();
+
+    const confirmBtn = screen.getByRole('button', { name: /yes/i });
+    await user.click(confirmBtn);
+
+    const bookingId = bookingsMockData[0]._id;
+    const trainingId = bookingsMockData[0].training._id;
+    expect(mutateMock).toHaveBeenCalledWith({ bookingId, trainingId });
+  });
+
+  test('cancellation modal can be canceled', async () => {
+    render(<Bookings />);
+    const cancelBtn = screen.getAllByRole('button', { name: /cancel/i })[0];
+    await user.click(cancelBtn);
+
+    const modal = screen.getByTestId('confirm-window');
+    const cancelModalBtn = within(modal).getByRole('button', {
+      name: /cancel/i,
+    });
+    await user.click(cancelModalBtn);
+
+    expect(mutateMock).not.toHaveBeenCalled();
+  });
+  test('renders mobile view with BookingsCard', () => {
+    (useAppContext as jest.Mock).mockReturnValue({ isMobile: true });
+    render(<Bookings />);
+    expect(
+      screen.getByText(bookingsMockData[0].training.yogaStyle_id.title),
+    ).toBeInTheDocument();
+  });
+});

@@ -3,7 +3,6 @@ import { Booking } from '../../../../types/Types';
 import { convertDateToString } from '../../../../utils/dateHelpers';
 import styles from './Bookings.module.css';
 import { BookingsCard } from '../booking-card/BookingsCard';
-
 import { filterBookings } from '../../../../utils/filterBookings';
 import Button from '../../../../shared/ui/button/Button';
 import { useGetBookingsByUser } from '../../hooks/useGetBookingByUser';

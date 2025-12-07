@@ -3,7 +3,11 @@ import styles from './Pricing.module.css';
 
 export const PricingSkeleton = () => {
   return (
-    <section id='pricing' className={styles.pricing}>
+    <section
+      id='pricing'
+      className={styles.pricing}
+      data-testid='pricing-skeleton'
+    >
       <div className='container'>
         <h2>Pricing plans</h2>
         <div className={styles.plans}>

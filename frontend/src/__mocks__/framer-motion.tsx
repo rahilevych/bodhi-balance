@@ -5,4 +5,7 @@ export const motion = {
   li: ({ children, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
     <li {...props}>{children}</li>
   ),
+  nav: ({ children, ...props }: React.HTMLAttributes<HTMLElement>) => (
+    <nav {...props}>{children}</nav>
+  ),
 };

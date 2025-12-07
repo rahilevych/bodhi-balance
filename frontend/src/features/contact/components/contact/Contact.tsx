@@ -29,7 +29,7 @@ const Contact = () => {
             <div className={styles.image}>
               <img
                 src='https://i.pinimg.com/736x/d0/00/b8/d000b850c636e2f0afdb6b627f24a59a.jpg'
-                alt=''
+                alt='contact-img'
               />
             </div>
           </div>

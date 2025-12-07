@@ -5,7 +5,7 @@ import { AppProvider, useAppContext } from '../AppContext';
 import { render, renderHook, screen } from '@testing-library/react';
 import * as windowHook from '../../hooks/useWindowSize';
 
-jest.mock('../../styles/modal/NotificationWindow.tsx', () => ({
+jest.mock('../../shared/modal/NotificationWindow.tsx', () => ({
   NotificationWindow: ({ message, onClose }: any) => (
     <div data-testid='notification'>
       <span>{message}</span>

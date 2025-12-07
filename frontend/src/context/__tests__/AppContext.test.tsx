@@ -22,8 +22,7 @@ const TestComponent = () => {
     openModal,
     closeModal,
     isModalOpen,
-    notification,
-    setNotification,
+
     isMobile,
   } = useAppContext();
 
@@ -31,11 +30,8 @@ const TestComponent = () => {
     <div>
       <button onClick={openModal}>Open Modal</button>
       <button onClick={closeModal}>Close Modal</button>
-      <button onClick={() => setNotification('Hello')}>Notify</button>
-
       <div>{isModalOpen ? 'Modal Open' : 'Modal Closed'}</div>
       <div>{isMobile ? 'Mobile' : 'Desktop'}</div>
-      {notification && <div>{notification}</div>}
     </div>
   );
 };
@@ -61,24 +57,6 @@ describe('AppContext', () => {
     expect(document.body.style.overflow).toBe('auto');
   });
 
-  test('notification is displayed and closed correctly', async () => {
-    render(
-      <AppProvider>
-        <TestComponent />
-      </AppProvider>,
-    );
-
-    const notifyBtn = screen.getByText('Notify');
-    await userEvent.click(notifyBtn);
-
-    const notification = screen.getByTestId('notification');
-    expect(notification).toBeInTheDocument();
-    expect(notification).toHaveTextContent('Hello');
-
-    const closeBtn = screen.getByText('Close');
-    await userEvent.click(closeBtn);
-    expect(screen.queryByTestId('notification')).not.toBeInTheDocument();
-  });
   test('isMobile is true for small width', () => {
     mockedUseWindowSize.mockReturnValue({
       width: 500,

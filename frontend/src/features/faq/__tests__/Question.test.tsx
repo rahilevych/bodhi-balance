@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { Question } from '../components/question/Question';
+
 const mockQuestion = {
   _id: 'q1',
   question: 'What should I bring to a yoga class?',

@@ -3,7 +3,7 @@ import styles from './FAQ.module.css';
 
 export const FAQSkeleton = () => {
   return (
-    <section id='faq' className={styles.faq}>
+    <section id='faq' className={styles.faq} data-testid='faq-skeleton'>
       <div className='container'>
         <h2>FAQ</h2>
         <div className={styles.content}>

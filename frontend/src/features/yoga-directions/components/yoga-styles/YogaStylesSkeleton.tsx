@@ -6,7 +6,7 @@ import { useAppContext } from '../../../../context/AppContext';
 export const YogaStylesSkeleton = () => {
   const { isMobile } = useAppContext();
   return (
-    <section className={styles.yogastyles}>
+    <section className={styles.yogastyles} data-testid='skeleton'>
       <div className='container'>
         <h2>Yoga styles</h2>
 

@@ -6,7 +6,7 @@ import Button from '../../../../shared/ui/button/Button';
 import { useSendMessage } from '../../hooks/useSendMessage';
 
 const schema = z.object({
-  fullName: z.string().min(1, 'Name ist required!'),
+  fullName: z.string().min(1, 'Name is required!'),
   email: z.string().min(1, 'Email is required!').email('Invalid email format!'),
   message: z.string().min(1, 'Message is required!'),
 });

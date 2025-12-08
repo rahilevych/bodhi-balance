@@ -6,9 +6,9 @@ interface Props {
 
 export const FullCard = ({ currentTrainer: currentTrainer }: Props) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-testid='full-card'>
       <div className={styles.photo}>
-        <img src={currentTrainer?.photo} alt='' />
+        <img src={currentTrainer?.photo} alt='trainer-img' />
       </div>
       <div className={styles.info}>
         <h4>{currentTrainer?.fullName}</h4>

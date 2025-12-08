@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import styles from '../Form.module.css';
+import styles from '../../styles/Form.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Button from '../../../../shared/ui/button/Button';
@@ -30,7 +30,11 @@ export const RegistrationForm = () => {
   };
   if (isPending) return <Loader />;
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={styles.form}
+      onSubmit={handleSubmit(onSubmit)}
+      data-testid='registration-form'
+    >
       <input {...register('fullName')} placeholder='Full Name' />
       {errors.fullName && <p>{errors.fullName.message}</p>}
       <input {...register('email')} placeholder='Email' />

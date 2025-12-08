@@ -1,50 +1,87 @@
-// import { render, screen, waitFor } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import '@testing-library/jest-dom';
-// import { PlanDetailed } from '../components/plan-detailed/PlanDetailed';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { PlanDetailed } from '../components/plan-detailed/PlanDetailed';
+import { useGetPlan } from '../hooks/useGetPlan';
+import { useCreateCheckoutSession } from '../../payment/hooks/useCreateCheckoutSession';
+import { MemoryRouter } from 'react-router-dom';
 
-// const mockStartCheckout = jest.fn();
+jest.mock('../hooks/useGetPlan');
+jest.mock('../../payment/hooks/useCreateCheckoutSession');
 
-// jest.mock('../../hooks/useCheckout', () => ({
-//   useCheckout: () => ({
-//     startCheckout: mockStartCheckout,
-//   }),
-// }));
-// jest.mock('../../services/planService', () => ({
-//   getPlanById: jest.fn(),
-// }));
+const mockPlan = {
+  _id: '1',
+  type: 'subscription',
+  title: 'Monthly Plan',
+  description: 'Plan description',
+  price: 50,
+  priceId: 'p1',
+};
 
-// jest.mock('../../hooks/useFetchDataWithParam', () => ({
-//   useFetchDataWithParam: () => ({
-//     data: {
-//       _id: '123',
-//       type: 'Pack',
-//       title: '5 Pack',
-//       description: 'Best for professionals',
-//       price: 49,
-//       priceId: 'priceId',
-//     },
-//     loading: false,
-//     error: null,
-//   }),
-// }));
-// describe('PlanDetailed', () => {
-//   beforeEach(() => {
-//     mockStartCheckout.mockClear();
-//   });
-//   test('render correctly plan data', () => {
-//     render(<PlanDetailed id='123' />);
-//     expect(screen.getByText('5 Pack')).toBeInTheDocument();
-//     expect(screen.getByText('Price:')).toBeInTheDocument();
-//     expect(screen.getByText('49 $')).toBeInTheDocument();
-//     expect(screen.getByRole('button', { name: /buy/i })).toBeInTheDocument();
-//   });
-//   test('by button click start chekoutSession', async () => {
-//     const user = userEvent.setup();
-//     render(<PlanDetailed id='123' />);
-//     const button = screen.getByRole('button', { name: /buy/i });
-//     await user.click(button);
-//     expect(mockStartCheckout).toHaveBeenCalledTimes(1);
-//     expect(mockStartCheckout).toHaveBeenCalledWith('123', 'subscription');
-//   });
-// });
+describe('PlanDetailed component', () => {
+  const mutateMock = jest.fn();
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (useGetPlan as jest.Mock).mockReturnValue({ data: mockPlan });
+    (useCreateCheckoutSession as jest.Mock).mockReturnValue({
+      mutate: mutateMock,
+      isPending: false,
+    });
+  });
+
+  test('renders plan details', () => {
+    render(
+      <MemoryRouter>
+        <PlanDetailed id='1' />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText(mockPlan.title)).toBeInTheDocument();
+    expect(screen.getByText(mockPlan.description)).toBeInTheDocument();
+    expect(screen.getByText(`Price:`)).toBeInTheDocument();
+    expect(screen.getByText(`${mockPlan.price} $`)).toBeInTheDocument();
+    expect(screen.getByText('Buy Checkout')).toBeInTheDocument();
+  });
+
+  test('calls startCheckout on button click', () => {
+    render(
+      <MemoryRouter>
+        <PlanDetailed id='1' />
+      </MemoryRouter>,
+    );
+
+    const button = screen.getByText('Buy Checkout');
+    fireEvent.click(button);
+
+    expect(mutateMock).toHaveBeenCalledWith({
+      productId: mockPlan._id,
+      type: 'subscription',
+    });
+  });
+
+  test('shows processing text when isPending is true', () => {
+    (useCreateCheckoutSession as jest.Mock).mockReturnValue({
+      mutate: mutateMock,
+      isPending: true,
+    });
+
+    render(
+      <MemoryRouter>
+        <PlanDetailed id='1' />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText('Buy Processing...')).toBeInTheDocument();
+  });
+
+  test('returns null if plan is undefined', () => {
+    (useGetPlan as jest.Mock).mockReturnValue({ data: undefined });
+
+    const { container } = render(
+      <MemoryRouter>
+        <PlanDetailed id='1' />
+      </MemoryRouter>,
+    );
+
+    expect(container.firstChild).toBeNull();
+  });
+});

@@ -1,4 +1,4 @@
-import { Authorization } from '../../features/auth/components/Authorization';
+import { Authorization } from '../../features/auth/components/authorization/Authorization';
 import styles from './AuthPage.module.css';
 
 export const AuthPage = () => {

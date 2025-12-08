@@ -1,180 +1,87 @@
-// import { render, screen, waitFor } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import '@testing-library/jest-dom';
-// import { useAppContext } from '../../../context/AppContext';
-// import { MemoryRouter, useNavigate } from 'react-router-dom';
-// import { PersonalData } from '../components/personal-data/PersonalData';
-// import { deleteUser, updateUser } from '../../../services/userService';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { PersonalData } from '../components/personal-data/PersonalData';
+import { useProfile } from '../../auth/hooks/useProfile';
+import { useDeleteUser } from '../hooks/useDeleteUser';
+import { MemoryRouter } from 'react-router-dom';
 
-// jest.mock('react-router-dom', () => ({
-//   ...jest.requireActual('react-router-dom'),
-//   useNavigate: jest.fn(),
-// }));
-// jest.mock('../../services/authService', () => ({
-//   getMe: jest.fn(),
-// }));
-// jest.mock('../../services/userService', () => ({
-//   deleteUser: jest.fn(),
-//   updateUser: jest.fn(),
-// }));
-// jest.mock('../../services/subscriptionService', () => ({
-//   getSubscriptionByUserId: jest.fn(),
-// }));
-// jest.mock('../../context/AppContext', () => ({
-//   useAppContext: jest.fn(),
-// }));
-// jest.mock('react-spinners', () => ({
-//   BounceLoader: ({ loading }: { loading: boolean }) =>
-//     loading ? <div data-testid='loader'>Loading...</div> : null,
-// }));
-// const mockUser = {
-//   _id: '123',
-//   name: 'User',
-//   email: 'user@example.com',
-//   phone: '+490112232635',
-//   address: 'Teststreet',
-// };
-// const mockNavigate = jest.fn();
-// const user = userEvent.setup();
-// describe('PersonalData', () => {
-//   beforeEach(() => {
-//     jest.clearAllMocks();
-//     (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-//     (useAppContext as jest.Mock).mockReturnValue({
-//       user: mockUser,
-//       setUser: jest.fn(),
-//       setNotification: jest.fn(),
-//       setIsAuthenticated: jest.fn(),
-//       color: '#000',
-//     });
-//   });
-//   test('renders user data ', () => {
-//     render(
-//       <MemoryRouter>
-//         <PersonalData />
-//       </MemoryRouter>,
-//     );
+jest.mock('../../auth/hooks/useProfile');
+jest.mock('../hooks/useUpdateUser', () => ({
+  useUpdateUser: () => ({
+    mutate: jest.fn(),
+  }),
+}));
 
-//     expect(screen.getByText('Full Name:').parentElement).toHaveTextContent(
-//       `Full Name: ${mockUser.name}`,
-//     );
-//     expect(screen.getByText('Email:').parentElement).toHaveTextContent(
-//       `Email: ${mockUser.email}`,
-//     );
-//     expect(screen.getByText('Phone:').parentElement).toHaveTextContent(
-//       `Phone: ${mockUser.phone}`,
-//     );
-//     expect(screen.getByText('Address:').parentElement).toHaveTextContent(
-//       `Address: ${mockUser.address}`,
-//     );
+jest.mock('../hooks/useDeleteUser');
 
-//     expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument();
-//     expect(screen.getByRole('button', { name: 'Delete' })).toBeInTheDocument();
-//   });
-//   test('switches to edit mode on Edit button click', async () => {
-//     render(
-//       <MemoryRouter>
-//         <PersonalData />
-//       </MemoryRouter>,
-//     );
-//     await user.click(screen.getByText('Edit'));
-//     expect(screen.getByTestId('form')).toBeInTheDocument();
-//   });
+describe('PersonalData component', () => {
+  const deleteUserMock = jest.fn();
 
-//   test('calls updateUser on valid form submit', async () => {
-//     const setUserMock = jest.fn();
-//     const updateUserMock = updateUser as jest.Mock;
-//     updateUserMock.mockResolvedValueOnce({ ...mockUser, name: 'New name' });
-//     (useAppContext as jest.Mock).mockReturnValue({
-//       user: mockUser,
-//       setUser: setUserMock,
-//       setNotification: jest.fn(),
-//       setIsAuthenticated: jest.fn(),
-//       color: '#000',
-//     });
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (useProfile as jest.Mock).mockReturnValue({
+      data: {
+        name: 'John Doe',
+        email: 'john@example.com',
+        phone: '',
+        address: '',
+      },
+    });
+    (useDeleteUser as jest.Mock).mockReturnValue({ mutate: deleteUserMock });
+  });
 
-//     render(
-//       <MemoryRouter>
-//         <PersonalData />
-//       </MemoryRouter>,
-//     );
+  test('renders user info', () => {
+    render(
+      <MemoryRouter>
+        <PersonalData />
+      </MemoryRouter>,
+    );
 
-//     await user.click(screen.getByText('Edit'));
-//     await user.clear(screen.getByPlaceholderText('Full Name'));
-//     await user.type(screen.getByPlaceholderText('Full Name'), 'New name');
-//     await user.click(screen.getByText('Save'));
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('john@example.com')).toBeInTheDocument();
+  });
 
-//     await waitFor(() => {
-//       expect(updateUserMock).toHaveBeenCalledWith(
-//         expect.objectContaining({ name: 'New name' }),
-//         mockUser._id,
-//       );
-//       expect(setUserMock).toHaveBeenCalledWith(
-//         expect.objectContaining({ name: 'New name' }),
-//       );
-//     });
-//   });
-//   test('shows error message if form validation fails', async () => {
-//     render(
-//       <MemoryRouter>
-//         <PersonalData />
-//       </MemoryRouter>,
-//     );
-//     await user.click(screen.getByText('Edit'));
-//     await user.clear(screen.getByPlaceholderText('Full Name'));
-//     await user.type(screen.getByPlaceholderText('Full Name'), 'N');
+  test('opens edit form when EditBtn is clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter>
+        <PersonalData />
+      </MemoryRouter>,
+    );
 
-//     await user.click(screen.getByText('Save'));
+    await user.click(screen.getByText('Edit'));
+    expect(screen.getByTestId('form')).toBeInTheDocument();
+  });
 
-//     await waitFor(() => {
-//       expect(
-//         screen.getByText('Name must be at least 3 symbols'),
-//       ).toBeInTheDocument();
-//     });
-//   });
+  test('opens confirmation modal and calls deleteUser', async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter>
+        <PersonalData />
+      </MemoryRouter>,
+    );
 
-//   test('opens confirmation modal on Delete click', async () => {
-//     render(
-//       <MemoryRouter>
-//         <PersonalData />
-//       </MemoryRouter>,
-//     );
-//     await user.click(screen.getByText('Delete'));
-//     expect(
-//       screen.getByText('Are you sure you want to delete your account?'),
-//     ).toBeInTheDocument();
-//   });
+    await user.click(screen.getByText('Delete'));
+    expect(
+      screen.getByText(/Are you sure you want to delete/i),
+    ).toBeInTheDocument();
 
-//   test('calls deleteUser on confirm delete', async () => {
-//     const deleteUserMock = deleteUser as jest.Mock;
-//     deleteUserMock.mockResolvedValueOnce('User deleted successfully!');
-//     const setUserMock = jest.fn();
-//     const setIsAuthenticatedMock = jest.fn();
-//     const setNotificationMock = jest.fn();
+    await user.click(screen.getByText('Yes'));
+    expect(deleteUserMock).toHaveBeenCalled();
+  });
 
-//     (useAppContext as jest.Mock).mockReturnValue({
-//       user: mockUser,
-//       setUser: setUserMock,
-//       setNotification: setNotificationMock,
-//       setIsAuthenticated: setIsAuthenticatedMock,
-//       color: '#000',
-//     });
-//     render(
-//       <MemoryRouter>
-//         <PersonalData />
-//       </MemoryRouter>,
-//     );
-//     await user.click(screen.getByRole('button', { name: 'Delete' }));
+  test('cancels deletion when Cancel is clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <MemoryRouter>
+        <PersonalData />
+      </MemoryRouter>,
+    );
 
-//     await user.click(screen.getByText('Yes'));
+    await user.click(screen.getByText('Delete'));
+    await user.click(screen.getByText('Cancel'));
 
-//     await waitFor(() => {
-//       expect(deleteUserMock).toHaveBeenCalled();
-//       expect(setUserMock).toHaveBeenCalledWith(null);
-//       expect(setIsAuthenticatedMock).toHaveBeenCalledWith(false);
-//       expect(setNotificationMock).toHaveBeenCalledWith(
-//         'User deleted successfully!',
-//       );
-//     });
-//   });
-// });
+    expect(deleteUserMock).not.toHaveBeenCalled();
+    expect(screen.queryByText(/Are you sure/i)).not.toBeInTheDocument();
+  });
+});

@@ -1,65 +1,99 @@
-// import { render, screen } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
-// import '@testing-library/jest-dom';
-// import { useNavigate } from 'react-router-dom';
-// import { PricingCard } from '../../features/pricing/components/pricing-card/PricingCard';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { PricingCard } from '../components/pricing-card/PricingCard';
 
-// jest.mock('react-router-dom', () => ({
-//   ...jest.requireActual('react-router-dom'),
-//   useNavigate: jest.fn(),
-// }));
+import { BrowserRouter } from 'react-router-dom';
+import { scroller } from 'react-scroll';
+import { useNavigate } from 'react-router-dom';
+import { Plan } from '../../../types/Types';
 
-// describe('PricingCard', () => {
-//   const mockNavigate = jest.fn();
-//   const user = userEvent.setup();
-//   const plans = [
-//     {
-//       _id: 'id1',
-//       type: 'pack',
-//       title: '5-Class pack',
-//       price: 100,
-//       description: 'Flexible schedules or occasional visitors',
-//       priceId: 'price_1RaDrbHCX17lsTRpRlbNr3y4',
-//       trainingsCoiunt: 5,
-//     },
-//     {
-//       _id: 'id2',
-//       type: 'pack',
-//       title: '10-Class pack',
-//       price: 220,
-//       description: 'Flexible schedules or occasional visitors',
-//       priceId: 'price_1RaDrxHCX17lsTRpida8URQV',
-//       trainingsCoiunt: 10,
-//     },
-//   ];
-//   const type = 'pack';
+jest.mock('react-router-dom', () => ({
+  ...(jest.requireActual('react-router-dom') as any),
+  useNavigate: jest.fn(),
+}));
+jest.mock('react-scroll', () => ({
+  scroller: {
+    scrollTo: jest.fn(),
+  },
+}));
+describe('PricingCard', () => {
+  const mockNavigate = jest.fn();
+  const plans: Plan[] = [
+    {
+      _id: '1',
+      type: 'single',
+      title: '1 Session',
+      description: 'Desc1',
+      price: 10,
+      priceId: 'p1',
+    },
+    {
+      _id: '2',
+      type: 'monthly',
+      title: 'Monthly Plan',
+      description: 'Desc2',
+      price: 50,
+      priceId: 'p2',
+    },
+  ];
 
-//   beforeEach(() => {
-//     jest.clearAllMocks();
-//     (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-//   });
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
+  });
 
-//   test('renders correct component', () => {
-//     render(<PricingCard type={type} plans={plans} />);
-//     expect(
-//       screen.getByRole('button', { name: /buy now/i }),
-//     ).toBeInTheDocument();
-//     expect(screen.getByRole('heading', { name: new RegExp(type, 'i') }));
-//     expect(screen.getByText(plans[0].description)).toBeInTheDocument();
-//     expect(screen.getByText(plans[0].title)).toHaveClass('active');
-//   });
-//   test('switches to information about another plan on click', async () => {
-//     render(<PricingCard type='pack' plans={plans} />);
+  const renderComponent = () =>
+    render(
+      <BrowserRouter>
+        <PricingCard plans={plans} type='Test Type' />
+      </BrowserRouter>,
+    );
 
-//     const firstDescription = screen.getByText(plans[0].description);
-//     expect(firstDescription).toBeInTheDocument();
-//     await user.click(screen.getByText(plans[1].title));
-//     const secondDescription = screen.getByText(plans[1].description);
-//     expect(secondDescription).toBeInTheDocument();
-//   });
-//   test('button click navigates to "/detailed/plan/plan._id" ', async () => {
-//     render(<PricingCard type='pack' plans={plans} />);
-//     await user.click(screen.getByRole('button', { name: /buy now/i }));
-//     expect(mockNavigate).toHaveBeenCalledWith(`/detailed/plan/${plans[0]._id}`);
-//   });
-// });
+  test('renders plans and default selected', () => {
+    renderComponent();
+    expect(screen.getByText('Test Type')).toBeInTheDocument();
+    expect(screen.getByText('1 Session')).toHaveClass('active');
+    expect(screen.getByText('Desc1')).toBeInTheDocument();
+    expect(screen.getByText('Price: 10')).toBeInTheDocument();
+  });
+
+  test('changes active plan on click', async () => {
+    const user = userEvent.setup();
+    renderComponent();
+    const monthlyPlan = screen.getByText('Monthly Plan');
+
+    await user.click(monthlyPlan);
+
+    expect(monthlyPlan).toHaveClass('active');
+    expect(screen.getByText('Desc2')).toBeInTheDocument();
+    expect(screen.getByText('Price: 50')).toBeInTheDocument();
+  });
+
+  test('scrolls when "1 session" plan is clicked', async () => {
+    const user = userEvent.setup();
+    renderComponent();
+    const buyBtn = screen.getByText('Buy now');
+
+    await user.click(buyBtn);
+
+    expect(scroller.scrollTo).toHaveBeenCalledWith('schedule', {
+      duration: 800,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+    });
+    expect(mockNavigate).not.toHaveBeenCalled();
+  });
+
+  test('navigates when other plan is clicked', async () => {
+    const user = userEvent.setup();
+    renderComponent();
+
+    await user.click(screen.getByText('Monthly Plan'));
+
+    const buyBtn = screen.getByText('Buy now');
+    await user.click(buyBtn);
+
+    expect(mockNavigate).toHaveBeenCalledWith('/detailed/plan/2');
+  });
+});

@@ -1,9 +1,10 @@
 import styles from './LogoutButton.module.css';
-import { ConfirmationWindow } from '../../../../styles/modal/ConfirmationWindow';
+
 import { useState } from 'react';
 import Button from '../../../../shared/ui/button/Button';
 import { useLogout } from '../../hooks/useLogout';
 import { Loader } from '../../../../shared/ui/loader/Loader';
+import { ConfirmationWindow } from '../../../../shared/modal/ConfirmationWindow';
 
 const LogoutButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

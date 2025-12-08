@@ -1,13 +1,10 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { NotificationWindow } from '../styles/modal/NotificationWindow';
 import { useWindowSize } from '../hooks/useWindowSize';
 
 interface AppContextType {
   openModal: () => void;
   closeModal: () => void;
   isModalOpen: boolean;
-  notification: string | null;
-  setNotification: React.Dispatch<React.SetStateAction<string | null>>;
   isMobile: boolean;
 }
 
@@ -25,7 +22,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [notification, setNotification] = useState<string | null>(null);
   const { width } = useWindowSize();
   const isMobile = width < 769;
 
@@ -45,18 +41,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         openModal,
         closeModal,
         isModalOpen,
-        notification,
-        setNotification,
         isMobile,
       }}
     >
       {children}
-      {notification && (
-        <NotificationWindow
-          message={notification}
-          onClose={() => setNotification(null)}
-        />
-      )}
     </AppContext.Provider>
   );
 };

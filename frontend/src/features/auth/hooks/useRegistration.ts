@@ -4,7 +4,8 @@ import AuthService from '../service/AuthService';
 export const useRegistration = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: AuthService.registerUser,
+    mutationFn: (data: { fullName: string; email: string; password: string }) =>
+      AuthService.registerUser(data),
     onSuccess: (data) => {
       queryClient.setQueryData(['currentUser'], data.user);
     },

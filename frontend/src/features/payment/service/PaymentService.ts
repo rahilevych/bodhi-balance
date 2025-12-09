@@ -5,13 +5,13 @@ export class PaymentService {
     let res;
     switch (type) {
       case 'training':
-        res = await api.post(`/booking/training`, {
+        res = await api.post(`/api/booking/training`, {
           productId,
           type,
         });
         break;
       case 'subscription':
-        res = await api.post(`/subscription/buy`, {
+        res = await api.post(`/api/subscription/buy`, {
           productId,
           type,
         });

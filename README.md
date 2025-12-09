@@ -4,12 +4,32 @@ Welcome to the repository for the **frontend part** of the **Bodhi Balance** yog
 
 | Resource | Link |
 | :--- | :--- |
-| **Live Demo** | [Visit Bodhi Balance Live Site](https://bodhi-balance-back.onrender.com/) |
+| **Live Demo** | [Visit Bodhi Balance Live Site](https://bodhi-balance-8ucr.vercel.app) |
 | **Backend Repository** | [Go to Backend Repo](https://github.com/rahilevych/bodhi-balance-back) |
 
 ## 🌟 Project Overview
 
 The Bodhi Balance frontend is a **Single Page Application (SPA)** built with a focus on performance, reliability, and code cleanliness.
+### HomePage
+![Homepage Screenshot](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/home.png)
+### About section
+![About section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/about.png)
+### Yoga styles section
+![Styles section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/styles.png)
+### Pricing section
+![Pricing section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/pricing.png)
+### Schedule section
+![Schedule section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/schedule.png)
+### Trainers section
+![Trainers section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/trainers.png)
+### FAQ section
+![FAQ section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/faq.png)
+### Contact section
+![Trainers section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/contact.png)
+### Auth section
+![Auth section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/auth.png)
+### Profile page
+![Profile section](https://github.com/rahilevych/bodhi-balance/blob/main/frontend/src/assets/profile.png)
 
 ---
 

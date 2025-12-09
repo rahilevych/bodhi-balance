@@ -28,7 +28,7 @@ const Contact = () => {
             </div>
             <div className={styles.image}>
               <img
-                src='https://i.pinimg.com/736x/d0/00/b8/d000b850c636e2f0afdb6b627f24a59a.jpg'
+                src='https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1026&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
                 alt='contact-img'
               />
             </div>

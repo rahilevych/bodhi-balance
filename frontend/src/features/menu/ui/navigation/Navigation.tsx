@@ -7,6 +7,7 @@ import LogoutButton from '../../../auth/ui/logout-btn/LogoutButton';
 import Button from '../../../../shared/ui/button/Button';
 import { useProfile } from '../../../auth/hooks/useProfile';
 import { Loader } from '../../../../shared/ui/loader/Loader';
+import { useAppContext } from '../../../../context/AppContext';
 const navVariants = {
   open: {
     transition: {
@@ -38,6 +39,7 @@ interface NavigationProps {
 export const Navigation = ({ setIsOpen }: NavigationProps) => {
   const allSubSections = sectionsList.flatMap((section) => section.subSections);
   const navigate = useNavigate();
+  const { token } = useAppContext();
   const { data: user, isPending } = useProfile();
   if (isPending) return <Loader />;
   return (
@@ -49,7 +51,7 @@ export const Navigation = ({ setIsOpen }: NavigationProps) => {
         ))}
       </motion.ul>
       <motion.div variants={buttonsVariants} className={styles.buttons}>
-        {user ? (
+        {user && token !== null ? (
           <div className={styles.buttons}>
             <div onClick={() => navigate('/profile')} className={styles.btn}>
               <Button>Profile</Button>

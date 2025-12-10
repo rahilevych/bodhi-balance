@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from 'react';
 import { useWindowSize } from '../hooks/useWindowSize';
 
 interface AppContextType {
@@ -6,6 +12,8 @@ interface AppContextType {
   closeModal: () => void;
   isModalOpen: boolean;
   isMobile: boolean;
+  token: string | null;
+  setToken: (token: string | null) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -22,6 +30,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [token, setToken] = useState(localStorage.getItem('accessToken'));
   const { width } = useWindowSize();
   const isMobile = width < 769;
 
@@ -34,7 +43,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     document.body.style.overflow = 'auto';
     setIsModalOpen(false);
   };
-
+  useEffect(() => {
+    if (token !== null) localStorage.setItem('accessToken', token);
+    else {
+      localStorage.removeItem('accessToken');
+    }
+  }, [token]);
   return (
     <AppContext.Provider
       value={{
@@ -42,6 +56,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         closeModal,
         isModalOpen,
         isMobile,
+        token,
+        setToken,
       }}
     >
       {children}

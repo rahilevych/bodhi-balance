@@ -18,7 +18,7 @@ export const YogaStylesSkeleton = () => {
           )}
 
           <div className={styles.sliderSkeleton}>
-            {Array.from({ length: 2 }).map((_, i) =>
+            {Array.from({ length: 1 }).map((_, i) =>
               isMobile ? (
                 <YogaFullCardSkeleton key={i} />
               ) : (

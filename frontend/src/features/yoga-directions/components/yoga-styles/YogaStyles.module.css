@@ -19,6 +19,7 @@
 .sliderSkeleton {
   width: 40%;
   display: flex;
+  justify-content: center;
   gap: 1rem;
 }
 @media (max-width: 768px) {
@@ -27,5 +28,8 @@
   }
   .selected {
     display: none;
+  }
+  .sliderSkeleton {
+    width: 100%;
   }
 }

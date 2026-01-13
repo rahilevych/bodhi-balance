@@ -33,7 +33,7 @@ const Schedule = () => {
             {trainings.length > 0 ? (
               <ScheduleTable trainings={trainings} />
             ) : (
-              <p style={{ marginTop: '2rem' }}>Schedule not available</p>
+              <p style={{ marginTop: '25px' }}>Schedule not available</p>
             )}
           </div>
         </motion.div>

@@ -30,7 +30,11 @@ const Schedule = () => {
           <h2>Schedule</h2>
           <div className={styles.timetable}>
             <ScheduleDays day={day} setDay={setDay} />
-            <ScheduleTable trainings={trainings} />
+            {trainings.length > 0 ? (
+              <ScheduleTable trainings={trainings} />
+            ) : (
+              <p>Schedule not available</p>
+            )}
           </div>
         </motion.div>
       </section>

@@ -13,6 +13,7 @@ export const setLogoutNavigate = (fn: () => void) => {
 
 export const logout = () => {
   localStorage.removeItem('accessToken');
+
   if (logoutNavigate) logoutNavigate();
   else window.location.href = '/auth';
 };

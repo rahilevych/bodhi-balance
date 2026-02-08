@@ -12,13 +12,14 @@ import { setLogoutNavigate } from '../shared/api/axiosInstance';
 function App() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { setToken } = useAppContext();
+  const { setToken, setIsAuth } = useAppContext();
   useEffect(() => {
     const initAuth = async () => {
       const token = await refreshAccessToken();
       if (token) {
         localStorage.setItem('accessToken', token);
         setToken(token);
+        setIsAuth(true);
         queryClient.invalidateQueries({ queryKey: ['currentUser'] });
       }
     };
@@ -27,6 +28,7 @@ function App() {
   }, []);
   useEffect(() => {
     setLogoutNavigate(() => navigate('/auth'));
+    setIsAuth(false);
   }, [navigate]);
   return (
     <div className='wrapper'>

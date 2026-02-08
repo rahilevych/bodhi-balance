@@ -14,6 +14,8 @@ interface AppContextType {
   isMobile: boolean;
   token: string | null;
   setToken: (token: string | null) => void;
+  isAuth: boolean;
+  setIsAuth: (isAuth: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -31,6 +33,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [token, setToken] = useState(localStorage.getItem('accessToken'));
+  const [isAuth, setIsAuth] = useState(false);
   const { width } = useWindowSize();
   const isMobile = width < 769;
 
@@ -58,6 +61,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         isMobile,
         token,
         setToken,
+        isAuth,
+        setIsAuth,
       }}
     >
       {children}

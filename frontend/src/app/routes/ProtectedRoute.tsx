@@ -1,13 +1,14 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
+import { useAppContext } from '../../context/AppContext';
 
 interface ProtectedRouteProps {
   element: ReactNode;
 }
 const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
-  const token = localStorage.getItem('accessToken');
+  const { isAuth } = useAppContext();
 
-  return token ? element : <Navigate to='/auth' replace />;
+  return isAuth ? element : <Navigate to='/auth' replace />;
 };
 
 export default ProtectedRoute;

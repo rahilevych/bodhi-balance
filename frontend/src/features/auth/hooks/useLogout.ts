@@ -4,7 +4,7 @@ import { useAppContext } from '../../../context/AppContext';
 
 export const useLogout = () => {
   const queryClient = useQueryClient();
-  const { setToken } = useAppContext();
+  const { setToken, setIsAuth } = useAppContext();
   return useMutation({
     mutationFn: AuthService.logout,
     onSuccess: () => {
@@ -13,6 +13,7 @@ export const useLogout = () => {
       queryClient.removeQueries({ queryKey: ['subscription', 'active'] });
       localStorage.removeItem('accessToken');
       setToken(null);
+      setIsAuth(false);
     },
   });
 };

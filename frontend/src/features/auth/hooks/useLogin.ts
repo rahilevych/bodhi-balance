@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
-  const { setToken } = useAppContext();
+  const { setToken, setIsAuth } = useAppContext();
 
   return useMutation({
     mutationFn: (data: { email: string; password: string }) =>
@@ -15,8 +15,9 @@ export const useLogin = () => {
       queryClient.setQueryData(['currentUser'], data.user);
       localStorage.setItem('accessToken', data.accessToken);
       setToken(data.accessToken);
+      setIsAuth(true);
     },
-     onError: (error: AxiosError) => {
+    onError: (error: AxiosError) => {
       if (!error.response) {
         toast.error('Network error, check your connection!');
         return;
@@ -33,6 +34,5 @@ export const useLogin = () => {
           toast.error(data.message || 'An unexpected error occurred');
       }
     },
-    
   });
 };

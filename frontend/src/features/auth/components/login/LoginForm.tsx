@@ -6,6 +6,7 @@ import Button from '../../../../shared/ui/button/Button';
 import { useLogin } from '../../hooks/useLogin';
 import { useNavigate } from 'react-router';
 import { Loader } from '../../../../shared/ui/loader/Loader';
+import { useAppContext } from '../../../../context/AppContext';
 
 const schema = z.object({
   email: z.string().min(1, 'Email is required!').email('Invalid email format'),
@@ -16,6 +17,7 @@ export type LoginFormData = z.infer<typeof schema>;
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  const { setIsAuth } = useAppContext();
   const { mutate: login, isPending } = useLogin();
   const {
     register,
@@ -30,6 +32,7 @@ export const LoginForm = () => {
       { email: data.email, password: data.password },
       {
         onSuccess: () => {
+          setIsAuth(true);
           navigate('/', { replace: true });
         },
       },

@@ -6,11 +6,8 @@ import { refreshAccessToken } from '../utils/refreshAccessToken';
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { useNavigate } from 'react-router';
-import { setLogoutNavigate } from '../shared/api/axiosInstance';
 
 function App() {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { setToken, setIsAuth } = useAppContext();
   useEffect(() => {
@@ -26,10 +23,7 @@ function App() {
 
     initAuth();
   }, []);
-  useEffect(() => {
-    setLogoutNavigate(() => navigate('/auth'));
-    setIsAuth(false);
-  }, [navigate]);
+
   return (
     <div className='wrapper'>
       <AppRoutes />

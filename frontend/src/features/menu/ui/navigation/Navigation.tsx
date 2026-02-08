@@ -38,7 +38,7 @@ interface NavigationProps {
 export const Navigation = ({ setIsOpen }: NavigationProps) => {
   const allSubSections = sectionsList.flatMap((section) => section.subSections);
   const navigate = useNavigate();
-  const { token } = useAppContext();
+  const { isAuth } = useAppContext();
   const { data: user } = useProfile();
 
   return (
@@ -50,7 +50,7 @@ export const Navigation = ({ setIsOpen }: NavigationProps) => {
         ))}
       </motion.ul>
       <motion.div variants={buttonsVariants} className={styles.buttons}>
-        {user && token !== null ? (
+        {user && isAuth ? (
           <div className={styles.buttons}>
             <div onClick={() => navigate('/profile')} className={styles.btn}>
               <Button>Profile</Button>

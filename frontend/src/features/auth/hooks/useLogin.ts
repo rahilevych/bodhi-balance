@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 
 export const useLogin = () => {
   const queryClient = useQueryClient();
-  const { setToken, setIsAuth } = useAppContext();
+  const { setToken } = useAppContext();
 
   return useMutation({
     mutationFn: (data: { email: string; password: string }) =>
@@ -14,8 +14,8 @@ export const useLogin = () => {
     onSuccess: (data) => {
       queryClient.setQueryData(['currentUser'], data.user);
       localStorage.setItem('accessToken', data.accessToken);
+
       setToken(data.accessToken);
-      setIsAuth(true);
     },
     onError: (error: AxiosError) => {
       if (!error.response) {

@@ -6,9 +6,10 @@ interface ProtectedRouteProps {
   element: ReactNode;
 }
 const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
-  const { isAuth } = useAppContext();
+  const { isAuth, token } = useAppContext();
+  console.log(isAuth);
 
-  return isAuth ? element : <Navigate to='/auth' replace />;
+  return isAuth && token ? element : <Navigate to='/auth' replace />;
 };
 
 export default ProtectedRoute;

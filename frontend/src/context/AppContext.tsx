@@ -47,8 +47,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     setIsModalOpen(false);
   };
   useEffect(() => {
-    if (token !== null) localStorage.setItem('accessToken', token);
-    else {
+    if (token !== null) {
+      localStorage.setItem('accessToken', token);
+      setIsAuth(true);
+    } else {
       localStorage.removeItem('accessToken');
     }
   }, [token]);

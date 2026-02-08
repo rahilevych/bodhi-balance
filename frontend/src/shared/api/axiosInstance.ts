@@ -5,17 +5,9 @@ export const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const getToken = () => localStorage.getItem('accessToken');
 
-let logoutNavigate: (() => void) | null = null;
-
-export const setLogoutNavigate = (fn: () => void) => {
-  logoutNavigate = fn;
-};
-
 export const logout = () => {
   localStorage.removeItem('accessToken');
-
-  if (logoutNavigate) logoutNavigate();
-  else window.location.href = '/auth';
+  window.location.href = '/auth';
 };
 
 const api = axios.create({

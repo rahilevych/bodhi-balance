@@ -1,16 +1,13 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useProfile } from '../../features/auth/hooks/useProfile';
-import { useAppContext } from '../../context/AppContext';
 
 interface ProtectedRouteProps {
   element: ReactNode;
 }
 const ProtectedRoute = ({ element }: ProtectedRouteProps) => {
-  const { data: user } = useProfile();
-  const { token } = useAppContext();
+  const token = localStorage.getItem('accessToken');
 
-  return user && token ? element : <Navigate to='/auth' replace />;
+  return token ? element : <Navigate to='/auth' replace />;
 };
 
 export default ProtectedRoute;

@@ -1,21 +1,20 @@
 import axios from 'axios';
 import { refreshAccessToken } from '../../utils/refreshAccessToken';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+export const BASE_URL = import.meta.env.VITE_BASE_URL;
+console.log(BASE_URL);
 
 const api = axios.create({
-  withCredentials: true,
   baseURL: BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
 });
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken');
   if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
@@ -32,7 +31,7 @@ api.interceptors.response.use(
         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } else {
-        window.location.href = '/login';
+        window.location.href = '/auth';
       }
     }
     return Promise.reject(error);

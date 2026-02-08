@@ -9,6 +9,7 @@ import {
 import Button from '../../../../shared/ui/button/Button';
 import { useGetTrainingById } from '../../hooks/useGetTrainingById';
 import { useCreateCheckoutSession } from '../../../payment/hooks/useCreateCheckoutSession';
+import { Loader } from '../../../../shared/ui/loader/Loader';
 
 interface TrainingDetailedProps {
   id: string;
@@ -19,7 +20,7 @@ export const TrainingDetailed = ({ id }: TrainingDetailedProps) => {
   const type = 'training';
   const { data: training, isPending } = useGetTrainingById(id);
 
-  if (isPending) return <p>loading</p>;
+  if (isPending) return <Loader />;
 
   const handleBookBtn = (trainingId: string, type: string) => {
     startCheckout({ productId: id, type: type });

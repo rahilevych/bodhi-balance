@@ -1,9 +1,12 @@
-import api from '../shared/api/axiosInstance';
+import axios from 'axios';
+import { BASE_URL } from '../shared/api/axiosInstance';
 
 export const refreshAccessToken = async () => {
   try {
-    const { data } = await api.get('/auth/refresh');
-    localStorage.setItem('accessToken', data.accessToken);
+    const { data } = await axios.get(`${BASE_URL}/auth/refresh`, {
+      withCredentials: true,
+    });
+    localStorage.setItem('accessToken', data.token);
     return data.accessToken;
   } catch (err) {
     console.error('Refresh token failed', err);

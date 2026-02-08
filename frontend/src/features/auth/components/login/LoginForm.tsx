@@ -26,8 +26,14 @@ export const LoginForm = () => {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-    login(data);
-    navigate('/');
+    login(
+      { email: data.email, password: data.password },
+      {
+        onSuccess: () => {
+          navigate('/', { replace: true });
+        },
+      },
+    );
   };
   if (isPending) return <Loader />;
   return (
